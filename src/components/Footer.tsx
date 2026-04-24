@@ -396,7 +396,6 @@ export default function Footer() {
           <span aria-hidden="true">.</span>
           <a href="#">Cookies</a>
         </div>
-        <p className="footer-made">Fait avec coeur pour les createurs</p>
       </div>
     </footer>
   );
