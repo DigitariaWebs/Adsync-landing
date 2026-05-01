@@ -5045,6 +5045,7 @@ img {
   font-weight: 700;
   margin-bottom: 10px;
   line-height: 1;
+  color: #4e3787;
 }
 
 .stat-title {
@@ -5061,21 +5062,6 @@ img {
   margin: 0;
 }
 
-.stat-card:nth-child(1) .stat-number {
-  color: #3dbf8a;
-}
-
-.stat-card:nth-child(2) .stat-number {
-  color: #4e3787;
-}
-
-.stat-card:nth-child(3) .stat-number {
-  color: #f0a500;
-}
-
-.stat-card:nth-child(4) .stat-number {
-  color: #e03030;
-}
 
 .advantages-highlight-grid {
   display: grid;

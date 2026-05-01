@@ -94,15 +94,7 @@ export default function Hero() {
                 Travaille avec les meilleures marques
               </div>
 
-              <div className="floating-icon floating-icon-glasses" aria-hidden="true">
-                <InstagramIcon />
-              </div>
-              <div className="floating-icon floating-icon-heart" aria-hidden="true">
-                <TikTokIcon />
-              </div>
-              <div className="floating-icon floating-icon-social" aria-hidden="true">
-                <FacebookIcon />
-              </div>
+             
             </div>
           </div>
         </section>

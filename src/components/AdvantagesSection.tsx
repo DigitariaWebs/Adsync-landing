@@ -1,3 +1,7 @@
+import shieldImage from '../assets/shield.png';
+import payoutImage from '../assets/payout.png';
+import stripeImage from '../assets/stripe.png';
+
 type StatCard = {
   number: string;
   title: string;
@@ -18,61 +22,56 @@ type StripeFeature = {
 
 const statCards: StatCard[] = [
   {
-    number: '0€',
+    number: '0EUR',
     title: 'Aucun abonnement, jamais',
     description:
-      'Tu rejoins gratuitement. Une commission de 25% uniquement sur les contrats conclus. Pas de contrat, pas de frais.',
+      'Tu rejoins gratuitement. Une commission de 25% uniquement sur les contrats conclus.',
   },
   {
     number: '75%',
-    title: 'Du contrat reversé au créateur',
-    description:
-      'Sur chaque contrat signé, 75% reviennent au créateur, partout dans le monde, automatiquement.',
+    title: 'Du contrat reverse au createur',
+    description: 'Sur chaque contrat signe, 75% reviennent au createur automatiquement.',
   },
   {
     number: '0',
-    title: 'Tolérance pour les faux abonnés',
-    description:
-      'Notre IA bloque les comptes gonflés avant chaque campagne. Les marques paient pour de vraies personnes.',
+    title: 'Tolerance pour les faux abonnes',
+    description: 'Notre IA bloque les comptes gonfles avant chaque campagne.',
   },
   {
     number: '100%',
-    title: 'Paiement à la performance réelle',
-    description:
-      "1 vraie vue à 0,001€. 1 vrai clic à 0,10€. 1 vrai achat à 10€. Tu paies ce qui s'est vraiment passé.",
+    title: 'Paiement a la performance reelle',
+    description: "Tu paies uniquement ce qui s'est vraiment passe.",
   },
 ];
 
 const highlightCards: HighlightCard[] = [
   {
-    title: 'Anti bots, par défaut.',
-    description:
-      'Audience Quality Engine analyse chaque campagne en temps réel. Bots filtrés, paiement protégé.',
-    image: 'shield.png',
+    title: 'Anti bots, par defaut.',
+    description: 'Audience Quality Engine analyse chaque campagne en temps reel.',
+    image: shieldImage,
   },
   {
-    title: 'Paiement sécurisé par Stripe.',
-    description:
-      "Encaissement direct via Stripe : carte bancaire, virement SEPA, Apple Pay, Google Pay. Versement automatique dès qu'un contrat se termine.",
-    image: 'payout.png',
+    title: 'Paiement securise par Stripe.',
+    description: "Encaissement direct via Stripe avec versement automatique en fin de contrat.",
+    image: payoutImage,
   },
 ];
 
 const stripeFeatures: StripeFeature[] = [
   {
-    icon: '🔒',
-    title: 'SÉCURISÉ',
-    description: '3D Secure, conformité PCI niveau 1.',
+    icon: 'Secure',
+    title: 'SECURISE',
+    description: '3D Secure, conformite PCI niveau 1.',
   },
   {
-    icon: '⚡',
-    title: 'INSTANTANÉ',
+    icon: 'Fast',
+    title: 'INSTANTANE',
     description: 'Versement sous 24h en moyenne.',
   },
   {
-    icon: '🌍',
+    icon: 'Global',
     title: 'MONDIAL',
-    description: '135 devises, 47 pays supportés.',
+    description: '135 devises, 47 pays supportes.',
   },
 ];
 
@@ -82,20 +81,17 @@ export default function AdvantagesSection() {
   return (
     <section className="section" id="nos-avantages">
       <div className="advantages-panel">
-
-        {/* Header */}
         <header className="advantages-header">
           <p className="advantages-label">NOS AVANTAGES</p>
           <h2 className="advantages-title">
-            <span className="advantages-title-main">Ce qu'aucune autre plateforme </span>
+            <span className="advantages-title-main">Ce qu&apos;aucune autre plateforme </span>
             <span className="advantages-title-accent">ne fait.</span>
           </h2>
           <p className="advantages-subtitle">
-            Une infrastructure IA pensée pour protéger le budget des marques et maximiser la rémunération des créateurs.
+            Une infrastructure IA pour proteger les budgets des marques et maximiser la remuneration des createurs.
           </p>
         </header>
 
-        {/* 4 stat cards */}
         <div className="advantages-stats-grid">
           {statCards.map(card => (
             <article className="stat-card" key={card.title}>
@@ -106,12 +102,11 @@ export default function AdvantagesSection() {
           ))}
         </div>
 
-        {/* 2 image cards */}
         <div className="advantages-highlight-grid">
           {highlightCards.map(card => (
             <article className="adv-image-card" key={card.title}>
               <div className="adv-image-wrap">
-                <img src={`/src/assets/${card.image}`} alt={card.title} />
+                <img src={card.image} alt={card.title} />
                 <div className="adv-image-overlay" />
                 <div className="adv-image-content">
                   <h3>{card.title}</h3>
@@ -122,27 +117,20 @@ export default function AdvantagesSection() {
           ))}
         </div>
 
-        {/* Stripe section */}
         <div className="stripe-section">
-
-          {/* LEFT — image */}
           <div className="stripe-image">
-            <img src="/src/assets/stripe.png" alt="Paiement Stripe sécurisé" />
+            <img src={stripeImage} alt="Paiement Stripe securise" />
           </div>
 
-          {/* RIGHT — contenu */}
           <div className="stripe-content">
             <p className="stripe-label">PAIEMENTS</p>
             <h2 className="stripe-title">
-              Encaissé via <span>Stripe.</span>
+              Encaisse via <span>Stripe.</span>
             </h2>
             <p className="stripe-desc">
-              Chaque contrat passe par un séquestre Stripe. La marque dépose les fonds,
-              AdSync vérifie la performance, tu reçois ta part dès la fin de la campagne,
-              sur ton IBAN ou ta carte.
+              Chaque contrat passe par un sequestre Stripe: depots, verification et versement automatique.
             </p>
 
-            {/* 3 features */}
             <div className="stripe-features">
               {stripeFeatures.map(f => (
                 <div className="stripe-feature" key={f.title}>
@@ -153,7 +141,6 @@ export default function AdvantagesSection() {
               ))}
             </div>
 
-            {/* Pills */}
             <div className="stripe-pills">
               {stripePills.map(pill => (
                 <span className="stripe-pill" key={pill}>{pill}</span>
@@ -161,7 +148,6 @@ export default function AdvantagesSection() {
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );

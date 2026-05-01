@@ -99,7 +99,7 @@ export default function Navbar() {
       </nav>
 
       <div className="topbar-actions">
-        <a className="nav-cta nav-cta-ghost" href="#inscription-beta" onClick={() => setMenuOpen(false)}>
+        <a className="nav-cta nav-cta-ghost" href="#inscription" onClick={() => setMenuOpen(false)}>
           Je m&apos;inscris
         </a>
       </div>
