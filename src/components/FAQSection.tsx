@@ -4,32 +4,43 @@ type FaqItem = { question: string; answer: string };
 
 const faqs: FaqItem[] = [
   {
-    question: "Qu'est-ce que AdSync et comment ca marche ?",
+    question: "Quand AdSync ouvre vraiment ?",
     answer:
-      "AdSync connecte tes espaces digitaux a des campagnes publicitaires compatibles avec ton audience. Tu actives tes surfaces, l'IA trouve les marques adaptees, le contrat est securise et la remuneration est automatisee.",
+      "AdSync ouvre le 21 juin 2026 à 9h UTC. Les inscrits de la vague de lancement reçoivent un accès prioritaire 72h avant l’ouverture publique, ainsi que 0 % de commission sur leurs 3 premiers contrats.",
   },
   {
-    question: 'Qui peut rejoindre AdSync ?',
+    question: "Combien je gagne en tant que créateur ?",
     answer:
-      'Les createurs, influenceurs, medias, community managers et proprietaires de pages ou sites avec une audience engagee peuvent rejoindre la plateforme.',
+      "Tu touches 75 % du montant de chaque contrat signé. AdSync prend 25 % pour couvrir l’infrastructure, le matching IA, la sécurisation Stripe et la protection juridique des contrats.",
   },
   {
-    question: 'Comment je suis paye pour une collaboration ?',
+    question: "Quels formats de publicité je peux uploader en tant que marque ?",
     answer:
-      'La marque depose le budget dans un systeme securise avant validation. Une fois la campagne active et geree par AdSync, 75% de la remuneration te sont reverses automatiquement.',
+      "Tu peux uploader des vidéos (MP4/MOV), des affiches statiques (JPG/PNG), des carrousels multi-images, des GIF animés, ou des liens vers des publicités existantes (TikTok, YouTube, Meta, site web). L’IA Advisor recommande le format le plus performant selon la cible.",
   },
   {
-    question: 'Quels sont les avantages concrets ?',
+    question: "Comment je suis payé ? Quels moyens sont supportés ?",
     answer:
-      'Tu gagnes du temps, tu evites les negociations longues, tu recois des offres plus qualifiees et tu monetises tes espaces avec un cadre plus professionnel.',
+      "Les paiements sont supportés via Stripe (carte, SEPA, ACH), Apple Pay, Google Pay, PayPal, virement bancaire, et Mobile Money (Orange Money, MTN MoMo, Wave, M-Pesa). La crypto USDT/USDC est disponible sur demande pour les gros montants.",
   },
+  {
+    question: "Comment AdSync garantit qu’il n’y a pas de bots ?",
+    answer:
+      "Un Quality Score ≥ 94/100 est obligatoire. L’IA analyse le comportement, l’historique, la géolocalisation et les patterns d’engagement. Les faux abonnés et trafics synthétiques sont filtrés avant activation des campagnes.",
+  },
+  {
+    question: "Mon argent est-il sécurisé ?",
+    answer:
+      "Oui. Le budget de la marque est bloqué via Stripe Connect avant le lancement. Le créateur est payé uniquement après diffusion vérifiée. En cas de non-respect des performances (PrecisionPay), le surplus est automatiquement remboursé.",
+  },
+  
 ];
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number>(0);
 
   return (
-    <section className="section faq-section" id="inscription">
+    <section className="section faq-section" id="faq">
       <div className="faq-panel">
         <div className="faq-copy">
           <span className="eyebrow ">Reponses aux questions frequentes</span>

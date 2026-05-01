@@ -1,10 +1,14 @@
 import './index.css';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import FormatsMarquee from './components/FormatsMarquee';
 import HowItWorks from './components/HowItWorks';
-import CollabSection from './components/CollabSection';
+import AdvantagesSection from './components/AdvantagesSection';
+import SolutionSection from './components/SolutionSection';
 import { AudienceSection, FeaturesSection, ComparisonSection } from './components/Sections';
+import LiveWorldSection from './components/LiveWorldSection';
 import FAQSection from './components/FAQSection';
+import SmartSignupSection from './components/SmartSignupSection';
 import Footer from './components/Footer';
 
 export default function App() {
@@ -17,12 +21,14 @@ export default function App() {
 
       <main>
         <Hero />
+        <FormatsMarquee />
+        <LiveWorldSection />
         <HowItWorks />
-        <CollabSection />
+        <SolutionSection />
+        <AdvantagesSection />
         <AudienceSection />
-        <FeaturesSection />
-        <ComparisonSection />
         <FAQSection />
+        <SmartSignupSection />
       </main>
       <Footer />
     </div>

@@ -4,9 +4,9 @@ import logoImage from '../assets/logo.png';
 const navItems = [
   { href: '#home', label: 'Accueil', id: 'home' },
   { href: '#comment-ca-marche', label: 'Comment ca marche', id: 'comment-ca-marche' },
+  { href: '#monde', label: 'Activite live', id: 'monde' },
   { href: '#pour-qui', label: 'Pour qui', id: 'pour-qui' },
-  { href: '#fonctionnalites', label: 'Fonctionnalites', id: 'fonctionnalites' },
-  { href: '#comparaison', label: 'Comparaison', id: 'comparaison' },
+  { href: '#faq', label: 'FAQ', id: 'faq' },
 ];
 
 export default function Navbar() {

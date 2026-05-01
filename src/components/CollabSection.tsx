@@ -86,7 +86,7 @@ export default function CollabSection() {
             <br />
             mais pour tes
             <br />
-            <strong>reseaux sociaux.</strong>
+            <strong>plateformes.</strong>
           </h2>
           <p>
             Un appartement vide devient une chambre d'hotes qui genere des revenus.

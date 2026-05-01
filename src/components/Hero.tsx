@@ -54,14 +54,17 @@ export default function Hero() {
          
 
             <h1>
-              Gagne avec ton
+              TES PLATEFORMES 
               <br />
-              Social Clout.
+
+             TON IMMOBILIER 
+             <br />
+             NUMÉRIQUE.
+              
             </h1>
 
             <p className="hero-lead">
-              Recois des paiements garantis, des campagnes qui matchent vraiment ton
-              univers et des agents IA qui gerent la partie operationnelle pour toi.
+             AdSync.io transforme chaque story, reel, live et page web ... en surface publicitaire active. Les marques louent ton espace via des contrats officiels. Tu encaisses, automatiquement.
             </p>
 
             <div className="hero-actions">
@@ -85,7 +88,7 @@ export default function Hero() {
               <div className="photo-overlay" />
 
               <div className="floating-tag floating-tag-center">
-                Collabore avec plus de 200 marques
+                ADSYNC.io | 100% automatisé · Propulsé par l'IA
               </div>
               <div className="floating-tag floating-tag-right">
                 Travaille avec les meilleures marques

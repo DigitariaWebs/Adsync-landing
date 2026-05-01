@@ -1,32 +1,31 @@
 import { FormEvent, useState } from 'react';
 import emailjs from '@emailjs/browser';
-import logoImage from '../assets/logo.png';
 
 const footerLinks = {
   Produit: [
-    { label: 'Fonctionnalites', href: '#fonctionnalites' },
-    { label: 'PrecisionPay', href: '#' },
-    { label: 'Co-Create', href: '#' },
-    { label: 'Agents IA', href: '#' },
-    { label: 'Tarifs', href: '#' },
+    { label: 'Fonctionnalites', href: '#comment-ca-marche' },
+    { label: 'PrecisionPay', href: '#monde' },
+    { label: 'Co-Create', href: '#pour-qui' },
+    { label: 'Agents IA', href: '#comment-ca-marche' },
+    { label: 'Tarifs', href: '#inscription' },
   ],
   Ressources: [
-    { label: 'Blog', href: '#' },
-    { label: 'Guide createurs', href: '#' },
-    { label: 'API docs', href: '#' },
-    { label: 'Statut', href: '#' },
-    { label: 'Changelog', href: '#' },
+    { label: 'Blog', href: '#home' },
+    { label: 'Guide createurs', href: '#pour-qui' },
+    { label: 'API docs', href: '#comment-ca-marche' },
+    { label: 'Statut', href: '#monde' },
+    { label: 'Changelog', href: '#faq' },
   ],
   Entreprise: [
-    { label: 'A propos', href: '#' },
-    { label: 'Carrieres', href: '#' },
-    { label: 'Presse', href: '#' },
-    { label: 'Contact', href: '#' },
+    { label: 'A propos', href: '#home' },
+    { label: 'Carrieres', href: '#inscription' },
+    { label: 'Presse', href: '#monde' },
+    { label: 'Contact', href: '#inscription-beta' },
   ],
   Legal: [
-    { label: 'CGU', href: '#' },
-    { label: 'Confidentialite', href: '#' },
-    { label: 'Cookies', href: '#' },
+    { label: 'CGU', href: '#faq' },
+    { label: 'Confidentialite', href: '#faq' },
+    { label: 'Cookies', href: '#faq' },
   ],
 };
 
@@ -68,26 +67,6 @@ function TikTokIcon() {
         d="M9 12a4 4 0 104 4V4a5 5 0 005 5"
         stroke="currentColor"
         strokeWidth="1.9"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function ShieldIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M9 12l2 2 4-4"
-        stroke="currentColor"
-        strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -170,8 +149,6 @@ export default function Footer() {
       });
       form.reset();
     } catch (error) {
-      console.error('EmailJS error:', error);
-
       const status = typeof error === 'object' && error !== null && 'status' in error ? String(error.status) : '';
       const details = typeof error === 'object' && error !== null && 'text' in error ? String(error.text) : '';
 
@@ -188,165 +165,11 @@ export default function Footer() {
 
   return (
     <footer className="site-footer">
-      <section className="beta-signup-section" id="inscription-beta">
-        <div className="beta-signup-shell">
-          <div className="beta-signup-copy">
-            <span className="beta-kicker">Acces beta limite</span>
-            <h2 className="beta-heading">
-              INSCRIS-TOI
-              <br />
-              AVANT LE 21 JUIN
-            </h2>
-            <p className="beta-lead">
-              La beta d&apos;AdSync.io ouvre le 21 juin 2026. Complete le formulaire:
-              plus on en sait sur toi, mieux on pourra te connecter aux bonnes marques
-              ou aux bons createurs des le premier jour.
-            </p>
+  
 
-            <div className="beta-stat-row">
-              {betaStats.map(stat => (
-                <article key={stat.label} className="beta-stat-card">
-                  <span className="beta-stat-value">{stat.value}</span>
-                  <span className="beta-stat-text">{stat.label}</span>
-                </article>
-              ))}
-            </div>
-          </div>
+    
 
-          <form className="beta-form-panel" onSubmit={handleSubmit}>
-            <div className="beta-form-glow beta-form-glow-left" aria-hidden="true" />
-            <div className="beta-form-glow beta-form-glow-right" aria-hidden="true" />
-
-           
-            <div className="beta-form-section">
-              <div className="beta-form-title">
-                <PersonIcon />
-                <span>Informations personnelles</span>
-              </div>
-
-              <div className="beta-form-grid beta-form-grid-two">
-                <label className="beta-field">
-                  <span>Prenom *</span>
-                  <input type="text" name="prenom" placeholder="Ex : Yedidia" required />
-                </label>
-
-                <label className="beta-field">
-                  <span>Nom *</span>
-                  <input type="text" name="nom" placeholder="Ex : Lisaka" required />
-                </label>
-
-                <label className="beta-field beta-field-full">
-                  <span>Adresse email *</span>
-                  <input type="email" name="email" placeholder="ton@email.com" required />
-                </label>
-
-                <label className="beta-field">
-                  <span>Pays *</span>
-                  <select name="pays" defaultValue="canada" required>
-                    <option value="france">France</option>
-                    <option value="rdc">Republique Democratique du Congo</option>
-                    <option value="belgique">Belgique</option>
-                    <option value="canada">Canada</option>
-                    <option value="senegal">Senegal</option>
-                    <option value="cote-divoire">Cote d&apos;Ivoire</option>
-                    <option value="cameroun">Cameroun</option>
-                    <option value="nigeria">Nigeria</option>
-                  </select>
-                </label>
-
-                <label className="beta-field">
-                  <span>Ville (optionnel)</span>
-                  <input type="text" name="ville" placeholder="Ex : Paris, Lagos, Kinshasa..." />
-                </label>
-              </div>
-            </div>
-
-            <div className="beta-form-section">
-              <div className="beta-form-title">
-                <RoleIcon />
-                <span>Tu es plutot...</span>
-              </div>
-
-              <div className="beta-form-grid">
-                <label className="beta-field beta-field-full">
-                  <span>Ton role principal sur AdSync *</span>
-                  <select name="role" defaultValue="" required>
-                    <option value="" disabled>
-                      Selectionne ton role
-                    </option>
-                    <option value="createur">Createur / Influenceur</option>
-                    <option value="marque">Marque / Annonceur</option>
-                    <option value="agence">Agence</option>
-                    <option value="media">Media / Communaute</option>
-                  </select>
-                </label>
-              </div>
-            </div>
-
-            <div className="beta-form-actions">
-              <button type="submit" className="beta-submit-button" disabled={isSubmitting}>
-                <span>{isSubmitting ? 'Envoi en cours...' : 'Valider mon inscription'}</span>
-                <small>Acces beta le 21 Juin 2026</small>
-              </button>
-
-              {formMessage && (
-                <p
-                  className={
-                    formMessage.type === 'success'
-                      ? 'beta-form-feedback beta-form-feedback-success'
-                      : 'beta-form-feedback beta-form-feedback-error'
-                  }
-                >
-                  {formMessage.text}
-                </p>
-              )}
-
-              <div className="beta-trust-row">
-                <span>Donnees 100% privees</span>
-                <span>Zero spam</span>
-              </div>
-
-              <p className="beta-form-contact">
-                Questions ?{' '}
-                <a href="mailto:yedidiambengalikita13@gmail.com">
-                  yedidiambengalikita13@gmail.com
-                </a>
-              </p>
-            </div>
-          </form>
-        </div>
-      </section>
-
-      <div className="footer-cta-band">
-        <div className="footer-cta-inner">
-          <div className="footer-cta-copy">
-            <span className="footer-cta-eyebrow">Start Your AdSync Journey</span>
-            <h2 className="footer-cta-heading">
-              Pret a monetiser
-              <br />
-              <strong>ton audience ?</strong>
-            </h2>
-          </div>
-          <div className="footer-cta-actions">
-            <a href="#inscription-beta" className="footer-cta-btn-primary">
-              Creer mon compte gratuit
-              <span aria-hidden="true">-&gt;</span>
-            </a>
-            <a href="#comment-ca-marche" className="footer-cta-btn-ghost">
-              Voir une demo
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div className="footer-stats-band">
-        {footerStats.map(stat => (
-          <div key={stat.label} className="footer-stat">
-            <span className="footer-stat-val">{stat.value}</span>
-            <span className="footer-stat-label">{stat.label}</span>
-          </div>
-        ))}
-      </div>
+      
 
       <div className="footer-body">
         <div className="footer-brand-col">
@@ -358,16 +181,14 @@ export default function Footer() {
             des agents IA et des campagnes qui convertissent vraiment.
           </p>
 
-          
-
           <div className="footer-socials">
-            <a href="#" className="footer-social-btn" aria-label="Instagram">
+            <a href="#home" className="footer-social-btn" aria-label="Instagram">
               <InstagramIcon />
             </a>
-            <a href="#" className="footer-social-btn" aria-label="X / Twitter">
+            <a href="#home" className="footer-social-btn" aria-label="X / Twitter">
               <XIcon />
             </a>
-            <a href="#" className="footer-social-btn" aria-label="TikTok">
+            <a href="#home" className="footer-social-btn" aria-label="TikTok">
               <TikTokIcon />
             </a>
           </div>
@@ -390,11 +211,11 @@ export default function Footer() {
       <div className="footer-bottom-bar">
         <p className="footer-copy">Copyright {year} AdSync.io - Tous droits reserves.</p>
         <div className="footer-bottom-links">
-          <a href="#">CGU</a>
+          <a href="#faq">CGU</a>
           <span aria-hidden="true">.</span>
-          <a href="#">Confidentialite</a>
+          <a href="#faq">Confidentialite</a>
           <span aria-hidden="true">.</span>
-          <a href="#">Cookies</a>
+          <a href="#faq">Cookies</a>
         </div>
       </div>
     </footer>

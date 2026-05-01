@@ -1,39 +1,70 @@
-type Audience = { title: string; description: string; tag: string };
+import pourquiPhoto1 from '../assets/photo-pourqui1.png';
+import pourquiPhoto2 from '../assets/photo-pourqui2.png';
 
-const audiences: Audience[] = [
+type AudienceCard = {
+  title: string;
+  badge: string;
+  image: string;
+  items: string[];
+};
+
+const audienceCards: AudienceCard[] = [
   {
-    title: 'Createurs et influenceurs',
-    description:
-      'Monetisez vos formats quotidiens sans gerer les echanges, les devis ou les relances.',
-    tag: 'Creator',
+    title: 'Tu crées. Tu encaisses.',
+    badge: 'CRÉATEUR',
+    image: pourquiPhoto1,
+    items: [
+      'Tu as une audience, même petite',
+      'Tu publies des stories, reels ou lives',
+      'Tu veux monetiser sans poster en plus',
+      "Tu recois l'argent automatiquement",
+    ],
   },
   {
-    title: 'Talents en croissance',
-    description:
-      "Passez d'opportunites ponctuelles a un revenu plus stable avec un cadre professionnel.",
-    tag: 'Growth',
-  },
-  {
-    title: 'Marques ambitieuses',
-    description:
-      'Accedez a un inventaire social plus humain, plus rapide a activer et mieux pilote.',
-    tag: 'Brand',
+    title: 'Tu paies ce qui marche.',
+    badge: 'MARQUE',
+    image: pourquiPhoto2,
+    items: [
+      'Tu veux toucher de vraies personnes',
+      'Tu en as assez des bots et faux clics',
+      'Tu paies seulement les vrais resultats',
+      'Tu lances une campagne en 60 secondes',
+    ],
   },
 ];
 
 export function AudienceSection() {
   return (
-    <section className="section section-split" id="pour-qui">
-      <div className="section-intro">
-        <span className="eyebrow">Pour qui</span>
-        <h2>Concu pour les talents qui veulent un cadre plus rentable et plus propre.</h2>
+    <section className="section section-solution" id="pour-qui">
+      <div className="audience-header">
+        <span className="eyebrow">POUR QUI</span>
+        <h2>
+        Une plateforme.
+        <br />
+            <strong> Deux mondes.</strong>
+          </h2>
+        <p >
+          Que tu sois createur ou marque, AdSync t'ouvre une nouvelle economie : celle des espaces
+          numeriques qui se louent comme des appartements.
+        </p>
       </div>
-      <div className="audience-grid">
-        {audiences.map((audience, index) => (
-          <article className={`audience-card audience-card-${index + 1}`} key={audience.title}>
-            <span className="audience-chip">{audience.tag}</span>
-            <h3>{audience.title}</h3>
-            <p>{audience.description}</p>
+
+      <div className="audience-cards-grid">
+        {audienceCards.map((card) => (
+          <article className="audience-card-full" key={card.badge}>
+            <div className="audience-card-image">
+              <img src={card.image} alt={card.title} />
+            </div>
+            <div className="audience-card-overlay"></div>
+            <span className="audience-card-badge">{card.badge}</span>
+            <div className="audience-card-body">
+              <h3>{card.title}</h3>
+              <ul className="audience-checks">
+                {card.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
           </article>
         ))}
       </div>
