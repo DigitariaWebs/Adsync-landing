@@ -37,10 +37,8 @@ body {
   min-width: 320px;
   font-family: 'Inter', sans-serif;
   color: var(--text-primary);
-  background:
-    radial-gradient(circle at 12% 14%, rgba(231, 201, 255, 0.95), transparent 25%),
-    radial-gradient(circle at 88% 10%, rgba(194, 208, 255, 0.6), transparent 23%),
-    linear-gradient(180deg, #efe2ff 0%, #dcc5f8 48%, #eadcff 100%);
+  background:#ffffff
+
 }
 
 a {
