@@ -5192,8 +5192,14 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  color: #4e3787;
   margin-bottom: 8px;
+  border: 1px solid rgba(78, 55, 135, 0.16);
+}
+
+.stripe-feature-icon svg {
+  width: 20px;
+  height: 20px;
 }
 
 .stripe-feature-title {

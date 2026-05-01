@@ -64,7 +64,7 @@ export default function Hero() {
             </h1>
 
             <p className="hero-lead">
-             AdSync.io transforme chaque story, reel, live et page web ... en surface publicitaire active. Les marques louent ton espace via des contrats officiels. Tu encaisses, automatiquement.
+             AdSync.io transforme chaque story, reel, live et page web ... en surface publicitaire active. Les marques louent tes espaces via des contrats officiels. Tu encaisses, automatiquement.
             </p>
 
             <div className="hero-actions">

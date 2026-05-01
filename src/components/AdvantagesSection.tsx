@@ -15,7 +15,7 @@ type HighlightCard = {
 };
 
 type StripeFeature = {
-  icon: string;
+  icon: 'secure' | 'instant' | 'global';
   title: string;
   description: string;
 };
@@ -59,23 +59,49 @@ const highlightCards: HighlightCard[] = [
 
 const stripeFeatures: StripeFeature[] = [
   {
-    icon: 'Secure',
+    icon: 'secure',
     title: 'SECURISE',
     description: '3D Secure, conformite PCI niveau 1.',
   },
   {
-    icon: 'Fast',
+    icon: 'instant',
     title: 'INSTANTANE',
     description: 'Versement sous 24h en moyenne.',
   },
   {
-    icon: 'Global',
+    icon: 'global',
     title: 'MONDIAL',
     description: '135 devises, 47 pays supportes.',
   },
 ];
 
 const stripePills = ['VISA', 'MASTERCARD', 'AMEX', 'SEPA', 'APPLE PAY', 'GOOGLE PAY'];
+
+function StripeFeatureIcon({ type }: { type: StripeFeature['icon'] }) {
+  if (type === 'secure') {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="6.5" y="10" width="11" height="9" rx="2.2" stroke="currentColor" strokeWidth="1.8" />
+        <path d="M9 10V8.2A3 3 0 0 1 12 5a3 3 0 0 1 3 3.2V10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      </svg>
+    );
+  }
+
+  if (type === 'instant') {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="m13.7 3.8-6 8h4l-1.3 8.4 6.8-9h-4.1l.6-7.4Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="7.5" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M4.7 12h14.6M12 4.5c2.1 2 3.3 4.6 3.3 7.5s-1.2 5.5-3.3 7.5c-2.1-2-3.3-4.6-3.3-7.5S9.9 6.5 12 4.5Z" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
 
 export default function AdvantagesSection() {
   return (
@@ -134,7 +160,9 @@ export default function AdvantagesSection() {
             <div className="stripe-features">
               {stripeFeatures.map(f => (
                 <div className="stripe-feature" key={f.title}>
-                  <div className="stripe-feature-icon">{f.icon}</div>
+                  <div className="stripe-feature-icon">
+                    <StripeFeatureIcon type={f.icon} />
+                  </div>
                   <p className="stripe-feature-title">{f.title}</p>
                   <p className="stripe-feature-desc">{f.description}</p>
                 </div>
