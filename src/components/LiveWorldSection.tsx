@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import liveGlobeImage from '../assets/live-globe.png';
+import starIcon from '../assets/a_high_end_premium_3d_icon_of_a_minimalist_4_pointed_star._the_star_features-removebg-preview.png';
 
 type ActivityEntry = {
   id: number;
@@ -74,10 +75,11 @@ export default function LiveWorldSection() {
   return (
     <section className="live-signups-section" id="monde">
        <div className="solution-intro">
+          <img src={starIcon} alt="" aria-hidden="true" className="section-star" />
           <span className="eyebrow">En direct, partout dans le monde</span>
          <h2>
            Pendant que tu lis ceci,<br />
-           le monde s’inscrit.
+           <em>le monde s&rsquo;inscrit.</em>
          </h2>
           <p>
            Créateurs et marques rejoignent AdSync depuis plus de 80 pays. Chaque point lumineux est une nouvelle inscription en temps réel.

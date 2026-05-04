@@ -4,6 +4,7 @@ import dashboardImage from '../assets/dashboard.png';
 import contratImage from '../assets/contrat.png';
 import payoutImage from '../assets/payout.png';
 import uploadImage from '../assets/upload.png';
+import starIcon from '../assets/a_high_end_premium_3d_icon_of_a_minimalist_4_pointed_star._the_star_features-removebg-preview.png';
 
 type CardType = 'creator' | 'brand';
 
@@ -71,8 +72,13 @@ export default function HowItWorks() {
         <div className="how-it-works-glow" />
 
         <div className="how-it-works-intro">
+          <img src={starIcon} alt="" aria-hidden="true" className="section-star" />
           <span className="eyebrow">Comment ca marche</span>
-          <h2>Le processus est simple et securise pour tous</h2>
+          <h2>
+            Le processus est simple
+            <br />
+            <em>et sécurisé pour tous.</em>
+          </h2>
         </div>
 
         <div style={{ textAlign: 'center' }}>

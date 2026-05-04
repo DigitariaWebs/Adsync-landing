@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react';
 import emailjs from '@emailjs/browser';
+import starIcon from '../assets/a_high_end_premium_3d_icon_of_a_minimalist_4_pointed_star._the_star_features-removebg-preview.png';
 
 const footerLinks = {
   Produit: [
@@ -174,6 +175,7 @@ export default function Footer() {
       <div className="footer-body">
         <div className="footer-brand-col">
           <a href="#home" className="footer-logo">
+            <img src={starIcon} alt="" aria-hidden="true" className="footer-logo-star" />
             ADSYNC.
           </a>
           <p className="footer-tagline">

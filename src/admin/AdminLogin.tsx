@@ -1,0 +1,69 @@
+import { FormEvent, useState } from 'react';
+import { supabase } from '../lib/supabase';
+
+export default function AdminLogin() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string>('');
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitting(true);
+    setErrorMsg('');
+
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      setErrorMsg(error.message || 'Identifiants invalides.');
+      setSubmitting(false);
+    }
+    // Auth state listener in AdminPage will handle redirect on success
+  };
+
+  return (
+    <div className="admin-login-shell">
+      <a href="/" className="admin-back admin-back-floating" aria-label="Retour au site">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M15 6l-6 6 6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        <span>Retour au site</span>
+      </a>
+      <div className="admin-login-card">
+        <div className="admin-login-head">
+          <span className="admin-login-kicker">AdSync admin</span>
+          <h1>Connexion</h1>
+          <p>Accès réservé. Connecte-toi avec ton compte administrateur.</p>
+        </div>
+
+        <form className="admin-login-form" onSubmit={handleSubmit}>
+          <label>
+            <span>Email</span>
+            <input
+              type="email"
+              required
+              autoComplete="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder="admin@adsync.io"
+            />
+          </label>
+          <label>
+            <span>Mot de passe</span>
+            <input
+              type="password"
+              required
+              autoComplete="current-password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+          </label>
+          {errorMsg && <p className="admin-login-error">{errorMsg}</p>}
+          <button type="submit" disabled={submitting}>
+            {submitting ? 'Connexion...' : 'Se connecter'}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}

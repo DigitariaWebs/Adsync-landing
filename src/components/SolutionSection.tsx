@@ -1,14 +1,16 @@
 import solutionPhoto1 from '../assets/photo-solution1.png';
 import solutionPhoto2 from '../assets/photo-solution2.png';
+import starIcon from '../assets/a_high_end_premium_3d_icon_of_a_minimalist_4_pointed_star._the_star_features-removebg-preview.png';
 
 export default function SolutionSection() {
   return (
     <section className="section section-solution" id="solution">
       <div className="solution-panel">
         <div className="solution-intro">
+          <img src={starIcon} alt="" aria-hidden="true" className="section-star" />
           <span className="eyebrow">La solution</span>
           <h2>
-            Le pont manquant
+            Le pont <em>manquant.</em>
           </h2>
           <p>
             AdSync connecte createurs et marques via des contrats publicitaires directs. Pense a Airbnb: un

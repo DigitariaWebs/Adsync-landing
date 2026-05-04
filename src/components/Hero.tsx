@@ -1,4 +1,5 @@
 import heroImage from '../assets/hero.png';
+import starIcon from '../assets/a_high_end_premium_3d_icon_of_a_minimalist_4_pointed_star._the_star_features-removebg-preview.png';
 
 function InstagramIcon() {
   return (
@@ -51,20 +52,18 @@ export default function Hero() {
       <div className="hero-panel-shell">
         <section className="hero hero-photo">
           <div className="hero-copy">
-         
+          
 
             <h1>
-              TES PLATEFORMES 
+              Tes plateformes
               <br />
-
-             TON IMMOBILIER 
-             <br />
-             NUMÉRIQUE.
-              
+              ton immobilier
+              <br />
+              <em className="hero-title-gold">numérique louable.</em>
             </h1>
 
             <p className="hero-lead">
-             AdSync.io transforme chaque story, reel, live et page web ... en surface publicitaire active. Les marques louent tes espaces via des contrats officiels. Tu encaisses, automatiquement.
+             AdSync.io transforme chaque story, reel, live et page web d'un créateur de contenus en surface publicitaire active. Les marques louent tes espaces via des contrats officiels. Tu encaisses, automatiquement.
             </p>
 
             <div className="hero-actions">
@@ -87,24 +86,13 @@ export default function Hero() {
               />
               <div className="photo-overlay" />
 
-              <div className="floating-tag floating-tag-center">
-                ADSYNC.io | 100% automatisé · Propulsé par l'IA
-              </div>
-              <div className="floating-tag floating-tag-right">
-                Travaille avec les meilleures marques
-              </div>
+       
 
              
             </div>
           </div>
         </section>
 
-        <div className="hero-scroll">
-          <span className="hero-scroll-mouse" aria-hidden="true" />
-          <span className="hero-scroll-arrow" aria-hidden="true">
-            ↓
-          </span>
-        </div>
       </div>
     </section>
   );

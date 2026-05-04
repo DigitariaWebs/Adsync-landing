@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import logoImage from '../assets/logo.png';
+import starIcon from '../assets/a_high_end_premium_3d_icon_of_a_minimalist_4_pointed_star._the_star_features-removebg-preview.png';
 
 const navItems = [
   { href: '#home', label: 'Accueil', id: 'home' },
@@ -64,6 +65,7 @@ export default function Navbar() {
   return (
     <header className={`topbar${scrolled ? ' topbar-scrolled' : ''}${menuOpen ? ' topbar-menu-open' : ''}`}>
       <a className="brand" href="#home" aria-label="Accueil AdSync">
+        <img className="brand-star" src={starIcon} alt="" aria-hidden="true" />
         <img className="brand-logo" src={logoImage} alt="AdSync logo" />
       </a>
 
@@ -99,6 +101,13 @@ export default function Navbar() {
       </nav>
 
       <div className="topbar-actions">
+        <a className="nav-admin-link" href="/admin" aria-label="Espace admin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="4" y="10" width="16" height="11" rx="2" stroke="currentColor" strokeWidth="1.8" />
+            <path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+          </svg>
+          <span>Admin</span>
+        </a>
         <a className="nav-cta nav-cta-ghost" href="#inscription" onClick={() => setMenuOpen(false)}>
           Je m&apos;inscris
         </a>
