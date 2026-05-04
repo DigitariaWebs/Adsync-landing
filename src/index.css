@@ -39,7 +39,7 @@ body {
   font-family: 'Inter', sans-serif;
   color: var(--text-primary);
   background: #ffffff;
-  zoom: 0.88;
+  zoom: 0.97;
 }
 
 @supports not (zoom: 1) {
