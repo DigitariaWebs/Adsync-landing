@@ -81,10 +81,22 @@ const OBJECTIVES = [
   'Trafic site web',
 ];
 
+const HANDLE_PLACEHOLDERS: Record<string, string> = {
+  Instagram: '@ton_pseudo (ex : @aicha.studio)',
+  TikTok: '@ton_pseudo (ex : @aicha.studio)',
+  YouTube: 'Nom de la chaîne ou @handle',
+  Facebook: 'Nom de la page ou URL',
+  Twitch: 'Pseudo Twitch',
+  'X (Twitter)': '@ton_pseudo',
+  LinkedIn: 'URL de ton profil',
+  Snapchat: '@ton_pseudo',
+};
+
 export default function SmartSignupSection() {
   const [role, setRole] = useState<RoleTab>('createur');
   const [status, setStatus] = useState<Status>('idle');
   const [errorMsg, setErrorMsg] = useState<string>('');
+  const [creatorPlatform, setCreatorPlatform] = useState<string>('');
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -103,7 +115,17 @@ export default function SmartSignupSection() {
     if (role === 'createur') {
       const handle = String(formData.get('handle') ?? '').trim();
       const platformChoice = String(formData.get('platform') ?? '').trim();
-      platform = handle && platformChoice ? `${platformChoice} : ${handle}` : platformChoice || handle || null;
+      if (!platformChoice) {
+        setStatus('error');
+        setErrorMsg('Choisis ta plateforme principale.');
+        return;
+      }
+      if (!handle) {
+        setStatus('error');
+        setErrorMsg(`Renseigne ton identifiant ${platformChoice}.`);
+        return;
+      }
+      platform = `${platformChoice} : ${handle}`;
       audienceSize = String(formData.get('audience_size') ?? '').trim() || null;
       category = String(formData.get('category') ?? '').trim() || null;
       country = String(formData.get('country') ?? '').trim() || null;
@@ -142,6 +164,7 @@ export default function SmartSignupSection() {
 
     setStatus('success');
     (event.target as HTMLFormElement).reset();
+    setCreatorPlatform('');
   };
 
   const submitting = status === 'submitting';
@@ -169,7 +192,7 @@ export default function SmartSignupSection() {
               role="tab"
               aria-selected={role === 'createur'}
               className={`smart-signup-tab ${role === 'createur' ? 'is-active' : ''}`}
-              onClick={() => setRole('createur')}
+              onClick={() => { setRole('createur'); setCreatorPlatform(''); setStatus('idle'); }}
             >
               <span className="smart-signup-tab-title">Je suis Créateur</span>
               <span className="smart-signup-tab-sub">Je monétise mon audience · 75 % par contrat</span>
@@ -179,7 +202,7 @@ export default function SmartSignupSection() {
               role="tab"
               aria-selected={role === 'marque'}
               className={`smart-signup-tab ${role === 'marque' ? 'is-active' : ''}`}
-              onClick={() => setRole('marque')}
+              onClick={() => { setRole('marque'); setCreatorPlatform(''); setStatus('idle'); }}
             >
               <span className="smart-signup-tab-title">Je suis une Marque</span>
               <span className="smart-signup-tab-sub">Je lance des campagnes ciblées par l&apos;IA</span>
@@ -198,17 +221,36 @@ export default function SmartSignupSection() {
                   <input type="email" name="email" required placeholder="contact@email.com" />
                 </label>
                 <label className="smart-field">
-                  <span>@handle principal</span>
-                  <input type="text" name="handle" placeholder="@tonpseudo" />
-                </label>
-                <label className="smart-field">
                   <span>Plateforme principale</span>
-                  <select name="platform" defaultValue="">
+                  <select
+                    name="platform"
+                    required
+                    value={creatorPlatform}
+                    onChange={e => setCreatorPlatform(e.target.value)}
+                  >
                     <option value="" disabled>Choisis ta plateforme</option>
                     {PLATFORMS.map(p => (
                       <option key={p} value={p}>{p}</option>
                     ))}
                   </select>
+                </label>
+                <label className="smart-field">
+                  <span>
+                    {creatorPlatform
+                      ? `Ton identifiant ${creatorPlatform}`
+                      : 'Ton identifiant sur la plateforme'}
+                  </span>
+                  <input
+                    type="text"
+                    name="handle"
+                    required
+                    disabled={!creatorPlatform}
+                    placeholder={
+                      creatorPlatform
+                        ? HANDLE_PLACEHOLDERS[creatorPlatform] ?? '@ton_pseudo'
+                        : 'Choisis d’abord ta plateforme'
+                    }
+                  />
                 </label>
                 <label className="smart-field">
                   <span>Taille d&apos;audience</span>
