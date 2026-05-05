@@ -1,4 +1,4 @@
-import heroImage from '../assets/hero.png';
+import heroVideoMp4 from '../assets/video.mp4';
 import starIcon from '../assets/a_high_end_premium_3d_icon_of_a_minimalist_4_pointed_star._the_star_features-removebg-preview.png';
 
 function InstagramIcon() {
@@ -80,10 +80,16 @@ export default function Hero() {
             <div className="visual-card photo-card">
               <div className="hero-visual-glow hero-visual-glow-top" aria-hidden="true" />
               <div className="hero-visual-glow hero-visual-glow-bottom" aria-hidden="true" />
-              <img
-                src={heroImage}
-                alt="Createurs souriants representant une audience engagee"
-              />
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                aria-label="Aperçu animé d'AdSync.io"
+              >
+                <source src={heroVideoMp4} type="video/mp4" />
+              </video>
               <div className="photo-overlay" />
 
        

@@ -21,7 +21,7 @@ export default function SolutionSection() {
 
         <div className="solution-grid">
           <article className="solution-card">
-            <img src={solutionPhoto1} alt="Un pont direct - connexion directe entre createurs et marques" />
+            <img src={solutionPhoto1} alt="Un pont direct, connexion entre createurs et marques" />
             <div className="solution-card-overlay"></div>
             <div className="solution-card-content">
               <h3>Un pont direct.</h3>
@@ -32,12 +32,12 @@ export default function SolutionSection() {
           </article>
 
           <article className="solution-card">
-            <img src={solutionPhoto2} alt="Tes espaces valorisés - tes plateformes deviennent des espaces monetisables" />
+            <img src={solutionPhoto2} alt="Tes espaces valorisés, tes plateformes deviennent des espaces monetisables" />
             <div className="solution-card-overlay"></div>
             <div className="solution-card-content">
               <h3>Tes espaces, valorisés.</h3>
               <p>
-                Feeds, Reels, Stories, Lives - chaque espace devient une source de revenus stable et cadree.
+                Feeds, Reels, Stories, Lives : chaque espace devient une source de revenus stable et cadree.
               </p>
             </div>
           </article>

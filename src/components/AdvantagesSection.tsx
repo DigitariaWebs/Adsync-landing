@@ -1,5 +1,3 @@
-import shieldImage from '../assets/shield.png';
-import payoutImage from '../assets/payout.png';
 import stripeImage from '../assets/stripe.png';
 
 type StatCard = {
@@ -11,7 +9,6 @@ type StatCard = {
 type HighlightCard = {
   title: string;
   description: string;
-  image: string;
 };
 
 type StripeFeature = {
@@ -48,12 +45,10 @@ const highlightCards: HighlightCard[] = [
   {
     title: 'Anti bots, par defaut.',
     description: 'Audience Quality Engine analyse chaque campagne en temps reel.',
-    image: shieldImage,
   },
   {
     title: 'Paiement securise par Stripe.',
-    description: "Encaissement direct via Stripe avec versement automatique en fin de contrat.",
-    image: payoutImage,
+    description: 'Encaissement direct via Stripe avec versement automatique en fin de contrat.',
   },
 ];
 
@@ -130,15 +125,9 @@ export default function AdvantagesSection() {
 
         <div className="advantages-highlight-grid">
           {highlightCards.map(card => (
-            <article className="adv-image-card" key={card.title}>
-              <div className="adv-image-wrap">
-                <img src={card.image} alt={card.title} />
-                <div className="adv-image-overlay" />
-                <div className="adv-image-content">
-                  <h3>{card.title}</h3>
-                  <p>{card.description}</p>
-                </div>
-              </div>
+            <article className="adv-text-card" key={card.title}>
+              <h3>{card.title}</h3>
+              <p>{card.description}</p>
             </article>
           ))}
         </div>

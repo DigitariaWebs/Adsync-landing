@@ -211,7 +211,7 @@ export default function Footer() {
       </div>
 
       <div className="footer-bottom-bar">
-        <p className="footer-copy">Copyright {year} AdSync.io - Tous droits reserves.</p>
+        <p className="footer-copy">Copyright {year} AdSync.io. Tous droits reserves.</p>
         <div className="footer-bottom-links">
           <a href="#faq">CGU</a>
           <span aria-hidden="true">.</span>

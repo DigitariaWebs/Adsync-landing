@@ -1,5 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
-import { supabase, WaitlistEntry, WaitlistRole } from '../lib/supabase';
+import { supabase, WaitlistEntry, WaitlistRole, EffectivePermissions, ADMIN_EMAIL } from '../lib/supabase';
+import AdminMessages from './AdminMessages';
+import AdminTeam from './AdminTeam';
+import AdminAudit from './AdminAudit';
+import { logAction } from './audit';
+
+type AdminView = 'waitlist' | 'messages' | 'team' | 'audit';
 
 type RoleFilter = 'all' | WaitlistRole;
 
@@ -41,9 +47,24 @@ function downloadCsv(rows: WaitlistEntry[]) {
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+  void logAction('waitlist.export', 'waitlist', null, { count: rows.length });
 }
 
-export default function AdminDashboard({ adminEmail, onSignOut }: { adminEmail: string; onSignOut: () => void }) {
+type Props = {
+  adminEmail: string;
+  permissions: EffectivePermissions;
+  onSignOut: () => void;
+};
+
+export default function AdminDashboard({ adminEmail, permissions, onSignOut }: Props) {
+  const initialView: AdminView = permissions.canViewWaitlist
+    ? 'waitlist'
+    : permissions.canViewMessages
+      ? 'messages'
+      : permissions.isAdmin
+        ? 'team'
+        : 'waitlist';
+  const [view, setView] = useState<AdminView>(initialView);
   const [entries, setEntries] = useState<WaitlistEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState<string>('');
@@ -52,6 +73,10 @@ export default function AdminDashboard({ adminEmail, onSignOut }: { adminEmail: 
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
 
   useEffect(() => {
+    if (!permissions.canViewWaitlist) {
+      setLoading(false);
+      return;
+    }
     let cancelled = false;
     (async () => {
       const { data, error } = await supabase
@@ -71,7 +96,7 @@ export default function AdminDashboard({ adminEmail, onSignOut }: { adminEmail: 
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [permissions.canViewWaitlist]);
 
   const categories = useMemo(() => {
     const set = new Set<string>();
@@ -113,6 +138,13 @@ export default function AdminDashboard({ adminEmail, onSignOut }: { adminEmail: 
     return { total: entries.length, createurs, marques, last24h, last7d };
   }, [entries]);
 
+  const titleFor = (v: AdminView) => {
+    if (v === 'waitlist') return 'Liste d’attente';
+    if (v === 'messages') return 'Messages reçus';
+    if (v === 'team') return 'Équipe';
+    return 'Activité';
+  };
+
   return (
     <div className="admin-shell">
       <header className="admin-topbar">
@@ -124,8 +156,10 @@ export default function AdminDashboard({ adminEmail, onSignOut }: { adminEmail: 
           </a>
           <span className="admin-brand-mark">A</span>
           <div>
-            <span className="admin-brand-kicker">AdSync admin</span>
-            <h1>Liste d&apos;attente</h1>
+            <span className="admin-brand-kicker">
+              AdSync admin {permissions.isAdmin ? '· Admin' : '· Manager'}
+            </span>
+            <h1>{titleFor(view)}</h1>
           </div>
         </div>
         <div className="admin-topbar-right">
@@ -136,6 +170,117 @@ export default function AdminDashboard({ adminEmail, onSignOut }: { adminEmail: 
         </div>
       </header>
 
+      <nav className="admin-tabs" role="tablist" aria-label="Sections admin">
+        {permissions.canViewWaitlist && (
+          <button
+            type="button"
+            role="tab"
+            aria-selected={view === 'waitlist'}
+            className={`admin-tab ${view === 'waitlist' ? 'is-active' : ''}`}
+            onClick={() => setView('waitlist')}
+          >
+            Inscriptions
+          </button>
+        )}
+        {permissions.canViewMessages && (
+          <button
+            type="button"
+            role="tab"
+            aria-selected={view === 'messages'}
+            className={`admin-tab ${view === 'messages' ? 'is-active' : ''}`}
+            onClick={() => setView('messages')}
+          >
+            Messages
+          </button>
+        )}
+        {permissions.isAdmin && (
+          <>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={view === 'team'}
+              className={`admin-tab ${view === 'team' ? 'is-active' : ''}`}
+              onClick={() => setView('team')}
+            >
+              Équipe
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={view === 'audit'}
+              className={`admin-tab ${view === 'audit' ? 'is-active' : ''}`}
+              onClick={() => setView('audit')}
+            >
+              Activité
+            </button>
+          </>
+        )}
+      </nav>
+
+      {view === 'messages' && permissions.canViewMessages && (
+        <AdminMessages canReply={permissions.canReplyMessages} />
+      )}
+
+      {view === 'team' && permissions.isAdmin && (
+        <AdminTeam adminEmail={ADMIN_EMAIL || adminEmail} />
+      )}
+
+      {view === 'audit' && permissions.isAdmin && <AdminAudit />}
+
+      {view === 'waitlist' && permissions.canViewWaitlist && (
+        <WaitlistView
+          entries={entries}
+          loading={loading}
+          errorMsg={errorMsg}
+          roleFilter={roleFilter}
+          setRoleFilter={setRoleFilter}
+          categoryFilter={categoryFilter}
+          setCategoryFilter={setCategoryFilter}
+          search={search}
+          setSearch={setSearch}
+          categories={categories}
+          stats={stats}
+          filtered={filtered}
+          canExport={permissions.canEditWaitlist}
+        />
+      )}
+    </div>
+  );
+}
+
+type WaitlistViewProps = {
+  entries: WaitlistEntry[];
+  loading: boolean;
+  errorMsg: string;
+  roleFilter: RoleFilter;
+  setRoleFilter: (r: RoleFilter) => void;
+  categoryFilter: string;
+  setCategoryFilter: (c: string) => void;
+  search: string;
+  setSearch: (s: string) => void;
+  categories: string[];
+  stats: { total: number; createurs: number; marques: number; last24h: number; last7d: number };
+  filtered: WaitlistEntry[];
+  canExport: boolean;
+};
+
+function WaitlistView({
+  entries,
+  loading,
+  errorMsg,
+  roleFilter,
+  setRoleFilter,
+  categoryFilter,
+  setCategoryFilter,
+  search,
+  setSearch,
+  categories,
+  stats,
+  filtered,
+  canExport,
+}: WaitlistViewProps) {
+  return (
+    <>
       {errorMsg && <div className="admin-error-banner">{errorMsg}</div>}
 
       <section className="admin-kpis">
@@ -199,14 +344,16 @@ export default function AdminDashboard({ adminEmail, onSignOut }: { adminEmail: 
           />
         </div>
 
-        <button
-          type="button"
-          className="admin-export"
-          onClick={() => downloadCsv(filtered)}
-          disabled={filtered.length === 0}
-        >
-          Exporter CSV ({filtered.length})
-        </button>
+        {canExport && (
+          <button
+            type="button"
+            className="admin-export"
+            onClick={() => downloadCsv(filtered)}
+            disabled={filtered.length === 0}
+          >
+            Exporter CSV ({filtered.length})
+          </button>
+        )}
       </section>
 
       <section className="admin-table-wrap">
@@ -226,8 +373,10 @@ export default function AdminDashboard({ adminEmail, onSignOut }: { adminEmail: 
                 <th>Rôle</th>
                 <th>Nom</th>
                 <th>Email</th>
-                <th>Plateforme</th>
-                <th>Catégorie</th>
+                <th>Plateforme / Site</th>
+                <th>Catégorie / Secteur</th>
+                <th>Audience / Budget</th>
+                <th>Pays / Objectif</th>
               </tr>
             </thead>
             <tbody>
@@ -243,14 +392,16 @@ export default function AdminDashboard({ adminEmail, onSignOut }: { adminEmail: 
                   <td className="admin-cell-email">
                     <a href={`mailto:${entry.email}`}>{entry.email}</a>
                   </td>
-                  <td>{entry.platform ?? '—'}</td>
-                  <td>{entry.category ?? '—'}</td>
+                  <td>{entry.platform ?? '.'}</td>
+                  <td>{entry.category ?? '.'}</td>
+                  <td>{entry.audience_size ?? '.'}</td>
+                  <td>{entry.country ?? '.'}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         )}
       </section>
-    </div>
+    </>
   );
 }

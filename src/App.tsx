@@ -8,6 +8,7 @@ import PourQuiSection from './components/PourQuiSection';
 import LiveWorldSection from './components/LiveWorldSection';
 import FAQSection from './components/FAQSection';
 import SmartSignupSection from './components/SmartSignupSection';
+import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import AdminPage from './admin/AdminPage';
 
@@ -32,6 +33,7 @@ export default function App() {
         <AdvantagesSection />
         <FAQSection />
         <SmartSignupSection />
+        <ContactSection />
       </main>
       <Footer />
     </div>

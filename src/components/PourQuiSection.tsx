@@ -360,10 +360,10 @@ const surfaces = [
 
 const brandActions = [
   'Donner une pub à un créateur pour qu\'il la publie sur ses réseaux',
-  'Faire booster une pub Facebook existante par un créateur — il la partage, tu paies les résultats',
+  'Faire booster une pub Facebook existante par un créateur. Il la partage, tu paies les résultats.',
   "Placer une pub sur le site web d'un créateur, comme un panneau publicitaire numérique",
   "Laisser l'IA AdSync créer la pub complète à ta place : vidéo, texte, format",
-  'Payer uniquement ce qui se passe vraiment — vue, clic, achat réel',
+  'Payer uniquement ce qui se passe vraiment : vue, clic, achat réel',
 ];
 
 function ProfileCard({ profile }: { profile: Profile }) {
@@ -412,7 +412,7 @@ export default function PourQuiSection() {
           <p className="pq-block-lead">
             Tu as une audience, même petite, dès 200 abonnés. Tu publies du contenu sur n&apos;importe
             quelle plateforme et tu veux transformer tes Reels, Stories, Statuts, ton mur Facebook ou
-            Instagram, tes vidéos et tes espaces web en surfaces publicitaires actives — rémunérées
+            Instagram, tes vidéos et tes espaces web en surfaces publicitaires actives, rémunérées
             par contrats avec des marques alignées avec ton univers.
           </p>
 
@@ -443,7 +443,7 @@ export default function PourQuiSection() {
                 <h4>Pendant tes lives, l&apos;IA choisit seule le bon moment</h4>
                 <p>
                   Live Instagram, TikTok, YouTube ou Twitch&nbsp;: tu n&apos;as rien à faire. Notre IA
-                  analyse en temps réel et insère la pub au moment le plus naturel — pause,
+                  analyse en temps réel et insère la pub au moment le plus naturel : pause,
                   changement de sujet, moment calme. Jamais agressif.
                 </p>
               </div>
@@ -457,7 +457,7 @@ export default function PourQuiSection() {
                 <p>
                   Une marque a déjà une pub Facebook&nbsp;? Tu peux simplement la partager sur ta
                   page dans le cadre d&apos;un contrat. Ton espace devient temporairement la surface
-                  de diffusion — sans même créer de contenu.
+                  de diffusion, sans même créer de contenu.
                 </p>
               </div>
             </article>
@@ -481,8 +481,8 @@ export default function PourQuiSection() {
           <p className="pq-block-lead">
             Tu vends un produit ou un service, ou tu fais la promotion d&apos;une cause, d&apos;un
             événement, d&apos;une application. Tu veux faire diffuser ta pub sur les espaces
-            numériques de vrais créateurs — leur mur Facebook, leurs Stories, leurs Reels, leurs
-            Statuts, leur site web — en signant des contrats publicitaires directs.
+            numériques de vrais créateurs (leur mur Facebook, leurs Stories, leurs Reels, leurs
+            Statuts, leur site web) en signant des contrats publicitaires directs.
           </p>
 
           <div className="pq-profile-grid">
@@ -527,7 +527,7 @@ export default function PourQuiSection() {
                 <Icon name="web" />
               </span>
               <div>
-                <h4>WebSpaces — ton site devient surface pub</h4>
+                <h4>WebSpaces : ton site devient surface pub</h4>
                 <p>
                   Les marques diffusent leurs pubs directement sur les pages de ton site ou blog,
                   comme un panneau publicitaire numérique sur ton propre terrain. Chaque visiteur
@@ -540,7 +540,7 @@ export default function PourQuiSection() {
                 <Icon name="reshare" />
               </span>
               <div>
-                <h4>Pub Boost — partage de pub existante</h4>
+                <h4>Pub Boost : partage de pub existante</h4>
                 <p>
                   La marque a déjà sa pub sur Facebook&nbsp;? Tu n&apos;as rien à filmer. AdSync te
                   propose un contrat&nbsp;: tu partages la publication sur ta page ou ton groupe et
