@@ -87,6 +87,16 @@ export type AuditEntry = {
   details: Record<string, unknown> | null;
 };
 
+export type TeamInvite = {
+  email: string;
+  can_view_waitlist: boolean;
+  can_edit_waitlist: boolean;
+  can_view_messages: boolean;
+  can_reply_messages: boolean;
+  invited_by: string | null;
+  created_at: string;
+};
+
 export type EffectivePermissions = {
   isAdmin: boolean;
   isActive: boolean;

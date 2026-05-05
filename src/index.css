@@ -6955,6 +6955,81 @@ img {
   gap: 16px;
 }
 
+.admin-team-section {
+  margin-top: 28px;
+}
+
+.admin-team-section-title {
+  margin: 0 0 14px;
+  color: #211347;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.admin-invite-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 16px;
+  padding: 18px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(78, 55, 135, 0.1);
+}
+
+.admin-invite-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.admin-invite-field {
+  display: grid;
+  gap: 6px;
+}
+
+.admin-invite-field span {
+  color: rgba(78, 55, 135, 0.78);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.admin-invite-field input {
+  width: 100%;
+  border: 1px solid rgba(146, 125, 216, 0.28);
+  border-radius: 12px;
+  background: #ffffff;
+  color: #1f1142;
+  font-size: 0.94rem;
+  padding: 0.78rem 0.92rem;
+}
+
+.admin-invite-field input:focus {
+  outline: none;
+  border-color: rgba(142, 109, 236, 0.78);
+  box-shadow: 0 0 0 3px rgba(142, 109, 236, 0.2);
+}
+
+.admin-invite-perms {
+  margin: 0;
+}
+
+.admin-team-card-invite {
+  background: linear-gradient(180deg, #fffaf0 0%, #fff5e0 100%);
+  border-color: rgba(212, 165, 116, 0.5);
+}
+
+.admin-team-badge-pending {
+  background: linear-gradient(135deg, #f59e0b 0%, #c97a08 100%) !important;
+}
+
+.admin-team-cancel {
+  align-self: flex-start;
+}
+
 .admin-team-card {
   border: 1px solid rgba(78, 55, 135, 0.12);
   border-radius: 16px;
