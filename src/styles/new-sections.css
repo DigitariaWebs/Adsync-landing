@@ -752,6 +752,37 @@
   gap: 6px;
 }
 
+.admin-platform-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 280px;
+}
+
+.admin-platform-item {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.admin-platform-handle {
+  font-weight: 600;
+  color: var(--primary-800);
+  word-break: break-all;
+}
+
+.admin-platform-audience {
+  font-size: 0.82rem;
+  color: rgba(78, 55, 135, 0.7);
+  font-weight: 500;
+}
+
 .admin-pill {
   --p-color: #4e3787;
   --p-color-soft: rgba(78, 55, 135, 0.12);

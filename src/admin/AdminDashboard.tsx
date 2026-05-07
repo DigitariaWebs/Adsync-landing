@@ -514,18 +514,21 @@ function WaitlistView({
                         const pl = parsePlatformEntries(entry.platform);
                         if (pl.length === 0) return <span className="admin-pill-empty">—</span>;
                         return (
-                          <div className="admin-pill-row">
-                            {pl.map(p => (
-                              <span
-                                key={p.name}
-                                className="admin-pill"
-                                data-platform={p.name}
-                                title={`${p.handle} · ${p.audience}`}
-                              >
-                                {p.name}
-                              </span>
+                          <ul className="admin-platform-list">
+                            {pl.map((p, i) => (
+                              <li key={`${p.name}-${i}`} className="admin-platform-item">
+                                <span className="admin-pill" data-platform={p.name}>
+                                  {p.name}
+                                </span>
+                                {p.handle && (
+                                  <span className="admin-platform-handle">{p.handle}</span>
+                                )}
+                                {p.audience && p.audience !== '—' && (
+                                  <span className="admin-platform-audience">· {p.audience}</span>
+                                )}
+                              </li>
                             ))}
-                          </div>
+                          </ul>
                         );
                       })()
                     ) : (
