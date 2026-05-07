@@ -44,7 +44,7 @@ export function AudienceSection() {
             <strong> Deux mondes.</strong>
           </h2>
         <p >
-          Que tu sois createur ou marque, AdSync.io t'ouvre une nouvelle economie : celle des espaces
+          Que tu sois createur ou marque, AdSync.io (HUMAN ADTECH) t'ouvre une nouvelle economie : celle des espaces
           numeriques qui se louent comme des appartements.
         </p>
       </div>
@@ -235,11 +235,11 @@ export function ComparisonSection() {
         <div className="comparison-shell">
           <div className="comparison-shell-head">
             <span>Critere</span>
-            <span>AdSync.io</span>
+            <span>AdSync.io (HUMAN ADTECH)</span>
             <span>Approche classique</span>
           </div>
 
-          <div className="comparison-stack" aria-label="Comparaison AdSync.io">
+          <div className="comparison-stack" aria-label="Comparaison AdSync.io (HUMAN ADTECH)">
             {comparisons.map(item => (
               <article className="comparison-metric" key={item.label}>
                 <div className="comparison-metric-top">
@@ -272,7 +272,7 @@ export function ComparisonSection() {
 
           <div className="comparison-cta-wrap">
             <a className="comparison-cta" href="#inscription">
-              Voir pourquoi AdSync.io fait mieux
+              Voir pourquoi AdSync.io (HUMAN ADTECH) fait mieux
             </a>
           </div>
         </div>

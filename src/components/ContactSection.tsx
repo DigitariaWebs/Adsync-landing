@@ -52,7 +52,7 @@ export default function ContactSection() {
             Parle-nous <strong>directement.</strong>
           </h2>
           <p>
-            Une demande, un partenariat, un retour ? Envoie-nous un message, l&apos;équipe AdSync.io te
+            Une demande, un partenariat, un retour ? Envoie-nous un message, l&apos;équipe AdSync.io (HUMAN ADTECH) te
             répond personnellement par email sous 48h.
           </p>
         </header>

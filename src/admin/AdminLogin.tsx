@@ -49,7 +49,7 @@ export default function AdminLogin() {
       </a>
       <div className="admin-login-card">
         <div className="admin-login-head">
-          <span className="admin-login-kicker">AdSync.io admin</span>
+          <span className="admin-login-kicker">AdSync.io (HUMAN ADTECH) admin</span>
           <h1>{mode === 'signin' ? 'Connexion' : 'Créer un compte'}</h1>
           <p>
             {mode === 'signin'

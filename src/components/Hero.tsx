@@ -114,13 +114,13 @@ export default function Hero() {
         <section className="hero hero-photo">
           <div className="hero-copy">
             <h1>
-              Tes plateformes<br />
+            Tes plateformes<br />
               ton immobilier<br />
               <em className="hero-title-gold">numérique louable.</em>
             </h1>
 
             <p className="hero-lead">
-             AdSync.io transforme chaque story, reel, live et page web...ect ,d'un créateur de contenus en surface publicitaire active. Les marques louent tes espaces via des contrats officiels. Tu encaisses, automatiquement.
+             AdSync.io (HUMAN ADTECH) transforme chaque story, reel, live et page web...ect ,d'un créateur de contenus en surface publicitaire active. Les marques louent tes espaces via des contrats officiels. Tu encaisses, automatiquement.
             </p>
 
             <HeroCountdown />
@@ -146,7 +146,7 @@ export default function Hero() {
                 loop
                 playsInline
                 preload="auto"
-                aria-label="Aperçu animé d'AdSync.io"
+                aria-label="Aperçu animé d'AdSync.io (HUMAN ADTECH)"
               >
                 <source src={heroVideoMp4} type="video/mp4" />
               </video>

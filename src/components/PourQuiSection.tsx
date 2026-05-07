@@ -362,7 +362,7 @@ const brandActions = [
   'Donner une pub à un créateur pour qu\'il la publie sur ses réseaux',
   'Faire booster une pub existante (Facebook, Instagram, TikTok, X…etc) par un créateur. Il la partage, tu paies les résultats.',
   "Placer une pub sur le site web d'un créateur, comme un panneau publicitaire numérique",
-  "Laisser l'IA AdSync.io créer la pub complète à ta place : vidéo, texte, format",
+  "Laisser l'IA AdSync.io (HUMAN ADTECH) créer la pub complète à ta place : vidéo, texte, format",
   'Payer uniquement ce qui se passe vraiment : vue, clic, achat réel',
 ];
 
@@ -386,12 +386,12 @@ export default function PourQuiSection() {
           <img src={starIcon} alt="" aria-hidden="true" className="pq-header-star" />
           <span className="eyebrow pq-eyebrow">Pour qui ?</span>
           <h2>
-            AdSync.io,
+            AdSync.io (HUMAN ADTECH),
             <br />
             <em>c&apos;est pour toi.</em>
           </h2>
           <p>
-            Créateur ou marque, si tu as une audience ou un produit, tu as ta place sur AdSync.io.
+            Créateur ou marque, si tu as une audience ou un produit, tu as ta place sur AdSync.io (HUMAN ADTECH).
           </p>
         </header>
 
@@ -496,7 +496,7 @@ export default function PourQuiSection() {
           <div className="pq-actions-block">
             <span className="pq-surfaces-label">
               <Icon name="spark" />
-              Ce que tu peux faire avec AdSync.io
+              Ce que tu peux faire avec AdSync.io (HUMAN ADTECH)
             </span>
             <ul className="pq-actions-list">
               {brandActions.map(action => (
@@ -516,7 +516,7 @@ export default function PourQuiSection() {
               Exemple concret
             </span>
             <p>
-              Tu as une pub Nike Running déjà sur Facebook, Instagram, TikTok…etc. Sur AdSync.io, tu signes un contrat avec
+              Tu as une pub Nike Running déjà sur Facebook, Instagram, TikTok…etc. Sur AdSync.io (HUMAN ADTECH), tu signes un contrat avec
               20 créateurs qui la partagent à leur communauté. Tu ne paies que <strong>30&nbsp;€
               pour 3 vrais achats mesurés</strong>. Les créateurs reçoivent leur rémunération
               (75&nbsp;%) automatiquement. Transparent. Propre.
@@ -544,7 +544,7 @@ export default function PourQuiSection() {
               <div>
                 <h4>Pub Boost : partage de pub existante</h4>
                 <p>
-                  La marque a déjà sa pub sur Facebook, Instagram, TikTok…etc&nbsp;? Tu n&apos;as rien à filmer. AdSync.io te
+                  La marque a déjà sa pub sur Facebook, Instagram, TikTok…etc&nbsp;? Tu n&apos;as rien à filmer. AdSync.io (HUMAN ADTECH) te
                   propose un contrat&nbsp;: tu partages la publication sur ta page ou ton groupe et
                   tu reçois ta rémunération pour chaque résultat généré.
                 </p>

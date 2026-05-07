@@ -13,7 +13,7 @@ export default function SolutionSection() {
             Le pont <em>manquant.</em>
           </h2>
           <p>
-            AdSync.io connecte createurs et marques via des contrats publicitaires directs. Pense a Airbnb: un
+            AdSync.io (HUMAN ADTECH) connecte createurs et marques via des contrats publicitaires directs. Pense a Airbnb: un
             appartement vide devient une chambre d'hotes qui genere des revenus.
           </p>
         </div>

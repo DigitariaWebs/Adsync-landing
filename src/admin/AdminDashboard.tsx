@@ -55,10 +55,10 @@ function buildGmailBroadcastUrl(bcc: string[], subject: string, body: string) {
   return `https://mail.google.com/mail/?${params.toString()}`;
 }
 
-const DEFAULT_BROADCAST_SUBJECT = 'AdSync.io est disponible 🎉';
+const DEFAULT_BROADCAST_SUBJECT = 'AdSync.io (HUMAN ADTECH) est disponible 🎉';
 const DEFAULT_BROADCAST_BODY = `Bonjour,
 
-Bonne nouvelle : AdSync.io est officiellement disponible !
+Bonne nouvelle : AdSync.io (HUMAN ADTECH) est officiellement disponible !
 
 Tu peux maintenant télécharger l'app et activer ton compte pour commencer à monétiser tes espaces ou lancer tes campagnes.
 
@@ -66,7 +66,7 @@ Tu peux maintenant télécharger l'app et activer ton compte pour commencer à m
 
 Merci de faire partie de la première vague. On a hâte de te voir sur la plateforme.
 
-— L'équipe AdSync.io`;
+— L'équipe AdSync.io (HUMAN ADTECH)`;
 
 function downloadXlsx(rows: WaitlistEntry[]) {
   const header = ['created_at', 'role', 'name', 'email', 'platform', 'category', 'country', 'audience_size', 'phone'];
@@ -221,7 +221,7 @@ export default function AdminDashboard({ adminEmail, permissions, onSignOut }: P
           <span className="admin-brand-mark">A</span>
           <div>
             <span className="admin-brand-kicker">
-              AdSync.io admin {permissions.isAdmin ? '· Admin' : '· Manager'}
+              AdSync.io (HUMAN ADTECH) admin {permissions.isAdmin ? '· Admin' : '· Manager'}
             </span>
             <h1>{titleFor(view)}</h1>
           </div>
