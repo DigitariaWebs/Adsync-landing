@@ -277,7 +277,11 @@ export default function SmartSignupSection() {
                       const selected = p in creatorHandles;
                       const audiences = AUDIENCE_BY_PLATFORM[p] ?? [];
                       return (
-                        <div key={p} className={`smart-platform ${selected ? 'is-selected' : ''}`}>
+                        <div
+                          key={p}
+                          className={`smart-platform ${selected ? 'is-selected' : ''}`}
+                          data-platform={p}
+                        >
                           <label className="smart-platform-toggle">
                             <input
                               type="checkbox"

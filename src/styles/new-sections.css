@@ -499,3 +499,234 @@
 }
 
 
+/* ============================================================
+   COULEURS PAR PLATEFORME
+   ============================================================ */
+
+.smart-platform {
+  position: relative;
+  --platform-color: #4e3787;
+  --platform-color-soft: rgba(78, 55, 135, 0.12);
+}
+
+.smart-platform[data-platform="Instagram"] {
+  --platform-color: #e1306c;
+  --platform-color-soft: rgba(225, 48, 108, 0.12);
+}
+.smart-platform[data-platform="TikTok"] {
+  --platform-color: #010101;
+  --platform-color-soft: rgba(255, 0, 80, 0.1);
+}
+.smart-platform[data-platform="YouTube"] {
+  --platform-color: #ff0000;
+  --platform-color-soft: rgba(255, 0, 0, 0.1);
+}
+.smart-platform[data-platform="Facebook"] {
+  --platform-color: #1877f2;
+  --platform-color-soft: rgba(24, 119, 242, 0.1);
+}
+.smart-platform[data-platform="Twitch"] {
+  --platform-color: #9146ff;
+  --platform-color-soft: rgba(145, 70, 255, 0.12);
+}
+.smart-platform[data-platform="X (Twitter)"] {
+  --platform-color: #0f1419;
+  --platform-color-soft: rgba(15, 20, 25, 0.08);
+}
+.smart-platform[data-platform="LinkedIn"] {
+  --platform-color: #0a66c2;
+  --platform-color-soft: rgba(10, 102, 194, 0.1);
+}
+.smart-platform[data-platform="Snapchat"] {
+  --platform-color: #d4b800;
+  --platform-color-soft: rgba(255, 252, 0, 0.18);
+}
+.smart-platform[data-platform="Autre (Blog, Site web…)"] {
+  --platform-color: #4e3787;
+  --platform-color-soft: rgba(78, 55, 135, 0.12);
+}
+
+.smart-platform-toggle::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--platform-color);
+  flex-shrink: 0;
+  margin-right: 4px;
+  box-shadow: 0 0 0 3px var(--platform-color-soft);
+}
+
+.smart-platform.is-selected {
+  border-color: var(--platform-color) !important;
+  background: linear-gradient(180deg, #ffffff 0%, var(--platform-color-soft) 100%) !important;
+  box-shadow: 0 8px 24px var(--platform-color-soft) !important;
+}
+
+.smart-platform.is-selected .smart-platform-toggle {
+  color: var(--platform-color);
+}
+
+.smart-platform-toggle input {
+  accent-color: var(--platform-color) !important;
+}
+
+
+/* ============================================================
+   ADMIN — MODAL CHANGEMENT MOT DE PASSE
+   ============================================================ */
+
+.admin-pwd-btn {
+  background: rgba(78, 55, 135, 0.08) !important;
+  color: var(--primary-600) !important;
+  border-color: rgba(78, 55, 135, 0.2) !important;
+}
+
+.admin-pwd-btn:hover {
+  background: rgba(78, 55, 135, 0.14) !important;
+}
+
+.admin-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 8, 30, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 24px;
+}
+
+.admin-modal {
+  width: min(440px, 100%);
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 30px 80px rgba(15, 8, 30, 0.4);
+  border: 1px solid rgba(78, 55, 135, 0.14);
+  overflow: hidden;
+}
+
+.admin-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 26px 16px;
+  border-bottom: 1px solid rgba(78, 55, 135, 0.08);
+}
+
+.admin-modal-head h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary-800);
+}
+
+.admin-modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(78, 55, 135, 0.06);
+  color: var(--primary-600);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-modal-close:hover {
+  background: rgba(78, 55, 135, 0.14);
+}
+
+.admin-pwd-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 22px 26px 26px;
+}
+
+.admin-pwd-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-pwd-form label span {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--primary-800);
+}
+
+.admin-pwd-form input {
+  border: 1px solid rgba(78, 55, 135, 0.22);
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.96rem;
+  font-weight: 500;
+  background: #fff;
+  color: var(--primary-800);
+}
+
+.admin-pwd-form input:focus {
+  outline: none;
+  border-color: var(--primary-600);
+  box-shadow: 0 0 0 3px rgba(78, 55, 135, 0.18);
+}
+
+.admin-pwd-feedback {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.admin-pwd-feedback-success {
+  background: rgba(34, 178, 86, 0.1);
+  color: #197a3c;
+  border: 1px solid rgba(34, 178, 86, 0.25);
+}
+
+.admin-pwd-feedback-error {
+  background: rgba(192, 57, 43, 0.08);
+  color: #a32a1f;
+  border: 1px solid rgba(192, 57, 43, 0.22);
+}
+
+.admin-pwd-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.admin-pwd-actions button {
+  padding: 0.7rem 1.4rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.94rem;
+  cursor: pointer;
+  border: none;
+  background: linear-gradient(135deg, #7a67de 0%, #4e3787 100%);
+  color: #fff;
+}
+
+.admin-pwd-actions button:hover {
+  filter: brightness(1.05);
+}
+
+.admin-pwd-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.admin-pwd-actions .admin-pwd-cancel {
+  background: rgba(78, 55, 135, 0.08);
+  color: var(--primary-700);
+}
+
+

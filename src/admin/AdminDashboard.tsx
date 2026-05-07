@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { FormEvent, useEffect, useMemo, useState } from 'react';
 import { supabase, WaitlistEntry, WaitlistRole, EffectivePermissions, ADMIN_EMAIL } from '../lib/supabase';
 import AdminMessages from './AdminMessages';
 import AdminTeam from './AdminTeam';
@@ -71,6 +71,35 @@ export default function AdminDashboard({ adminEmail, permissions, onSignOut }: P
   const [roleFilter, setRoleFilter] = useState<RoleFilter>('all');
   const [search, setSearch] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
+  const [pwdOpen, setPwdOpen] = useState(false);
+  const [pwdNew, setPwdNew] = useState('');
+  const [pwdConfirm, setPwdConfirm] = useState('');
+  const [pwdSubmitting, setPwdSubmitting] = useState(false);
+  const [pwdMessage, setPwdMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  const handleChangePassword = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setPwdMessage(null);
+    if (pwdNew.length < 8) {
+      setPwdMessage({ type: 'error', text: 'Le mot de passe doit faire au moins 8 caractères.' });
+      return;
+    }
+    if (pwdNew !== pwdConfirm) {
+      setPwdMessage({ type: 'error', text: 'Les deux mots de passe ne correspondent pas.' });
+      return;
+    }
+    setPwdSubmitting(true);
+    const { error } = await supabase.auth.updateUser({ password: pwdNew });
+    setPwdSubmitting(false);
+    if (error) {
+      setPwdMessage({ type: 'error', text: error.message || 'Échec du changement de mot de passe.' });
+      return;
+    }
+    setPwdMessage({ type: 'success', text: 'Mot de passe mis à jour avec succès.' });
+    setPwdNew('');
+    setPwdConfirm('');
+    void logAction('account.password_changed', 'auth', null, undefined);
+  };
 
   useEffect(() => {
     if (!permissions.canViewWaitlist) {
@@ -164,11 +193,74 @@ export default function AdminDashboard({ adminEmail, permissions, onSignOut }: P
         </div>
         <div className="admin-topbar-right">
           <span className="admin-user">{adminEmail}</span>
+          <button
+            type="button"
+            className="admin-signout admin-pwd-btn"
+            onClick={() => { setPwdOpen(true); setPwdMessage(null); }}
+          >
+            Changer mot de passe
+          </button>
           <button type="button" className="admin-signout" onClick={onSignOut}>
             Déconnexion
           </button>
         </div>
       </header>
+
+      {pwdOpen && (
+        <div className="admin-modal-backdrop" onClick={() => setPwdOpen(false)}>
+          <div className="admin-modal" onClick={e => e.stopPropagation()}>
+            <header className="admin-modal-head">
+              <h3>Changer mon mot de passe</h3>
+              <button
+                type="button"
+                className="admin-modal-close"
+                onClick={() => setPwdOpen(false)}
+                aria-label="Fermer"
+              >
+                ×
+              </button>
+            </header>
+            <form className="admin-pwd-form" onSubmit={handleChangePassword}>
+              <label>
+                <span>Nouveau mot de passe</span>
+                <input
+                  type="password"
+                  required
+                  minLength={8}
+                  autoComplete="new-password"
+                  value={pwdNew}
+                  onChange={e => setPwdNew(e.target.value)}
+                  placeholder="8 caractères minimum"
+                />
+              </label>
+              <label>
+                <span>Confirmer le nouveau mot de passe</span>
+                <input
+                  type="password"
+                  required
+                  minLength={8}
+                  autoComplete="new-password"
+                  value={pwdConfirm}
+                  onChange={e => setPwdConfirm(e.target.value)}
+                />
+              </label>
+              {pwdMessage && (
+                <p className={`admin-pwd-feedback admin-pwd-feedback-${pwdMessage.type}`}>
+                  {pwdMessage.text}
+                </p>
+              )}
+              <div className="admin-pwd-actions">
+                <button type="button" onClick={() => setPwdOpen(false)} className="admin-pwd-cancel">
+                  Annuler
+                </button>
+                <button type="submit" disabled={pwdSubmitting}>
+                  {pwdSubmitting ? 'Mise à jour...' : 'Mettre à jour'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       <nav className="admin-tabs" role="tablist" aria-label="Sections admin">
         {permissions.canViewWaitlist && (

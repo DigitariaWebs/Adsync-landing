@@ -67,7 +67,7 @@ export default function AdminLogin() {
               autoComplete="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
-              placeholder="admin@adsync.io"
+              placeholder="contact@adsynchro.com"
             />
           </label>
           <label>
