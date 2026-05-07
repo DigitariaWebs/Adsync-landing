@@ -15,12 +15,22 @@ function parsePlatformEntries(raw: string | null | undefined): ParsedPlatform[] 
   if (!raw) return [];
   return raw
     .split('\n')
+    .map(line => line.trim())
+    .filter(line => line.length > 0)
     .map(line => {
-      const m = line.match(/^•\s*(.+?)\s+—\s+(.+?)\s*\(([^)]+)\)\s*$/);
-      if (!m) return null;
-      return { name: m[1].trim(), handle: m[2].trim(), audience: m[3].trim() };
-    })
-    .filter((p): p is ParsedPlatform => p !== null);
+      // Format actuel : "• Instagram — @user (10 000 à 100 000)"
+      const newFmt = line.match(/^•\s*(.+?)\s+—\s+(.+?)\s*\(([^)]+)\)\s*$/);
+      if (newFmt) {
+        return { name: newFmt[1].trim(), handle: newFmt[2].trim(), audience: newFmt[3].trim() };
+      }
+      // Ancien format : "Instagram : @user"
+      const oldFmt = line.match(/^([A-Za-zÀ-ÿ()\s\-]+?)\s*[:：]\s*(.+)$/);
+      if (oldFmt) {
+        return { name: oldFmt[1].trim(), handle: oldFmt[2].trim(), audience: '—' };
+      }
+      // Format inconnu : on garde la ligne comme nom de plateforme
+      return { name: line, handle: '', audience: '—' };
+    });
 }
 
 function formatDate(iso: string) {
