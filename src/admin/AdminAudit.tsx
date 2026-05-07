@@ -17,7 +17,8 @@ const ACTION_LABELS: Record<string, string> = {
   'message.reply_saved': 'Brouillon de réponse sauvegardé',
   'message.reply_sent': 'Réponse envoyée',
   'team.permissions_update': 'Mise à jour des permissions',
-  'waitlist.export': 'Export CSV de la liste',
+  'waitlist.export': 'Export Excel de la liste',
+  'waitlist.broadcast': 'Email broadcast aux inscrits',
 };
 
 function actionLabel(action: string) {

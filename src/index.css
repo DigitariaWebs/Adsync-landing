@@ -5400,6 +5400,50 @@ img {
   color: #c0392b;
 }
 
+.contact-socials {
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(122, 103, 222, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.contact-socials-label {
+  font-size: 0.85rem;
+  color: rgba(61, 43, 107, 0.7);
+  font-weight: 500;
+}
+
+.contact-socials-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.contact-social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(122, 103, 222, 0.25);
+  color: rgba(61, 43, 107, 0.85);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.contact-social-btn:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(122, 103, 222, 0.55);
+  transform: translateY(-1px);
+}
+
 @media (max-width: 760px) {
   .contact-section {
     padding: 48px 14px 70px;
@@ -7305,8 +7349,26 @@ img {
 
 .brand {
   display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  text-decoration: none;
+}
+
+.brand-row {
+  display: inline-flex;
   align-items: center;
   gap: 10px;
+}
+
+.brand-tagline {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(61, 43, 107, 0.55);
+  margin-left: 36px;
+  line-height: 1;
 }
 
 .brand-star {

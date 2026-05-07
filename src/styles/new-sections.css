@@ -731,6 +731,91 @@
 
 
 /* ============================================================
+   ADMIN — TOOLBAR ACTIONS + BROADCAST MODAL
+   ============================================================ */
+
+.admin-toolbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.admin-export-secondary {
+  background: rgba(78, 55, 135, 0.08);
+  color: var(--primary-700);
+}
+
+.admin-export-secondary:hover:not(:disabled) {
+  background: rgba(78, 55, 135, 0.14);
+}
+
+.admin-modal-broadcast {
+  width: min(640px, 100%);
+}
+
+.admin-broadcast-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 20px 20px;
+}
+
+.admin-broadcast-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-broadcast-field span {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-700);
+}
+
+.admin-broadcast-field input,
+.admin-broadcast-field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(78, 55, 135, 0.22);
+  background: #fff;
+  font: inherit;
+  color: #1f1238;
+  resize: vertical;
+}
+
+.admin-broadcast-field input:focus,
+.admin-broadcast-field textarea:focus {
+  outline: none;
+  border-color: rgba(122, 103, 222, 0.7);
+  box-shadow: 0 0 0 3px rgba(122, 103, 222, 0.15);
+}
+
+.admin-broadcast-hint {
+  margin: 0;
+  font-size: 0.82rem;
+  color: rgba(61, 43, 107, 0.75);
+  line-height: 1.5;
+}
+
+.admin-broadcast-feedback {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--primary-700);
+  font-weight: 500;
+}
+
+.admin-broadcast-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+
+/* ============================================================
    ADMIN — PLATEFORME PILLS
    ============================================================ */
 

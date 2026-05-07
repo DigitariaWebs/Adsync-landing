@@ -286,7 +286,7 @@ const creatorProfiles: Profile[] = [
   },
   {
     image: photoC,
-    title: 'Groupe Facebook ou WhatsApp',
+    title: 'Groupe Facebook, WhatsApp, Telegram…',
     description: "Tu gères un groupe actif ? Partage une pub d'une marque et sois payé.",
   },
   {
@@ -349,20 +349,20 @@ const surfaces = [
   'Mur Instagram',
   'Reels et Shorts TikTok',
   'Vidéo YouTube',
-  'Mur Facebook',
-  'Post Facebook',
-  'Statut WhatsApp',
-  'LinkedIn',
-  'Pages de site web',
-  "Partage d'une pub Facebook",
-  'Lives et streams automatiques',
+  'Mur Facebook, X, LinkedIn…',
+  'Post Facebook, Instagram, X…',
+  'Statut WhatsApp, Telegram…',
+  'LinkedIn, Threads…',
+  'Pages de site web, blog, newsletter…',
+  "Partage d'une pub Facebook, Instagram, TikTok…",
+  'Lives et streams automatiques (Twitch, YouTube, TikTok…)',
 ];
 
 const brandActions = [
   'Donner une pub à un créateur pour qu\'il la publie sur ses réseaux',
-  'Faire booster une pub Facebook existante par un créateur. Il la partage, tu paies les résultats.',
+  'Faire booster une pub existante (Facebook, Instagram, TikTok, X…etc) par un créateur. Il la partage, tu paies les résultats.',
   "Placer une pub sur le site web d'un créateur, comme un panneau publicitaire numérique",
-  "Laisser l'IA AdSync créer la pub complète à ta place : vidéo, texte, format",
+  "Laisser l'IA AdSync.io créer la pub complète à ta place : vidéo, texte, format",
   'Payer uniquement ce qui se passe vraiment : vue, clic, achat réel',
 ];
 
@@ -386,12 +386,12 @@ export default function PourQuiSection() {
           <img src={starIcon} alt="" aria-hidden="true" className="pq-header-star" />
           <span className="eyebrow pq-eyebrow">Pour qui ?</span>
           <h2>
-            AdSync,
+            AdSync.io,
             <br />
             <em>c&apos;est pour toi.</em>
           </h2>
           <p>
-            Créateur ou marque, si tu as une audience ou un produit, tu as ta place sur AdSync.
+            Créateur ou marque, si tu as une audience ou un produit, tu as ta place sur AdSync.io.
           </p>
         </header>
 
@@ -411,9 +411,10 @@ export default function PourQuiSection() {
 
           <p className="pq-block-lead">
             Tu as une audience, même petite, dès 200 abonnés. Tu publies du contenu sur n&apos;importe
-            quelle plateforme et tu veux transformer tes Reels, Stories, Statuts, ton mur Facebook ou
-            Instagram, tes vidéos et tes espaces web en surfaces publicitaires actives, rémunérées
-            par contrats avec des marques alignées avec ton univers.
+            quelle plateforme et tu veux transformer tes Reels, Stories, Statuts, Posts, Shorts,
+            ton mur Facebook, Instagram, TikTok, X, LinkedIn…etc, tes vidéos, tes lives et tes
+            espaces web en surfaces publicitaires actives, rémunérées par contrats avec des marques
+            alignées avec ton univers.
           </p>
 
           <div className="pq-profile-grid">
@@ -455,9 +456,9 @@ export default function PourQuiSection() {
               <div>
                 <h4>Le bon à savoir</h4>
                 <p>
-                  Une marque a déjà une pub Facebook&nbsp;? Tu peux simplement la partager sur ta
-                  page dans le cadre d&apos;un contrat. Ton espace devient temporairement la surface
-                  de diffusion, sans même créer de contenu.
+                  Une marque a déjà une pub (Facebook, Instagram, TikTok, X…etc)&nbsp;? Tu peux
+                  simplement la partager sur ta page dans le cadre d&apos;un contrat. Ton espace
+                  devient temporairement la surface de diffusion, sans même créer de contenu.
                 </p>
               </div>
             </article>
@@ -481,8 +482,9 @@ export default function PourQuiSection() {
           <p className="pq-block-lead">
             Tu vends un produit ou un service, ou tu fais la promotion d&apos;une cause, d&apos;un
             événement, d&apos;une application. Tu veux faire diffuser ta pub sur les espaces
-            numériques de vrais créateurs (leur mur Facebook, leurs Stories, leurs Reels, leurs
-            Statuts, leur site web) en signant des contrats publicitaires directs.
+            numériques de vrais créateurs (leur mur Facebook, Instagram, TikTok, X…etc, leurs
+            Stories, leurs Reels, leurs Statuts, leurs Lives, leur site web) en signant des
+            contrats publicitaires directs.
           </p>
 
           <div className="pq-profile-grid">
@@ -494,7 +496,7 @@ export default function PourQuiSection() {
           <div className="pq-actions-block">
             <span className="pq-surfaces-label">
               <Icon name="spark" />
-              Ce que tu peux faire avec AdSync
+              Ce que tu peux faire avec AdSync.io
             </span>
             <ul className="pq-actions-list">
               {brandActions.map(action => (
@@ -514,7 +516,7 @@ export default function PourQuiSection() {
               Exemple concret
             </span>
             <p>
-              Tu as une pub Nike Running déjà sur Facebook. Sur AdSync, tu signes un contrat avec
+              Tu as une pub Nike Running déjà sur Facebook, Instagram, TikTok…etc. Sur AdSync.io, tu signes un contrat avec
               20 créateurs qui la partagent à leur communauté. Tu ne paies que <strong>30&nbsp;€
               pour 3 vrais achats mesurés</strong>. Les créateurs reçoivent leur rémunération
               (75&nbsp;%) automatiquement. Transparent. Propre.
@@ -542,7 +544,7 @@ export default function PourQuiSection() {
               <div>
                 <h4>Pub Boost : partage de pub existante</h4>
                 <p>
-                  La marque a déjà sa pub sur Facebook&nbsp;? Tu n&apos;as rien à filmer. AdSync te
+                  La marque a déjà sa pub sur Facebook, Instagram, TikTok…etc&nbsp;? Tu n&apos;as rien à filmer. AdSync.io te
                   propose un contrat&nbsp;: tu partages la publication sur ta page ou ton groupe et
                   tu reçois ta rémunération pour chaque résultat généré.
                 </p>

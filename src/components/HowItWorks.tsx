@@ -11,8 +11,8 @@ type CardType = 'creator' | 'brand';
 const creatorCards = [
   {
     number: '01',
-    title: 'Tu crees ton compte',
-    description: 'Une seule fois. Tu connectes tes reseaux et tu choisis les surfaces a monetiser.',
+    title: 'Tu crées ton compte',
+    description: 'Une seule fois. Tu connectes tes réseaux et tu choisis les surfaces à monétiser.',
     image: aiCoreImage,
   },
   {
@@ -23,14 +23,14 @@ const creatorCards = [
   },
   {
     number: '03',
-    title: 'Tu recois un contrat securise',
-    description: "Remuneration bloquee d'avance. Tu signes en un clic, ou tu refuses sans pression.",
+    title: 'Tu reçois un contrat sécurisé',
+    description: "Rémunération bloquée d'avance. Tu signes en un clic, ou tu refuses sans pression.",
     image: contratImage,
   },
   {
     number: '04',
     title: 'La pub se publie. Tu encaisses.',
-    description: 'Diffusion automatisee et paiement via Stripe, virement, PayPal ou Mobile Money.',
+    description: 'Diffusion automatisée et paiement via Stripe, virement, PayPal ou Mobile Money.',
     image: payoutImage,
   },
 ];
@@ -39,7 +39,7 @@ const brandCards = [
   {
     number: '01',
     title: "Tu uploades ta pub. L'IA l'oriente.",
-    description: 'Video, affiche, carrousel: IA Advisor recommande format, audience et budget.',
+    description: 'Vidéo, affiche, carrousel : IA Advisor recommande format, audience et budget.',
     image: uploadImage,
   },
   {
@@ -50,14 +50,14 @@ const brandCards = [
   },
   {
     number: '03',
-    title: 'Le budget est securise',
-    description: 'Versement bloque via Stripe puis campagne activee avec suivi clair.',
+    title: 'Le budget est sécurisé',
+    description: 'Versement bloqué via Stripe puis campagne activée avec suivi clair.',
     image: contratImage,
   },
   {
     number: '04',
-    title: 'Tu paies la performance reelle',
-    description: 'PrecisionPay sur vues, clics et achats. Surplus rembourse automatiquement.',
+    title: 'Tu paies la performance réelle',
+    description: 'PrecisionPay sur vues, clics et achats. Surplus remboursé automatiquement.',
     image: payoutImage,
   },
 ];
@@ -73,7 +73,7 @@ export default function HowItWorks() {
 
         <div className="how-it-works-intro">
           <img src={starIcon} alt="" aria-hidden="true" className="section-star" />
-          <span className="eyebrow">Comment ca marche</span>
+          <span className="eyebrow">Comment ça marche</span>
           <h2>
             Le processus est simple
             <br />
@@ -87,7 +87,7 @@ export default function HowItWorks() {
               className={`toggle-btn ${activeTab === 'creator' ? 'active' : 'inactive'}`}
               onClick={() => setActiveTab('creator')}
             >
-              Createur
+              Créateur
             </button>
             <button
               className={`toggle-btn ${activeTab === 'brand' ? 'active' : 'inactive'}`}

@@ -28,8 +28,8 @@ export default function MobileMoneySection() {
             <em>partout chez toi.</em>
           </h2>
           <p>
-            Tu n'as pas besoin d'un compte bancaire. AdSync te paie directement sur ton téléphone
-            via les plus grands opérateurs de Mobile Money en Afrique et en Asie.
+            Tu n'as pas besoin d'un compte bancaire. AdSync.io te paie directement sur ton téléphone
+            via les plus grands opérateurs de Mobile Money en Afrique.
           </p>
 
           <ul className="mobile-money-benefits">

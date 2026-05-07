@@ -13,7 +13,7 @@ export default function SolutionSection() {
             Le pont <em>manquant.</em>
           </h2>
           <p>
-            AdSync connecte createurs et marques via des contrats publicitaires directs. Pense a Airbnb: un
+            AdSync.io connecte createurs et marques via des contrats publicitaires directs. Pense a Airbnb: un
             appartement vide devient une chambre d'hotes qui genere des revenus.
           </p>
         </div>
@@ -37,7 +37,7 @@ export default function SolutionSection() {
             <div className="solution-card-content">
               <h3>Tes espaces, valorisés.</h3>
               <p>
-                Feeds, Reels, Stories, Lives : chaque espace devient une source de revenus stable et cadree.
+                Feeds, Reels, Stories, Lives, Posts, Shorts…etc : chaque espace devient une source de revenus stable et cadree.
               </p>
             </div>
           </article>

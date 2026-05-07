@@ -139,7 +139,7 @@ export default function AdminMessages({ canReply = true }: { canReply?: boolean 
 
   const openInGmail = () => {
     if (!selected) return;
-    const subject = selected.subject ? `Re: ${selected.subject}` : 'Re: ton message à AdSync';
+    const subject = selected.subject ? `Re: ${selected.subject}` : 'Re: ton message à AdSync.io';
     const body = `${replyDraft.trim()}\n\n---\nMessage d'origine :\n${selected.message}`;
     const url = buildGmailUrl(selected.email, subject, body);
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -147,7 +147,7 @@ export default function AdminMessages({ canReply = true }: { canReply?: boolean 
 
   const openInMailClient = () => {
     if (!selected) return;
-    const subject = selected.subject ? `Re: ${selected.subject}` : 'Re: ton message à AdSync';
+    const subject = selected.subject ? `Re: ${selected.subject}` : 'Re: ton message à AdSync.io';
     const body = `${replyDraft.trim()}\n\n---\nMessage d'origine :\n${selected.message}`;
     const href = `mailto:${selected.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = href;

@@ -22,7 +22,7 @@ const statCards: StatCard[] = [
     number: '0EUR',
     title: 'Aucun abonnement, jamais',
     description:
-      'Tu rejoins gratuitement. Une commission de 25% uniquement sur les contrats conclus.',
+      'Tu rejoins gratuitement. AdSync.io prélève une commission de 25 % uniquement sur les contrats conclus.',
   },
   {
     number: '75%',

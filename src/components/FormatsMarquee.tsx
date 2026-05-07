@@ -92,7 +92,7 @@ function PlatformIcon({ icon }: { icon: PlatformKey }) {
 
 export default function FormatsMarquee() {
   return (
-    <section className="formats-marquee-section" aria-label="Plateformes supportées par AdSync">
+    <section className="formats-marquee-section" aria-label="Plateformes supportées par AdSync.io">
       <div className="formats-marquee-shell">
         <div className="formats-marquee-track">
           {marqueeLoop.map((item, index) => (

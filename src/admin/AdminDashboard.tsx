@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useMemo, useState } from 'react';
+import * as XLSX from 'xlsx';
 import { supabase, WaitlistEntry, WaitlistRole, EffectivePermissions, ADMIN_EMAIL } from '../lib/supabase';
 import AdminMessages from './AdminMessages';
 import AdminTeam from './AdminTeam';
@@ -43,35 +44,45 @@ function formatDate(iso: string) {
   });
 }
 
-function escapeCsv(value: unknown): string {
-  if (value === null || value === undefined) return '';
-  const s = String(value);
-  if (s.includes(',') || s.includes('"') || s.includes('\n')) {
-    return `"${s.replace(/"/g, '""')}"`;
-  }
-  return s;
+function buildGmailBroadcastUrl(bcc: string[], subject: string, body: string) {
+  const params = new URLSearchParams({
+    view: 'cm',
+    fs: '1',
+    bcc: bcc.join(','),
+    su: subject,
+    body,
+  });
+  return `https://mail.google.com/mail/?${params.toString()}`;
 }
 
-function downloadCsv(rows: WaitlistEntry[]) {
+const DEFAULT_BROADCAST_SUBJECT = 'AdSync.io est disponible 🎉';
+const DEFAULT_BROADCAST_BODY = `Bonjour,
+
+Bonne nouvelle : AdSync.io est officiellement disponible !
+
+Tu peux maintenant télécharger l'app et activer ton compte pour commencer à monétiser tes espaces ou lancer tes campagnes.
+
+👉 Lien de téléchargement : https://adsync.io
+
+Merci de faire partie de la première vague. On a hâte de te voir sur la plateforme.
+
+— L'équipe AdSync.io`;
+
+function downloadXlsx(rows: WaitlistEntry[]) {
   const header = ['created_at', 'role', 'name', 'email', 'platform', 'category', 'country', 'audience_size', 'phone'];
-  const lines = [header.join(',')];
-  for (const r of rows) {
-    lines.push(
-      header
-        .map(key => escapeCsv((r as unknown as Record<string, unknown>)[key]))
-        .join(','),
-    );
-  }
-  const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `waitlist-${new Date().toISOString().slice(0, 10)}.csv`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-  void logAction('waitlist.export', 'waitlist', null, { count: rows.length });
+  const data = rows.map(r => {
+    const obj: Record<string, unknown> = {};
+    const src = r as unknown as Record<string, unknown>;
+    for (const key of header) {
+      obj[key] = src[key] ?? '';
+    }
+    return obj;
+  });
+  const worksheet = XLSX.utils.json_to_sheet(data, { header });
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Waitlist');
+  XLSX.writeFile(workbook, `waitlist-${new Date().toISOString().slice(0, 10)}.xlsx`);
+  void logAction('waitlist.export', 'waitlist', null, { count: rows.length, format: 'xlsx' });
 }
 
 type Props = {
@@ -210,7 +221,7 @@ export default function AdminDashboard({ adminEmail, permissions, onSignOut }: P
           <span className="admin-brand-mark">A</span>
           <div>
             <span className="admin-brand-kicker">
-              AdSync admin {permissions.isAdmin ? '· Admin' : '· Manager'}
+              AdSync.io admin {permissions.isAdmin ? '· Admin' : '· Manager'}
             </span>
             <h1>{titleFor(view)}</h1>
           </div>
@@ -395,6 +406,47 @@ function WaitlistView({
   filtered,
   canExport,
 }: WaitlistViewProps) {
+  const [broadcastOpen, setBroadcastOpen] = useState(false);
+  const [broadcastSubject, setBroadcastSubject] = useState(DEFAULT_BROADCAST_SUBJECT);
+  const [broadcastBody, setBroadcastBody] = useState(DEFAULT_BROADCAST_BODY);
+  const [broadcastFeedback, setBroadcastFeedback] = useState<string>('');
+
+  const broadcastEmails = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          filtered
+            .map(e => e.email?.trim().toLowerCase())
+            .filter((e): e is string => !!e),
+        ),
+      ),
+    [filtered],
+  );
+
+  const openInGmailBroadcast = () => {
+    if (broadcastEmails.length === 0) return;
+    const url = buildGmailBroadcastUrl(broadcastEmails, broadcastSubject, broadcastBody);
+    window.open(url, '_blank', 'noopener,noreferrer');
+    void logAction('waitlist.broadcast', 'waitlist', null, {
+      count: broadcastEmails.length,
+      via: 'gmail',
+    });
+  };
+
+  const copyBroadcastEmails = async () => {
+    try {
+      await navigator.clipboard.writeText(broadcastEmails.join(', '));
+      setBroadcastFeedback(`${broadcastEmails.length} emails copiés dans le presse-papiers.`);
+      void logAction('waitlist.broadcast', 'waitlist', null, {
+        count: broadcastEmails.length,
+        via: 'clipboard',
+      });
+      setTimeout(() => setBroadcastFeedback(''), 4000);
+    } catch {
+      setBroadcastFeedback("Impossible de copier — copie manuellement depuis l'aperçu.");
+    }
+  };
+
   return (
     <>
       {errorMsg && <div className="admin-error-banner">{errorMsg}</div>}
@@ -461,16 +513,93 @@ function WaitlistView({
         </div>
 
         {canExport && (
-          <button
-            type="button"
-            className="admin-export"
-            onClick={() => downloadCsv(filtered)}
-            disabled={filtered.length === 0}
-          >
-            Exporter CSV ({filtered.length})
-          </button>
+          <div className="admin-toolbar-actions">
+            <button
+              type="button"
+              className="admin-export admin-export-secondary"
+              onClick={() => {
+                setBroadcastOpen(true);
+                setBroadcastFeedback('');
+              }}
+              disabled={broadcastEmails.length === 0}
+            >
+              Envoyer un email à tous ({broadcastEmails.length})
+            </button>
+            <button
+              type="button"
+              className="admin-export"
+              onClick={() => downloadXlsx(filtered)}
+              disabled={filtered.length === 0}
+            >
+              Exporter Excel ({filtered.length})
+            </button>
+          </div>
         )}
       </section>
+
+      {broadcastOpen && (
+        <div className="admin-modal-backdrop" onClick={() => setBroadcastOpen(false)}>
+          <div className="admin-modal admin-modal-broadcast" onClick={e => e.stopPropagation()}>
+            <header className="admin-modal-head">
+              <h3>Email à tous les inscrits ({broadcastEmails.length})</h3>
+              <button
+                type="button"
+                className="admin-modal-close"
+                onClick={() => setBroadcastOpen(false)}
+                aria-label="Fermer"
+              >
+                ×
+              </button>
+            </header>
+            <div className="admin-broadcast-body">
+              <label className="admin-broadcast-field">
+                <span>Sujet</span>
+                <input
+                  type="text"
+                  value={broadcastSubject}
+                  onChange={e => setBroadcastSubject(e.target.value)}
+                  placeholder="Sujet de l'email"
+                />
+              </label>
+              <label className="admin-broadcast-field">
+                <span>Message</span>
+                <textarea
+                  rows={10}
+                  value={broadcastBody}
+                  onChange={e => setBroadcastBody(e.target.value)}
+                  placeholder="Contenu de l'email"
+                />
+              </label>
+              <p className="admin-broadcast-hint">
+                Les destinataires sont placés en <strong>BCC</strong> (cachés entre eux). Filtre la
+                liste avant d'ouvrir cette fenêtre pour cibler un sous-groupe (créateurs uniquement,
+                catégorie spécifique, etc.).
+              </p>
+              {broadcastFeedback && (
+                <p className="admin-broadcast-feedback">{broadcastFeedback}</p>
+              )}
+              <div className="admin-broadcast-actions">
+                <button
+                  type="button"
+                  className="admin-pwd-cancel"
+                  onClick={copyBroadcastEmails}
+                  disabled={broadcastEmails.length === 0}
+                >
+                  Copier les emails
+                </button>
+                <button
+                  type="button"
+                  className="admin-pwd-submit"
+                  onClick={openInGmailBroadcast}
+                  disabled={broadcastEmails.length === 0 || !broadcastSubject.trim()}
+                >
+                  Ouvrir dans Gmail
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <section className="admin-table-wrap">
         {loading ? (

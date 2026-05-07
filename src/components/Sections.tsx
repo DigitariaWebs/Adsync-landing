@@ -15,7 +15,7 @@ const audienceCards: AudienceCard[] = [
     image: pourquiPhoto1,
     items: [
       'Tu as une audience, même petite',
-      'Tu publies des stories, reels ou lives',
+      'Tu publies des stories, reels, posts, lives, shorts…etc',
       'Tu veux monetiser sans poster en plus',
       "Tu recois l'argent automatiquement",
     ],
@@ -44,7 +44,7 @@ export function AudienceSection() {
             <strong> Deux mondes.</strong>
           </h2>
         <p >
-          Que tu sois createur ou marque, AdSync t'ouvre une nouvelle economie : celle des espaces
+          Que tu sois createur ou marque, AdSync.io t'ouvre une nouvelle economie : celle des espaces
           numeriques qui se louent comme des appartements.
         </p>
       </div>
@@ -207,7 +207,7 @@ const comparisons = [
   },
   {
     label: 'Formats',
-    ours: 'Reels, Stories, Statuts, Lives',
+    ours: 'Reels, Stories, Statuts, Lives, Posts, Shorts…etc',
     theirs: 'Formats limites',
     leftHint: 'Multi-format',
     rightHint: 'Limite',
@@ -272,7 +272,7 @@ export function ComparisonSection() {
 
           <div className="comparison-cta-wrap">
             <a className="comparison-cta" href="#inscription">
-              Voir pourquoi AdSync fait mieux
+              Voir pourquoi AdSync.io fait mieux
             </a>
           </div>
         </div>

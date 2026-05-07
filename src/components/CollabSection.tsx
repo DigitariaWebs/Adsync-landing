@@ -94,7 +94,7 @@ export default function CollabSection() {
             les marques peuvent diffuser leurs publicites.
           </p>
           <ul className="collab-checks">
-            <li>Tes contenus Feed, Reels, Stories et Lives deviennent des espaces publicitaires.</li>
+            <li>Tes contenus Feed, Reels, Stories, Lives, Posts, Shorts…etc deviennent des espaces publicitaires.</li>
             <li>Les marques y diffusent leurs annonces de maniere simple et cadre.</li>
             <li>Tu es remunere sur chaque diffusion, jusqu'a 75% de la valeur generee.</li>
           </ul>

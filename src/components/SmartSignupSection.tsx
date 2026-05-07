@@ -149,6 +149,7 @@ const BUDGETS = [
   '2 000 à 10 000 €',
   '10 000 à 50 000 €',
   'Plus de 50 000 €',
+  'Autre',
 ];
 
 const OBJECTIVES = [
@@ -181,6 +182,8 @@ export default function SmartSignupSection() {
   const [creatorHandles, setCreatorHandles] = useState<Record<string, PlatformEntry>>({});
   const [countryChoice, setCountryChoice] = useState<string>('');
   const [countryOther, setCountryOther] = useState<string>('');
+  const [budgetChoice, setBudgetChoice] = useState<string>('');
+  const [budgetOther, setBudgetOther] = useState<string>('');
 
   const togglePlatform = (p: string) => {
     setCreatorHandles(prev => {
@@ -253,7 +256,17 @@ export default function SmartSignupSection() {
     } else {
       platform = String(formData.get('website') ?? '').trim() || null;
       category = String(formData.get('sector') ?? '').trim() || null;
-      audienceSize = String(formData.get('budget') ?? '').trim() || null;
+      if (budgetChoice === 'Autre') {
+        const customBudget = budgetOther.trim();
+        if (!customBudget) {
+          setStatus('error');
+          setErrorMsg('Précise ton budget.');
+          return;
+        }
+        audienceSize = `Autre — ${customBudget}`;
+      } else {
+        audienceSize = budgetChoice || null;
+      }
       country = String(formData.get('objective') ?? '').trim() || null;
     }
 
@@ -455,12 +468,27 @@ export default function SmartSignupSection() {
                 </label>
                 <label className="smart-field">
                   <span>Budget par campagne</span>
-                  <select name="budget" defaultValue="">
+                  <select
+                    name="budget"
+                    value={budgetChoice}
+                    onChange={e => setBudgetChoice(e.target.value)}
+                  >
                     <option value="" disabled>Sélectionne un budget</option>
                     {BUDGETS.map(b => (
                       <option key={b} value={b}>{b}</option>
                     ))}
                   </select>
+                  {budgetChoice === 'Autre' && (
+                    <input
+                      type="text"
+                      className="smart-country-other"
+                      value={budgetOther}
+                      onChange={e => setBudgetOther(e.target.value)}
+                      placeholder="Précise ton budget (ex : 750 €)"
+                      aria-label="Budget personnalisé"
+                      style={{ marginTop: 8 }}
+                    />
+                  )}
                 </label>
                 <label className="smart-field smart-field-full">
                   <span>Objectif principal</span>
@@ -476,7 +504,7 @@ export default function SmartSignupSection() {
 
             <div className="smart-signup-note">
               {role === 'createur'
-                ? 'L’IA AdSync analysera ton profil pour te proposer uniquement des marques compatibles avec ton audience. Tu gardes le dernier mot sur chaque contrat.'
+                ? 'L’IA AdSync.io analysera ton profil pour te proposer uniquement des marques compatibles avec ton audience. Tu gardes le dernier mot sur chaque contrat.'
                 : 'L’IA Advisor te recommandera les meilleurs créateurs, formats publicitaires et budgets selon ton secteur. Tu uploades ta pub, on s’occupe du reste.'}
             </div>
 

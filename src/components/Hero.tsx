@@ -114,15 +114,13 @@ export default function Hero() {
         <section className="hero hero-photo">
           <div className="hero-copy">
             <h1>
-              Tes plateformes
-              <br />
-              ton immobilier
-              <br />
+              Tes plateformes<br />
+              ton immobilier<br />
               <em className="hero-title-gold">numérique louable.</em>
             </h1>
 
             <p className="hero-lead">
-             AdSync.io transforme chaque story, reel, live et page web d'un créateur de contenus en surface publicitaire active. Les marques louent tes espaces via des contrats officiels. Tu encaisses, automatiquement.
+             AdSync.io transforme chaque story, reel, live et page web...ect ,d'un créateur de contenus en surface publicitaire active. Les marques louent tes espaces via des contrats officiels. Tu encaisses, automatiquement.
             </p>
 
             <HeroCountdown />

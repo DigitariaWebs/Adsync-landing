@@ -64,9 +64,12 @@ export default function Navbar() {
 
   return (
     <header className={`topbar${scrolled ? ' topbar-scrolled' : ''}${menuOpen ? ' topbar-menu-open' : ''}`}>
-      <a className="brand" href="#home" aria-label="Accueil AdSync">
-        <img className="brand-star" src={starIcon} alt="" aria-hidden="true" />
-        <img className="brand-logo" src={logoImage} alt="AdSync logo" />
+      <a className="brand" href="#home" aria-label="Accueil AdSync.io">
+        <span className="brand-row">
+          <img className="brand-star" src={starIcon} alt="" aria-hidden="true" />
+          <img className="brand-logo" src={logoImage} alt="AdSync.io logo" />
+        </span>
+        <span className="brand-tagline">HUMAN ADTECH</span>
       </a>
 
       <button

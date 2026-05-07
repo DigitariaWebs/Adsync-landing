@@ -82,7 +82,7 @@ export default function LiveWorldSection() {
            <em>le monde s&rsquo;inscrit.</em>
          </h2>
           <p>
-           Créateurs et marques rejoignent AdSync depuis plus de 80 pays. Chaque point lumineux est une nouvelle inscription en temps réel.
+           Créateurs et marques rejoignent AdSync.io depuis plus de 80 pays. Chaque point lumineux est une nouvelle inscription en temps réel.
           </p>
         </div>
       <div className="live-signups-shell">
