@@ -17,12 +17,6 @@ const footerLinks = {
     { label: 'Statut', href: '#monde' },
     { label: 'Changelog', href: '#faq' },
   ],
-  Entreprise: [
-    { label: 'A propos', href: '#home' },
-    { label: 'Carrieres', href: '#inscription' },
-    { label: 'Presse', href: '#monde' },
-    { label: 'Contact', href: '#inscription-beta' },
-  ],
   Legal: [
     { label: 'CGU', href: '#faq' },
     { label: 'Confidentialite', href: '#faq' },
