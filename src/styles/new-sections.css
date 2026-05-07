@@ -730,3 +730,104 @@
 }
 
 
+/* ============================================================
+   ADMIN — PLATEFORME PILLS
+   ============================================================ */
+
+.admin-cell-platform-pills {
+  vertical-align: top;
+  padding-top: 12px;
+  min-width: 220px;
+  max-width: 320px;
+}
+
+.admin-cell-audience {
+  vertical-align: top;
+  padding-top: 12px;
+}
+
+.admin-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.admin-pill {
+  --p-color: #4e3787;
+  --p-color-soft: rgba(78, 55, 135, 0.12);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--p-color);
+  background: var(--p-color-soft);
+  border: 1px solid color-mix(in srgb, var(--p-color) 28%, transparent);
+  white-space: nowrap;
+  cursor: help;
+  letter-spacing: -0.01em;
+}
+
+.admin-pill::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--p-color);
+  flex-shrink: 0;
+}
+
+.admin-pill[data-platform="Instagram"] {
+  --p-color: #e1306c;
+  --p-color-soft: rgba(225, 48, 108, 0.1);
+}
+.admin-pill[data-platform="TikTok"] {
+  --p-color: #010101;
+  --p-color-soft: rgba(0, 0, 0, 0.06);
+}
+.admin-pill[data-platform="YouTube"] {
+  --p-color: #ff0000;
+  --p-color-soft: rgba(255, 0, 0, 0.08);
+}
+.admin-pill[data-platform="Facebook"] {
+  --p-color: #1877f2;
+  --p-color-soft: rgba(24, 119, 242, 0.1);
+}
+.admin-pill[data-platform="Twitch"] {
+  --p-color: #9146ff;
+  --p-color-soft: rgba(145, 70, 255, 0.1);
+}
+.admin-pill[data-platform="X (Twitter)"] {
+  --p-color: #0f1419;
+  --p-color-soft: rgba(15, 20, 25, 0.06);
+}
+.admin-pill[data-platform="LinkedIn"] {
+  --p-color: #0a66c2;
+  --p-color-soft: rgba(10, 102, 194, 0.1);
+}
+.admin-pill[data-platform="Snapchat"] {
+  --p-color: #b89500;
+  --p-color-soft: rgba(255, 230, 0, 0.18);
+}
+.admin-pill[data-platform="Autre (Blog, Site web…)"] {
+  --p-color: #4e3787;
+  --p-color-soft: rgba(78, 55, 135, 0.1);
+}
+
+.admin-pill-empty {
+  font-size: 0.85rem;
+  color: rgba(78, 55, 135, 0.55);
+  font-weight: 600;
+}
+
+.admin-pill-site {
+  display: inline-block;
+  max-width: 220px;
+  word-break: break-word;
+  font-size: 0.9rem;
+  color: var(--primary-700);
+}
+
+

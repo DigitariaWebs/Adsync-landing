@@ -51,21 +51,80 @@ const CREATOR_CATEGORIES = [
 ];
 
 const COUNTRIES = [
+  // Europe francophone
   'France',
   'Belgique',
   'Suisse',
+  'Luxembourg',
+  'Monaco',
+  // Amérique du Nord
   'Canada',
+  'États-Unis',
+  'Haïti',
+  // Afrique de l'Ouest
   'Côte d’Ivoire',
   'Sénégal',
+  'Mali',
+  'Burkina Faso',
+  'Bénin',
+  'Togo',
+  'Niger',
+  'Guinée',
+  'Mauritanie',
+  // Afrique Centrale
   'Cameroun',
+  'Gabon',
+  'Tchad',
+  'Centrafrique',
+  'Congo-Brazzaville',
+  'RD Congo',
+  // Afrique du Nord
   'Maroc',
   'Algérie',
   'Tunisie',
-  'RD Congo',
-  'Bénin',
-  'Togo',
-  'Mali',
-  'Burkina Faso',
+  'Égypte',
+  'Libye',
+  // Afrique Australe et Est
+  'Madagascar',
+  'Maurice',
+  'Comores',
+  'Djibouti',
+  'Rwanda',
+  'Burundi',
+  'Afrique du Sud',
+  'Kenya',
+  'Tanzanie',
+  'Nigeria',
+  'Ghana',
+  // Europe (autre)
+  'Allemagne',
+  'Royaume-Uni',
+  'Espagne',
+  'Italie',
+  'Portugal',
+  'Pays-Bas',
+  'Pologne',
+  // Moyen-Orient et Asie
+  'Émirats arabes unis',
+  'Arabie saoudite',
+  'Liban',
+  'Turquie',
+  'Inde',
+  'Vietnam',
+  'Thaïlande',
+  // Amérique du Sud / Caraïbes
+  'Brésil',
+  'Mexique',
+  'Argentine',
+  'Guadeloupe',
+  'Martinique',
+  'Guyane française',
+  'La Réunion',
+  // Océanie
+  'Australie',
+  'Nouvelle-Calédonie',
+  'Polynésie française',
+  // Catch-all
   'Autre',
 ];
 
@@ -120,6 +179,8 @@ export default function SmartSignupSection() {
   const [status, setStatus] = useState<Status>('idle');
   const [errorMsg, setErrorMsg] = useState<string>('');
   const [creatorHandles, setCreatorHandles] = useState<Record<string, PlatformEntry>>({});
+  const [countryChoice, setCountryChoice] = useState<string>('');
+  const [countryOther, setCountryOther] = useState<string>('');
 
   const togglePlatform = (p: string) => {
     setCreatorHandles(prev => {
@@ -178,7 +239,17 @@ export default function SmartSignupSection() {
         .join('\n');
       audienceSize = entries.map(([p, v]) => `${p}: ${v.audience}`).join(' | ');
       category = String(formData.get('category') ?? '').trim() || null;
-      country = String(formData.get('country') ?? '').trim() || null;
+      if (countryChoice === 'Autre') {
+        const custom = countryOther.trim();
+        if (!custom) {
+          setStatus('error');
+          setErrorMsg('Précise ton pays.');
+          return;
+        }
+        country = `Autre — ${custom}`;
+      } else {
+        country = countryChoice || null;
+      }
     } else {
       platform = String(formData.get('website') ?? '').trim() || null;
       category = String(formData.get('sector') ?? '').trim() || null;
@@ -215,6 +286,8 @@ export default function SmartSignupSection() {
     setStatus('success');
     (event.target as HTMLFormElement).reset();
     setCreatorHandles({});
+    setCountryChoice('');
+    setCountryOther('');
   };
 
   const submitting = status === 'submitting';
@@ -332,14 +405,29 @@ export default function SmartSignupSection() {
                     ))}
                   </select>
                 </label>
-                <label className="smart-field">
+                <label className="smart-field smart-field-full">
                   <span>Pays de résidence</span>
-                  <select name="country" defaultValue="">
+                  <select
+                    name="country"
+                    value={countryChoice}
+                    onChange={e => setCountryChoice(e.target.value)}
+                  >
                     <option value="" disabled>Sélectionne ton pays</option>
                     {COUNTRIES.map(c => (
                       <option key={c} value={c}>{c}</option>
                     ))}
                   </select>
+                  {countryChoice === 'Autre' && (
+                    <input
+                      type="text"
+                      className="smart-country-other"
+                      value={countryOther}
+                      onChange={e => setCountryOther(e.target.value)}
+                      placeholder="Précise ton pays (ex : Suriname)"
+                      aria-label="Pays personnalisé"
+                      style={{ marginTop: 8 }}
+                    />
+                  )}
                 </label>
               </div>
             ) : (

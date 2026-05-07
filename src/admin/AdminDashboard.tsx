@@ -9,6 +9,20 @@ type AdminView = 'waitlist' | 'messages' | 'team' | 'audit';
 
 type RoleFilter = 'all' | WaitlistRole;
 
+type ParsedPlatform = { name: string; handle: string; audience: string };
+
+function parsePlatformEntries(raw: string | null | undefined): ParsedPlatform[] {
+  if (!raw) return [];
+  return raw
+    .split('\n')
+    .map(line => {
+      const m = line.match(/^•\s*(.+?)\s+—\s+(.+?)\s*\(([^)]+)\)\s*$/);
+      if (!m) return null;
+      return { name: m[1].trim(), handle: m[2].trim(), audience: m[3].trim() };
+    })
+    .filter((p): p is ParsedPlatform => p !== null);
+}
+
 function formatDate(iso: string) {
   return new Date(iso).toLocaleString('fr-FR', {
     day: '2-digit',
@@ -484,10 +498,42 @@ function WaitlistView({
                   <td className="admin-cell-email">
                     <a href={`mailto:${entry.email}`}>{entry.email}</a>
                   </td>
-                  <td className="admin-cell-platform">{entry.platform ?? '.'}</td>
-                  <td>{entry.category ?? '.'}</td>
-                  <td className="admin-cell-platform">{entry.audience_size ?? '.'}</td>
-                  <td>{entry.country ?? '.'}</td>
+                  <td className="admin-cell-platform-pills">
+                    {entry.role === 'createur' ? (
+                      (() => {
+                        const pl = parsePlatformEntries(entry.platform);
+                        if (pl.length === 0) return <span className="admin-pill-empty">—</span>;
+                        return (
+                          <div className="admin-pill-row">
+                            {pl.map(p => (
+                              <span
+                                key={p.name}
+                                className="admin-pill"
+                                data-platform={p.name}
+                                title={`${p.handle} · ${p.audience}`}
+                              >
+                                {p.name}
+                              </span>
+                            ))}
+                          </div>
+                        );
+                      })()
+                    ) : (
+                      <span className="admin-pill-site">{entry.platform ?? '—'}</span>
+                    )}
+                  </td>
+                  <td>{entry.category ?? '—'}</td>
+                  <td className="admin-cell-audience">
+                    {entry.role === 'createur' ? (
+                      <span className="admin-pill-empty" title={entry.audience_size ?? ''}>
+                        {parsePlatformEntries(entry.platform).length} plateforme
+                        {parsePlatformEntries(entry.platform).length > 1 ? 's' : ''}
+                      </span>
+                    ) : (
+                      entry.audience_size ?? '—'
+                    )}
+                  </td>
+                  <td>{entry.country ?? '—'}</td>
                 </tr>
               ))}
             </tbody>
