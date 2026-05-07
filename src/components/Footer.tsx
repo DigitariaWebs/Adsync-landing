@@ -75,6 +75,17 @@ function TikTokIcon() {
   );
 }
 
+function FacebookIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M14 8.5h2V6h-2c-1.7 0-2.8 1.1-2.8 2.8V11H9.5v2.5h1.7v6h2.5v-6H16l.4-2.5h-2.7V9c0-.3.1-.5.3-.5z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 function PersonIcon() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -184,13 +195,40 @@ export default function Footer() {
           </p>
 
           <div className="footer-socials">
-            <a href="#home" className="footer-social-btn" aria-label="Instagram">
+            <a
+              href="https://www.instagram.com/adsync.io_?igsh=c3owbXB0OXhzZmt4&utm_source=qr"
+              className="footer-social-btn"
+              aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <InstagramIcon />
             </a>
-            <a href="#home" className="footer-social-btn" aria-label="X / Twitter">
+            <a
+              href="https://x.com/Adsync14769"
+              className="footer-social-btn"
+              aria-label="X / Twitter"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <XIcon />
             </a>
-            <a href="#home" className="footer-social-btn" aria-label="TikTok">
+            <a
+              href="https://www.facebook.com/share/1DqtsogvrJ/?mibextid=wwXIfr"
+              className="footer-social-btn"
+              aria-label="Facebook"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FacebookIcon />
+            </a>
+            <a
+              href="https://www.tiktok.com/@adsync.io?_r=1&_t=ZN-9684QypXnP8"
+              className="footer-social-btn"
+              aria-label="TikTok"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <TikTokIcon />
             </a>
           </div>

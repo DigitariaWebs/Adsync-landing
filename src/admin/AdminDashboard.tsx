@@ -392,9 +392,9 @@ function WaitlistView({
                   <td className="admin-cell-email">
                     <a href={`mailto:${entry.email}`}>{entry.email}</a>
                   </td>
-                  <td>{entry.platform ?? '.'}</td>
+                  <td className="admin-cell-platform">{entry.platform ?? '.'}</td>
                   <td>{entry.category ?? '.'}</td>
-                  <td>{entry.audience_size ?? '.'}</td>
+                  <td className="admin-cell-platform">{entry.audience_size ?? '.'}</td>
                   <td>{entry.country ?? '.'}</td>
                 </tr>
               ))}

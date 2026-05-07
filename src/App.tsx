@@ -1,11 +1,15 @@
 import './index.css';
+import './styles/new-sections.css';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import FormatsMarquee from './components/FormatsMarquee';
 import HowItWorks from './components/HowItWorks';
 import AdvantagesSection from './components/AdvantagesSection';
 import SolutionSection from './components/SolutionSection';
 import PourQuiSection from './components/PourQuiSection';
 import LiveWorldSection from './components/LiveWorldSection';
+import ProblemSection from './components/ProblemSection';
+import MobileMoneySection from './components/MobileMoneySection';
 import FAQSection from './components/FAQSection';
 import SmartSignupSection from './components/SmartSignupSection';
 import ContactSection from './components/ContactSection';
@@ -26,14 +30,17 @@ export default function App() {
 
       <main>
         <Hero />
+        <FormatsMarquee />
         <LiveWorldSection />
+        <ProblemSection />
+        <SolutionSection />
         <HowItWorks />
         <PourQuiSection />
-        <SolutionSection />
         <AdvantagesSection />
-        <FAQSection />
+        <MobileMoneySection />
         <SmartSignupSection />
         <ContactSection />
+        <FAQSection />
       </main>
       <Footer />
     </div>

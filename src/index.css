@@ -30,7 +30,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 13.6px;
+  font-size: 16px;
 }
 
 body {
@@ -39,23 +39,13 @@ body {
   font-family: 'Inter', sans-serif;
   color: var(--text-primary);
   background: #ffffff;
-  zoom: 0.97;
-}
-
-@supports not (zoom: 1) {
-  body {
-    zoom: unset;
-    transform-origin: top left;
-  }
+  font-size: 1.0625rem;
+  line-height: 1.6;
 }
 
 @media (max-width: 720px) {
-  body {
-    zoom: 1;
-  }
-
   html {
-    font-size: 16px;
+    font-size: 15px;
   }
 }
 
@@ -550,11 +540,11 @@ img {
 }
 
 .hero-lead {
-  max-width: 50ch;
+  max-width: 56ch;
   margin: 22px 0 0;
-  color: rgba(61, 43, 107, 0.82);
-  font-size: 1.05rem;
-  line-height: 1.55;
+  color: rgba(61, 43, 107, 0.85);
+  font-size: 1.2rem;
+  line-height: 1.6;
 }
 
 .hero-actions {
@@ -1479,9 +1469,10 @@ img {
 .how-it-works-intro {
   position: relative;
   z-index: 1;
-  max-width: 760px;
-  margin: 0 auto 28px;
+  max-width: 1180px;
+  margin: 0 auto 36px;
   text-align: center;
+  padding: 0 16px;
 }
 
 .how-it-works-kicker {
@@ -2165,9 +2156,19 @@ img {
 }
 
 .solution-intro {
-  max-width: 860px;
-  margin: 0 auto 48px;
+  max-width: 1180px;
+  margin: 0 auto 56px;
   text-align: center;
+  padding: 0 16px;
+}
+
+.solution-intro p {
+  font-size: 1.18rem;
+  line-height: 1.6;
+  margin-top: 18px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .solution-intro .eyebrow {
@@ -4875,6 +4876,18 @@ img {
 .advantages-header {
   text-align: center;
   margin-bottom: 56px;
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 16px;
+}
+
+.advantages-subtitle {
+  font-size: 1.18rem !important;
+  line-height: 1.6;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .advantages-label {
@@ -5723,9 +5736,18 @@ img {
 }
 
 .pq-header {
-  max-width: 760px;
+  max-width: 1180px;
   margin: 0 auto 64px;
   text-align: center;
+  padding: 0 16px;
+}
+
+.pq-header p {
+  font-size: 1.18rem;
+  line-height: 1.6;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .pq-eyebrow {
@@ -6645,6 +6667,16 @@ img {
 
 .admin-cell-name {
   font-weight: 600;
+}
+
+.admin-cell-platform {
+  white-space: pre-line;
+  line-height: 1.5;
+  font-size: 0.92rem;
+  min-width: 220px;
+  max-width: 320px;
+  vertical-align: top;
+  padding-top: 10px;
 }
 
 .admin-cell-email a {

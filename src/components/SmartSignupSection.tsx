@@ -5,15 +5,35 @@ type RoleTab = 'createur' | 'marque';
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
-const PLATFORMS = ['Instagram', 'TikTok', 'YouTube', 'Facebook', 'Twitch', 'X (Twitter)', 'LinkedIn', 'Snapchat'];
-
-const AUDIENCE_SIZES = [
-  'Moins de 5 000',
-  '5 000 à 50 000',
-  '50 000 à 250 000',
-  '250 000 à 1 M',
-  'Plus de 1 M',
+const PLATFORMS = [
+  'Instagram',
+  'TikTok',
+  'YouTube',
+  'Facebook',
+  'Twitch',
+  'X (Twitter)',
+  'LinkedIn',
+  'Snapchat',
+  'Autre (Blog, Site web…)',
 ];
+
+const AUDIENCE_BY_PLATFORM: Record<string, string[]> = {
+  Instagram: ['Moins de 1 000', '1 000 à 10 000', '10 000 à 100 000', '100 000 à 500 000', 'Plus de 500 000'],
+  TikTok: ['Moins de 5 000', '5 000 à 50 000', '50 000 à 500 000', '500 000 à 2 M', 'Plus de 2 M'],
+  YouTube: ['Moins de 1 000 abonnés', '1 000 à 10 000', '10 000 à 100 000', '100 000 à 1 M', 'Plus de 1 M'],
+  Facebook: ['Moins de 1 000 fans', '1 000 à 10 000', '10 000 à 100 000', '100 000 à 500 000', 'Plus de 500 000'],
+  Twitch: ['Moins de 100 followers', '100 à 1 000', '1 000 à 10 000', '10 000 à 100 000', 'Plus de 100 000'],
+  'X (Twitter)': ['Moins de 1 000', '1 000 à 10 000', '10 000 à 100 000', '100 000 à 1 M', 'Plus de 1 M'],
+  LinkedIn: ['Moins de 500 relations', '500 à 5 000', '5 000 à 30 000', '30 000 à 100 000', 'Plus de 100 000'],
+  Snapchat: ['Moins de 1 000', '1 000 à 10 000', '10 000 à 100 000', '100 000 à 1 M', 'Plus de 1 M'],
+  'Autre (Blog, Site web…)': [
+    'Moins de 500 visites/mois',
+    '500 à 5 000 visites/mois',
+    '5 000 à 50 000 visites/mois',
+    '50 000 à 500 000 visites/mois',
+    'Plus de 500 000 visites/mois',
+  ],
+};
 
 const CREATOR_CATEGORIES = [
   'Lifestyle',
@@ -90,13 +110,16 @@ const HANDLE_PLACEHOLDERS: Record<string, string> = {
   'X (Twitter)': '@ton_pseudo',
   LinkedIn: 'URL de ton profil',
   Snapchat: '@ton_pseudo',
+  'Autre (Blog, Site web…)': 'URL de ton blog ou site (ex : https://monblog.fr)',
 };
+
+type PlatformEntry = { handle: string; audience: string };
 
 export default function SmartSignupSection() {
   const [role, setRole] = useState<RoleTab>('createur');
   const [status, setStatus] = useState<Status>('idle');
   const [errorMsg, setErrorMsg] = useState<string>('');
-  const [creatorHandles, setCreatorHandles] = useState<Record<string, string>>({});
+  const [creatorHandles, setCreatorHandles] = useState<Record<string, PlatformEntry>>({});
 
   const togglePlatform = (p: string) => {
     setCreatorHandles(prev => {
@@ -105,12 +128,16 @@ export default function SmartSignupSection() {
         delete next[p];
         return next;
       }
-      return { ...prev, [p]: '' };
+      return { ...prev, [p]: { handle: '', audience: '' } };
     });
   };
 
   const updateHandle = (p: string, value: string) => {
-    setCreatorHandles(prev => ({ ...prev, [p]: value }));
+    setCreatorHandles(prev => ({ ...prev, [p]: { ...prev[p], handle: value } }));
+  };
+
+  const updateAudience = (p: string, value: string) => {
+    setCreatorHandles(prev => ({ ...prev, [p]: { ...prev[p], audience: value } }));
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -134,14 +161,22 @@ export default function SmartSignupSection() {
         setErrorMsg('Sélectionne au moins une plateforme.');
         return;
       }
-      const missing = entries.find(([, h]) => !h.trim());
-      if (missing) {
+      const missingHandle = entries.find(([, v]) => !v.handle.trim());
+      if (missingHandle) {
         setStatus('error');
-        setErrorMsg(`Renseigne ton identifiant ${missing[0]}.`);
+        setErrorMsg(`Renseigne ton identifiant ${missingHandle[0]}.`);
         return;
       }
-      platform = entries.map(([p, h]) => `${p} : ${h.trim()}`).join('\n');
-      audienceSize = String(formData.get('audience_size') ?? '').trim() || null;
+      const missingAudience = entries.find(([, v]) => !v.audience);
+      if (missingAudience) {
+        setStatus('error');
+        setErrorMsg(`Sélectionne une fourchette d'audience pour ${missingAudience[0]}.`);
+        return;
+      }
+      platform = entries
+        .map(([p, v]) => `• ${p} — ${v.handle.trim()} (${v.audience})`)
+        .join('\n');
+      audienceSize = entries.map(([p, v]) => `${p}: ${v.audience}`).join(' | ');
       category = String(formData.get('category') ?? '').trim() || null;
       country = String(formData.get('country') ?? '').trim() || null;
     } else {
@@ -236,10 +271,11 @@ export default function SmartSignupSection() {
                   <input type="email" name="email" required placeholder="contact@email.com" />
                 </label>
                 <div className="smart-field smart-field-full">
-                  <span>Tes plateformes et identifiants</span>
+                  <span>Tes plateformes, identifiants et audiences</span>
                   <div className="smart-platforms">
                     {PLATFORMS.map(p => {
                       const selected = p in creatorHandles;
+                      const audiences = AUDIENCE_BY_PLATFORM[p] ?? [];
                       return (
                         <div key={p} className={`smart-platform ${selected ? 'is-selected' : ''}`}>
                           <label className="smart-platform-toggle">
@@ -251,33 +287,38 @@ export default function SmartSignupSection() {
                             <span>{p}</span>
                           </label>
                           {selected && (
-                            <input
-                              type="text"
-                              className="smart-platform-handle"
-                              value={creatorHandles[p]}
-                              onChange={e => updateHandle(p, e.target.value)}
-                              placeholder={HANDLE_PLACEHOLDERS[p] ?? '@ton_pseudo'}
-                              aria-label={`Identifiant ${p}`}
-                            />
+                            <div className="smart-platform-fields">
+                              <input
+                                type="text"
+                                className="smart-platform-handle"
+                                value={creatorHandles[p].handle}
+                                onChange={e => updateHandle(p, e.target.value)}
+                                placeholder={HANDLE_PLACEHOLDERS[p] ?? '@ton_pseudo'}
+                                aria-label={`Identifiant ${p}`}
+                              />
+                              <select
+                                className="smart-platform-audience"
+                                value={creatorHandles[p].audience}
+                                onChange={e => updateAudience(p, e.target.value)}
+                                aria-label={`Fourchette d'audience ${p}`}
+                              >
+                                <option value="" disabled>Fourchette d&apos;audience…</option>
+                                {audiences.map(a => (
+                                  <option key={a} value={a}>{a}</option>
+                                ))}
+                              </select>
+                            </div>
                           )}
                         </div>
                       );
                     })}
                   </div>
                   <p className="smart-platforms-hint">
-                    Coche toutes les plateformes où tu es actif et renseigne ton identifiant pour
-                    chacune. L&apos;IA proposera tes espaces aux marques alignées.
+                    Coche toutes les plateformes où tu es actif. Pour chacune, renseigne ton
+                    identifiant et la fourchette d&apos;audience correspondante (chaque plateforme a
+                    sa propre échelle).
                   </p>
                 </div>
-                <label className="smart-field">
-                  <span>Taille d&apos;audience</span>
-                  <select name="audience_size" defaultValue="">
-                    <option value="" disabled>Sélectionne une fourchette</option>
-                    {AUDIENCE_SIZES.map(a => (
-                      <option key={a} value={a}>{a}</option>
-                    ))}
-                  </select>
-                </label>
                 <label className="smart-field">
                   <span>Catégorie de contenu</span>
                   <select name="category" defaultValue="">
@@ -287,7 +328,7 @@ export default function SmartSignupSection() {
                     ))}
                   </select>
                 </label>
-                <label className="smart-field smart-field-full">
+                <label className="smart-field">
                   <span>Pays de résidence</span>
                   <select name="country" defaultValue="">
                     <option value="" disabled>Sélectionne ton pays</option>
@@ -350,11 +391,7 @@ export default function SmartSignupSection() {
             <div className="smart-signup-actions">
               <p>Paiements sécurisés par Stripe, Mobile Money et virement.</p>
               <button type="submit" disabled={submitting}>
-                {submitting
-                  ? 'Envoi...'
-                  : role === 'marque'
-                    ? 'Lancer ma marque'
-                    : 'Réserver mon accès'}
+                {submitting ? 'Envoi...' : 'Réserver mon accès'}
               </button>
             </div>
 
