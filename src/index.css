@@ -672,7 +672,7 @@ img {
 }
 
 .photo-card video {
-  object-position: center center;
+  object-position: center top;
   transform: translateZ(0);
   backface-visibility: hidden;
   will-change: transform;
