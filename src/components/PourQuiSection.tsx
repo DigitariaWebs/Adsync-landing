@@ -258,12 +258,12 @@ const creatorProfiles: Profile[] = [
   {
     image: influenceurFemme,
     title: 'Influenceur ou influenceuse',
-    description: "Instagram, TikTok, YouTube, Snapchat. N'importe quelle taille d'audience.",
+    description: "Instagram, TikTok, YouTube, Snapchat....ect N'importe quelle taille d'audience.",
   },
   {
     image: garsAvecPc,
     title: 'Gamer ou streamer',
-    description: "Twitch, Kick, YouTube Gaming, TikTok Live. L'IA insère la pub au bon moment.",
+    description: "Twitch, Kick, YouTube Gaming, TikTok Live...ect, L'IA insère la pub au bon moment.",
   },
   {
     image: photoB,
@@ -311,7 +311,7 @@ const brandProfiles: Profile[] = [
   {
     image: appMobile,
     title: 'Application mobile',
-    description: 'Téléchargements réels uniquement. PaySync paie à chaque install vérifiée.',
+    description: 'Téléchargements réels uniquement.',
   },
   {
     image: livreur,
@@ -387,7 +387,7 @@ export default function PourQuiSection() {
           <img src={starIcon} alt="" aria-hidden="true" className="pq-header-star" />
           <span className="eyebrow pq-eyebrow">Pour qui ?</span>
           <h2>
-            <span className="brand-name">AdSync.io</span><BrandBadge />,
+            <span className="brand-name">AdSync.io</span> <BrandBadge />,
             <br />
             <em>c&apos;est pour toi.</em>
           </h2>

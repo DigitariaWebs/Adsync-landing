@@ -7,7 +7,7 @@ const faqs: FaqItem[] = [
   {
     question: "Quand AdSync.io ouvre vraiment ?",
     answer:
-      "AdSync.io ouvre le 21 juin 2026 à 9h UTC. Les inscrits de la vague de lancement reçoivent un accès prioritaire 72h avant l’ouverture publique, ainsi que 0 % de commission sur leurs 3 premiers contrats.",
+      "AdSync.io ouvre le 21 juin 2026 à 9h UTC. Les inscrits de la vague de lancement reçoivent un accès prioritaire 72h avant l’ouverture publique, ainsi que 0 % de commission sur leurs premier contrat.",
   },
   {
     question: "Combien je gagne en tant que créateur ?",
