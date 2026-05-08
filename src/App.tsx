@@ -33,7 +33,6 @@ export default function App() {
         <Hero />
         <FormatsMarquee />
         <LiveWorldSection />
-        <VisionSection />
         <ProblemSection />
         <SolutionSection />
         <HowItWorks />
@@ -42,6 +41,7 @@ export default function App() {
         <MobileMoneySection />
         <SmartSignupSection />
         <ContactSection />
+        <VisionSection />
         <FAQSection />
       </main>
       <Footer />

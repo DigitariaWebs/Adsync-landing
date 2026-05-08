@@ -3,12 +3,12 @@ import logoImage from '../assets/logo.png';
 import starIcon from '../assets/a_high_end_premium_3d_icon_of_a_minimalist_4_pointed_star._the_star_features-removebg-preview.png';
 
 const navItems = [
-  { href: '#pour-qui', label: 'Pour qui', id: 'pour-qui' },
   { href: '#solution', label: 'Solution', id: 'solution' },
   { href: '#comment-ca-marche', label: 'Processus', id: 'comment-ca-marche' },
-  { href: '#vision', label: 'Vision', id: 'vision' },
+  { href: '#pour-qui', label: 'Pour qui', id: 'pour-qui' },
   { href: '#nos-avantages', label: 'Avantages', id: 'nos-avantages' },
   { href: '#inscription', label: 'Lancement', id: 'inscription' },
+  { href: '#vision', label: 'Vision', id: 'vision' },
 ];
 
 export default function Navbar() {
