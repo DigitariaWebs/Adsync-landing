@@ -20,7 +20,7 @@ const pains: Pain[] = [
   {
     number: '03',
     title: 'Les créateurs ne sont pas payés',
-    description: '200 millions de créateurs dans le monde gagnent à peine de quoi vivre.',
+    description: 'plus de 200 millions de créateurs dans le monde gagnent à peine de quoi vivre.',
   },
   {
     number: '04',

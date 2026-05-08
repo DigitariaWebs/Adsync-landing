@@ -1,4 +1,5 @@
 import starIcon from '../assets/a_high_end_premium_3d_icon_of_a_minimalist_4_pointed_star._the_star_features-removebg-preview.png';
+import { BrandBadge } from './BrandedText';
 
 const providers = [
   { name: 'Orange Money', region: 'Afrique de l\'Ouest et Centrale' },
@@ -28,7 +29,7 @@ export default function MobileMoneySection() {
             <em>partout chez toi.</em>
           </h2>
           <p>
-            Tu n'as pas besoin d'un compte bancaire. AdSync.io (HUMAN ADTECH) te paie directement sur ton téléphone
+            Tu n'as pas besoin d'un compte bancaire. <span className="brand-name">AdSync.io</span><BrandBadge /> te paie directement sur ton téléphone
             via les plus grands opérateurs de Mobile Money en Afrique.
           </p>
 

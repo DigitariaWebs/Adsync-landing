@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import liveGlobeImage from '../assets/live-globe.png';
 import starIcon from '../assets/a_high_end_premium_3d_icon_of_a_minimalist_4_pointed_star._the_star_features-removebg-preview.png';
+import { BrandBadge } from './BrandedText';
 
 type ActivityEntry = {
   id: number;
@@ -82,7 +83,7 @@ export default function LiveWorldSection() {
            <em>le monde s&rsquo;inscrit.</em>
          </h2>
           <p>
-           Créateurs et marques rejoignent AdSync.io (HUMAN ADTECH) depuis plus de 80 pays. Chaque point lumineux est une nouvelle inscription en temps réel.
+           Créateurs et marques rejoignent <span className="brand-name">AdSync.io</span><BrandBadge /> depuis plus de 80 pays. Chaque point lumineux est une nouvelle inscription en temps réel.
           </p>
         </div>
       <div className="live-signups-shell">

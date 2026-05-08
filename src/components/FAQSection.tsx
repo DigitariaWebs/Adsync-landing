@@ -1,17 +1,18 @@
 import { useState } from 'react';
+import BrandedText from './BrandedText';
 
 type FaqItem = { question: string; answer: string };
 
 const faqs: FaqItem[] = [
   {
-    question: "Quand AdSync.io (HUMAN ADTECH) ouvre vraiment ?",
+    question: "Quand AdSync.io ouvre vraiment ?",
     answer:
-      "AdSync.io (HUMAN ADTECH) ouvre le 21 juin 2026 à 9h UTC. Les inscrits de la vague de lancement reçoivent un accès prioritaire 72h avant l’ouverture publique, ainsi que 0 % de commission sur leurs 3 premiers contrats.",
+      "AdSync.io ouvre le 21 juin 2026 à 9h UTC. Les inscrits de la vague de lancement reçoivent un accès prioritaire 72h avant l’ouverture publique, ainsi que 0 % de commission sur leurs 3 premiers contrats.",
   },
   {
     question: "Combien je gagne en tant que créateur ?",
     answer:
-      "Tu touches 75 % du montant de chaque contrat signé. AdSync.io (HUMAN ADTECH) prend 25 % pour couvrir l’infrastructure, le matching IA, la sécurisation Stripe et la protection juridique des contrats.",
+      "Tu touches 75 % du montant de chaque contrat signé. AdSync.io prend 25 % pour couvrir l’infrastructure, le matching IA, la sécurisation Stripe et la protection juridique des contrats.",
   },
   {
     question: "Quels formats de publicité je peux uploader en tant que marque ?",
@@ -24,7 +25,7 @@ const faqs: FaqItem[] = [
       "Les paiements sont supportés via Stripe (carte, SEPA, ACH), Apple Pay, Google Pay, PayPal, virement bancaire, et Mobile Money (Orange Money, MTN MoMo, Wave, M-Pesa). La crypto USDT/USDC est disponible sur demande pour les gros montants.",
   },
   {
-    question: "Comment AdSync.io (HUMAN ADTECH) garantit qu’il n’y a pas de bots ?",
+    question: "Comment AdSync.io garantit qu’il n’y a pas de bots ?",
     answer:
       "Un Quality Score ≥ 94/100 est obligatoire. L’IA analyse le comportement, l’historique, la géolocalisation et les patterns d’engagement. Les faux abonnés et trafics synthétiques sont filtrés avant activation des campagnes.",
   },
@@ -66,12 +67,12 @@ export default function FAQSection() {
               style={{ cursor: 'pointer' }}
             >
               <div className="faq-question-row">
-                <h3>{item.question}</h3>
+                <h3><BrandedText text={item.question} /></h3>
                 <span className="faq-plus" aria-hidden="true">
                   {openIndex === idx ? '−' : '+'}
                 </span>
               </div>
-              {openIndex === idx && <p>{item.answer}</p>}
+              {openIndex === idx && <p><BrandedText text={item.answer} /></p>}
             </article>
           ))}
         </div>

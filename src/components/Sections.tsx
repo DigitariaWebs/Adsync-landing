@@ -1,5 +1,6 @@
 import pourquiPhoto1 from '../assets/photo-pourqui1.png';
 import pourquiPhoto2 from '../assets/photo-pourqui2.png';
+import { BrandBadge } from './BrandedText';
 
 type AudienceCard = {
   title: string;
@@ -44,7 +45,7 @@ export function AudienceSection() {
             <strong> Deux mondes.</strong>
           </h2>
         <p >
-          Que tu sois createur ou marque, AdSync.io (HUMAN ADTECH) t'ouvre une nouvelle economie : celle des espaces
+          Que tu sois createur ou marque, <span className="brand-name">AdSync.io</span><BrandBadge /> t'ouvre une nouvelle economie : celle des espaces
           numeriques qui se louent comme des appartements.
         </p>
       </div>
@@ -235,11 +236,11 @@ export function ComparisonSection() {
         <div className="comparison-shell">
           <div className="comparison-shell-head">
             <span>Critere</span>
-            <span>AdSync.io (HUMAN ADTECH)</span>
+            <span><span className="brand-name">AdSync.io</span><BrandBadge /></span>
             <span>Approche classique</span>
           </div>
 
-          <div className="comparison-stack" aria-label="Comparaison AdSync.io (HUMAN ADTECH)">
+          <div className="comparison-stack" aria-label="Comparaison AdSync.io">
             {comparisons.map(item => (
               <article className="comparison-metric" key={item.label}>
                 <div className="comparison-metric-top">
@@ -272,7 +273,7 @@ export function ComparisonSection() {
 
           <div className="comparison-cta-wrap">
             <a className="comparison-cta" href="#inscription">
-              Voir pourquoi AdSync.io (HUMAN ADTECH) fait mieux
+              Voir pourquoi <span className="brand-name">AdSync.io</span><BrandBadge /> fait mieux
             </a>
           </div>
         </div>

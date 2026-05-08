@@ -6,6 +6,7 @@ const navItems = [
   { href: '#pour-qui', label: 'Pour qui', id: 'pour-qui' },
   { href: '#solution', label: 'Solution', id: 'solution' },
   { href: '#comment-ca-marche', label: 'Processus', id: 'comment-ca-marche' },
+  { href: '#vision', label: 'Vision', id: 'vision' },
   { href: '#nos-avantages', label: 'Avantages', id: 'nos-avantages' },
   { href: '#inscription', label: 'Lancement', id: 'inscription' },
 ];
@@ -64,10 +65,10 @@ export default function Navbar() {
 
   return (
     <header className={`topbar${scrolled ? ' topbar-scrolled' : ''}${menuOpen ? ' topbar-menu-open' : ''}`}>
-      <a className="brand" href="#home" aria-label="Accueil AdSync.io (HUMAN ADTECH)">
+      <a className="brand" href="#home" aria-label="Accueil AdSync.io">
         <span className="brand-row">
           <img className="brand-star" src={starIcon} alt="" aria-hidden="true" />
-          <img className="brand-logo" src={logoImage} alt="AdSync.io (HUMAN ADTECH) logo" />
+          <img className="brand-logo" src={logoImage} alt="AdSync.io logo" />
         </span>
         <span className="brand-tagline">HUMAN ADTECH</span>
       </a>

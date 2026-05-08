@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { supabase } from '../lib/supabase';
+import BrandedText from './BrandedText';
 
 type RoleTab = 'createur' | 'marque';
 
@@ -503,9 +504,13 @@ export default function SmartSignupSection() {
             )}
 
             <div className="smart-signup-note">
-              {role === 'createur'
-                ? 'L’IA AdSync.io (HUMAN ADTECH) analysera ton profil pour te proposer uniquement des marques compatibles avec ton audience. Tu gardes le dernier mot sur chaque contrat.'
-                : 'L’IA Advisor te recommandera les meilleurs créateurs, formats publicitaires et budgets selon ton secteur. Tu uploades ta pub, on s’occupe du reste.'}
+              <BrandedText
+                text={
+                  role === 'createur'
+                    ? 'L’IA AdSync.io analysera ton profil pour te proposer uniquement des marques compatibles avec ton audience. Tu gardes le dernier mot sur chaque contrat.'
+                    : 'L’IA Advisor te recommandera les meilleurs créateurs, formats publicitaires et budgets selon ton secteur. Tu uploades ta pub, on s’occupe du reste.'
+                }
+              />
             </div>
 
             <div className="smart-signup-actions">

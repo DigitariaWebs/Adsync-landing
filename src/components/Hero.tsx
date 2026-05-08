@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import heroVideoMp4 from '../assets/video.mp4';
 import starIcon from '../assets/a_high_end_premium_3d_icon_of_a_minimalist_4_pointed_star._the_star_features-removebg-preview.png';
+import { BrandBadge } from './BrandedText';
 
 const LAUNCH_DATE = new Date('2026-06-21T09:00:00Z');
 
@@ -114,13 +115,13 @@ export default function Hero() {
         <section className="hero hero-photo">
           <div className="hero-copy">
             <h1>
-            Tes plateformes<br />
-              ton immobilier<br />
+              {'tes plateformes'}<br />
+              {'ton immobilier'}<br />
               <em className="hero-title-gold">numérique louable.</em>
             </h1>
 
             <p className="hero-lead">
-             AdSync.io (HUMAN ADTECH) transforme chaque story, reel, live et page web...ect ,d'un créateur de contenus en surface publicitaire active. Les marques louent tes espaces via des contrats officiels. Tu encaisses, automatiquement.
+              <span className="brand-name">AdSync.io</span><BrandBadge /> transforme chaque story, reel, live et page web...ect ,d'un créateur de contenus en surface publicitaire active. Les marques louent tes espaces via des contrats officiels. Tu encaisses, automatiquement.
             </p>
 
             <HeroCountdown />
@@ -146,7 +147,7 @@ export default function Hero() {
                 loop
                 playsInline
                 preload="auto"
-                aria-label="Aperçu animé d'AdSync.io (HUMAN ADTECH)"
+                aria-label="Aperçu animé d'AdSync.io"
               >
                 <source src={heroVideoMp4} type="video/mp4" />
               </video>

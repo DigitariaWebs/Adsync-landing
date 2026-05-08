@@ -20,6 +20,7 @@ import donateur from '../assets/donateur.png';
 import screen4 from '../assets/screen4-removebg-preview.png';
 import screen10 from '../assets/screen10-removebg-preview.png';
 import starIcon from '../assets/a_high_end_premium_3d_icon_of_a_minimalist_4_pointed_star._the_star_features-removebg-preview.png';
+import BrandedText, { BrandBadge } from './BrandedText';
 
 type IconName =
   | 'camera'
@@ -362,7 +363,7 @@ const brandActions = [
   'Donner une pub à un créateur pour qu\'il la publie sur ses réseaux',
   'Faire booster une pub existante (Facebook, Instagram, TikTok, X…etc) par un créateur. Il la partage, tu paies les résultats.',
   "Placer une pub sur le site web d'un créateur, comme un panneau publicitaire numérique",
-  "Laisser l'IA AdSync.io (HUMAN ADTECH) créer la pub complète à ta place : vidéo, texte, format",
+  "Laisser l'IA AdSync.io créer la pub complète à ta place : vidéo, texte, format",
   'Payer uniquement ce qui se passe vraiment : vue, clic, achat réel',
 ];
 
@@ -386,12 +387,12 @@ export default function PourQuiSection() {
           <img src={starIcon} alt="" aria-hidden="true" className="pq-header-star" />
           <span className="eyebrow pq-eyebrow">Pour qui ?</span>
           <h2>
-            AdSync.io (HUMAN ADTECH),
+            <span className="brand-name">AdSync.io</span><BrandBadge />,
             <br />
             <em>c&apos;est pour toi.</em>
           </h2>
           <p>
-            Créateur ou marque, si tu as une audience ou un produit, tu as ta place sur AdSync.io (HUMAN ADTECH).
+            Créateur ou marque, si tu as une audience ou un produit, tu as ta place sur <span className="brand-name">AdSync.io</span><BrandBadge />.
           </p>
         </header>
 
@@ -496,7 +497,7 @@ export default function PourQuiSection() {
           <div className="pq-actions-block">
             <span className="pq-surfaces-label">
               <Icon name="spark" />
-              Ce que tu peux faire avec AdSync.io (HUMAN ADTECH)
+              Ce que tu peux faire avec <span className="brand-name">AdSync.io</span><BrandBadge />
             </span>
             <ul className="pq-actions-list">
               {brandActions.map(action => (
@@ -504,7 +505,7 @@ export default function PourQuiSection() {
                   <span className="pq-actions-check">
                     <Icon name="check" />
                   </span>
-                  {action}
+                  <BrandedText text={action} />
                 </li>
               ))}
             </ul>
@@ -516,7 +517,7 @@ export default function PourQuiSection() {
               Exemple concret
             </span>
             <p>
-              Tu as une pub Nike Running déjà sur Facebook, Instagram, TikTok…etc. Sur AdSync.io (HUMAN ADTECH), tu signes un contrat avec
+              Tu as une pub Nike Running déjà sur Facebook, Instagram, TikTok…etc. Sur <span className="brand-name">AdSync.io</span><BrandBadge />, tu signes un contrat avec
               20 créateurs qui la partagent à leur communauté. Tu ne paies que <strong>30&nbsp;€
               pour 3 vrais achats mesurés</strong>. Les créateurs reçoivent leur rémunération
               (75&nbsp;%) automatiquement. Transparent. Propre.
@@ -544,7 +545,7 @@ export default function PourQuiSection() {
               <div>
                 <h4>Pub Boost : partage de pub existante</h4>
                 <p>
-                  La marque a déjà sa pub sur Facebook, Instagram, TikTok…etc&nbsp;? Tu n&apos;as rien à filmer. AdSync.io (HUMAN ADTECH) te
+                  La marque a déjà sa pub sur Facebook, Instagram, TikTok…etc&nbsp;? Tu n&apos;as rien à filmer. <span className="brand-name">AdSync.io</span><BrandBadge /> te
                   propose un contrat&nbsp;: tu partages la publication sur ta page ou ton groupe et
                   tu reçois ta rémunération pour chaque résultat généré.
                 </p>

@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import starIcon from '../assets/a_high_end_premium_3d_icon_of_a_minimalist_4_pointed_star._the_star_features-removebg-preview.png';
+import { BrandBadge } from './BrandedText';
 
 const footerLinks = {
   Produit: [
@@ -76,6 +77,15 @@ function FacebookIcon() {
         d="M14 8.5h2V6h-2c-1.7 0-2.8 1.1-2.8 2.8V11H9.5v2.5h1.7v6h2.5v-6H16l.4-2.5h-2.7V9c0-.3.1-.5.3-.5z"
         fill="currentColor"
       />
+    </svg>
+  );
+}
+
+function LinkedInIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="2.5" y="2.5" width="19" height="19" rx="3" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M7 10v7M7 7.5v.01M11 17v-4.5a2 2 0 1 1 4 0V17" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
     </svg>
   );
 }
@@ -225,6 +235,15 @@ export default function Footer() {
             >
               <TikTokIcon />
             </a>
+            <a
+              href="https://www.linkedin.com/company/adsync_io/"
+              className="footer-social-btn"
+              aria-label="LinkedIn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LinkedInIcon />
+            </a>
           </div>
         </div>
 
@@ -243,7 +262,7 @@ export default function Footer() {
       </div>
 
       <div className="footer-bottom-bar">
-        <p className="footer-copy">Copyright {year} AdSync.io (HUMAN ADTECH). Tous droits reserves.</p>
+        <p className="footer-copy">Copyright {year} <span className="brand-name">AdSync.io</span><BrandBadge />. Tous droits reserves.</p>
         <div className="footer-bottom-links">
           <a href="#faq">CGU</a>
           <span aria-hidden="true">.</span>

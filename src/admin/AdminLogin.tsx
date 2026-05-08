@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { supabase } from '../lib/supabase';
+import { BrandBadge } from '../components/BrandedText';
 
 type Mode = 'signin' | 'signup';
 
@@ -49,7 +50,7 @@ export default function AdminLogin() {
       </a>
       <div className="admin-login-card">
         <div className="admin-login-head">
-          <span className="admin-login-kicker">AdSync.io (HUMAN ADTECH) admin</span>
+          <span className="admin-login-kicker"><span className="brand-name">AdSync.io</span><BrandBadge /> admin</span>
           <h1>{mode === 'signin' ? 'Connexion' : 'Créer un compte'}</h1>
           <p>
             {mode === 'signin'

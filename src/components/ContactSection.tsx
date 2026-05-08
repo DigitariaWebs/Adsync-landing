@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { supabase } from '../lib/supabase';
+import { BrandBadge } from './BrandedText';
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -52,7 +53,7 @@ export default function ContactSection() {
             Parle-nous <strong>directement.</strong>
           </h2>
           <p>
-            Une demande, un partenariat, un retour ? Envoie-nous un message, l&apos;équipe AdSync.io (HUMAN ADTECH) te
+            Une demande, un partenariat, un retour ? Envoie-nous un message, l&apos;équipe <span className="brand-name">AdSync.io</span><BrandBadge /> te
             répond personnellement par email sous 48h.
           </p>
         </header>
@@ -160,6 +161,19 @@ export default function ContactSection() {
                 <path d="M4 4l16 16M20 4L4 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               </svg>
               <span>X</span>
+            </a>
+            <a
+              href="https://www.linkedin.com/company/adsync_io/"
+              className="contact-social-btn"
+              aria-label="LinkedIn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="2.5" y="2.5" width="19" height="19" rx="3" stroke="currentColor" strokeWidth="1.8" />
+                <path d="M7 10v7M7 7.5v.01M11 17v-4.5a2 2 0 1 1 4 0V17" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              </svg>
+              <span>LinkedIn</span>
             </a>
           </div>
         </div>

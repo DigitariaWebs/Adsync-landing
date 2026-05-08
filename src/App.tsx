@@ -8,6 +8,7 @@ import AdvantagesSection from './components/AdvantagesSection';
 import SolutionSection from './components/SolutionSection';
 import PourQuiSection from './components/PourQuiSection';
 import LiveWorldSection from './components/LiveWorldSection';
+import VisionSection from './components/VisionSection';
 import ProblemSection from './components/ProblemSection';
 import MobileMoneySection from './components/MobileMoneySection';
 import FAQSection from './components/FAQSection';
@@ -32,6 +33,7 @@ export default function App() {
         <Hero />
         <FormatsMarquee />
         <LiveWorldSection />
+        <VisionSection />
         <ProblemSection />
         <SolutionSection />
         <HowItWorks />
