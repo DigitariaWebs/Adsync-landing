@@ -674,7 +674,9 @@ img {
 }
 
 .photo-card video {
-  object-position: center top;
+  object-fit: contain;
+  object-position: center;
+  background: #f4f1fc;
   transform: translateZ(0);
   backface-visibility: hidden;
   will-change: transform;
