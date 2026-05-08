@@ -15,7 +15,7 @@ export default function SolutionSection() {
           </h2>
           <p>
             <span className="brand-name">AdSync.io</span><BrandBadge /> connecte createurs et marques via des contrats publicitaires directs. Pense a Airbnb: un
-            appartement vide devient une chambre d'hotes qui genere des revenus.
+            appartement vide devient une source de revenus. AdSync.io fait pareil pour tes espaces numériques.
           </p>
         </div>
          
