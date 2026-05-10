@@ -297,6 +297,31 @@ export default function SmartSignupSection() {
       return;
     }
 
+    try {
+      const refCode =
+        new URLSearchParams(window.location.search).get('ref') ||
+        window.localStorage.getItem('adsync_ref') ||
+        '';
+      if (refCode) {
+        const { data: partnerRow } = await supabase
+          .from('partners')
+          .select('id, referral_code')
+          .eq('referral_code', refCode.toUpperCase())
+          .maybeSingle();
+        if (partnerRow) {
+          await supabase.from('referrals').insert({
+            partner_id: partnerRow.id,
+            referral_code: partnerRow.referral_code,
+            email,
+            name,
+            role,
+          });
+        }
+      }
+    } catch {
+      // ne bloque pas l'inscription si la résolution du parrain échoue
+    }
+
     setStatus('success');
     (event.target as HTMLFormElement).reset();
     setCreatorHandles({});

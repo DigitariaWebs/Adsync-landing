@@ -97,6 +97,56 @@ export type TeamInvite = {
   created_at: string;
 };
 
+export type Partner = {
+  id: string;
+  user_id: string | null;
+  created_at: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  main_network: string | null;
+  audience_size: string | null;
+  profile_url: string | null;
+  referral_code: string;
+};
+
+export type PartnerInsert = {
+  user_id?: string | null;
+  first_name: string;
+  last_name: string;
+  email: string;
+  main_network?: string | null;
+  audience_size?: string | null;
+  profile_url?: string | null;
+  referral_code: string;
+};
+
+export type ReferralStatus = 'pending' | 'active' | 'first_contract' | 'second_contract';
+
+export type Referral = {
+  id: string;
+  partner_id: string;
+  referral_code: string;
+  created_at: string;
+  email: string;
+  name: string | null;
+  role: 'createur' | 'marque' | 'autre' | null;
+  status: ReferralStatus;
+  first_contract_at: string | null;
+  second_contract_at: string | null;
+  commission_amount: number | null;
+};
+
+export type PartnerStats = {
+  partner_id: string;
+  user_id: string | null;
+  referral_code: string;
+  total_referrals: number;
+  referrals_with_contract: number;
+  referrals_paid: number;
+  total_commission: number;
+};
+
 export type EffectivePermissions = {
   isAdmin: boolean;
   isActive: boolean;

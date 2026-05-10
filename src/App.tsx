@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import './index.css';
 import './styles/new-sections.css';
 import Navbar from './components/Navbar';
@@ -16,10 +17,22 @@ import SmartSignupSection from './components/SmartSignupSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import AdminPage from './admin/AdminPage';
+import PartnersPage from './partners/PartnersPage';
 
 export default function App() {
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const ref = new URLSearchParams(window.location.search).get('ref');
+    if (ref) {
+      window.localStorage.setItem('adsync_ref', ref.toUpperCase());
+    }
+  }, []);
+
   if (typeof window !== 'undefined' && window.location.pathname.startsWith('/admin')) {
     return <AdminPage />;
+  }
+  if (typeof window !== 'undefined' && window.location.pathname.startsWith('/partenaires')) {
+    return <PartnersPage />;
   }
 
   return (

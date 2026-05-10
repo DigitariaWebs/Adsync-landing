@@ -2,7 +2,13 @@ import { useEffect, useState } from 'react';
 import logoImage from '../assets/logo.png';
 import starIcon from '../assets/a_high_end_premium_3d_icon_of_a_minimalist_4_pointed_star._the_star_features-removebg-preview.png';
 
-const navItems = [
+type NavItem = {
+  href: string;
+  label: string;
+  id: string;
+};
+
+const navItems: NavItem[] = [
   { href: '#probleme', label: 'Le Problème', id: 'probleme' },
   { href: '#solution', label: 'La Solution', id: 'solution' },
   { href: '#comment-ca-marche', label: 'Comment ça marche', id: 'comment-ca-marche' },
@@ -56,7 +62,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const onResize = () => {
-      if (window.innerWidth > 1080) {
+      if (window.innerWidth > 1280) {
         setMenuOpen(false);
       }
     };
@@ -93,20 +99,34 @@ export default function Navbar() {
         className={menuOpen ? 'nav nav-open' : 'nav'}
         aria-label="Navigation principale"
       >
-        {navItems.map(item => (
-          <a
-            key={item.id}
-            href={item.href}
-            className={activeSection === item.id ? 'nav-link nav-link-active' : 'nav-link'}
-            aria-current={activeSection === item.id ? 'page' : undefined}
-            onClick={() => setMenuOpen(false)}
-          >
-            {item.label}
-          </a>
-        ))}
+        {navItems.map(item => {
+          const isActive = activeSection === item.id;
+          return (
+            <a
+              key={item.id}
+              href={item.href}
+              className={isActive ? 'nav-link nav-link-active' : 'nav-link'}
+              aria-current={isActive ? 'page' : undefined}
+              onClick={() => setMenuOpen(false)}
+            >
+              {item.label}
+            </a>
+          );
+        })}
+        <a
+          className="nav-link nav-link-partner nav-link-partner-mobile"
+          href="/partenaires"
+          onClick={() => setMenuOpen(false)}
+        >
+          ✦ Programme Partenaires
+        </a>
       </nav>
 
       <div className="topbar-actions">
+        <a className="nav-cta nav-cta-partner" href="/partenaires" onClick={() => setMenuOpen(false)}>
+          <span aria-hidden="true">✦</span>
+          <span>Programme Partenaires</span>
+        </a>
         <a className="nav-cta nav-cta-ghost" href="#inscription" onClick={() => setMenuOpen(false)}>
           Je m&apos;inscris
         </a>
