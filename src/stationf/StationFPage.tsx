@@ -157,7 +157,7 @@ export default function StationFPage() {
             <p>
               AdSync ouvre ses portes le 21 juin 2026. Réserve ta place sur la liste d&apos;attente
               ou rejoins le programme partenaires pour gagner 25 % de commission sur les
-              deuxième contrats de tes filleuls.
+              deuxièmes contrats de tes filleuls.
             </p>
             <div className="stationf-cta-actions">
               <a href="/" className="stationf-cta-btn stationf-cta-btn-ghost">
