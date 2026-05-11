@@ -166,11 +166,11 @@ export default function PartnersLanding({ onLoginClick }: { onLoginClick: () => 
             <br />
             <em>avant le 21 juin 2026.</em>
             <br />
-            <strong>Touche 25 % à la place d&apos;AdSync.</strong>
+            <strong>Touche 25 % avec &apos;AdSync.</strong>
           </h1>
           <p className="partners-hero-lead">
             Reçois ton code parrain en 60 secondes. Chaque filleul inscrit via ton lien avant le
-            21 juin 2026 te rapporte 25 % de la commission AdSync sur son 2ème contrat, une
+            21 juin 2026 te rapporte 25 % avec la commission AdSync sur son 2ème contrat, une
             seule fois, versés via Stripe, PayPal ou Mobile Money. AdSync renonce à sa part : elle
             te revient intégralement.
           </p>
