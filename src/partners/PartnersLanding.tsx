@@ -59,7 +59,7 @@ const detailSteps = [
   {
     n: '05',
     title: 'Tu touches 25 % sur son 2ème contrat',
-    text: 'Une seule fois par filleul, versés automatiquement via Stripe, PayPal ou Mobile Money. AdSync te cède sa propre commission.',
+    text: 'Une seule fois par filleul, versés automatiquement via Stripe, PayPal ou Mobile Money. AdSync te partage sa propre commission.',
   },
 ];
 
@@ -166,7 +166,7 @@ export default function PartnersLanding({ onLoginClick }: { onLoginClick: () => 
             <br />
             <em>avant le 21 juin 2026.</em>
             <br />
-            <strong>Touche 25 % avec &apos;AdSync.</strong>
+            <strong>Touche 25 % avec AdSync.</strong>
           </h1>
           <p className="partners-hero-lead">
             Reçois ton code parrain en 60 secondes. Chaque filleul inscrit via ton lien avant le

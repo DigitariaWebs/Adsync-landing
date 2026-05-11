@@ -11,12 +11,12 @@ const faqs: FaqItem[] = [
   {
     question: 'Pourquoi je touche 25 % seulement sur le 2ème contrat du filleul ?',
     answer:
-      "Le 1er contrat est offert à ton filleul (créateur ou marque) : AdSync prend 0 % pour qu'il teste la plateforme sans risque. Sur son 2ème contrat, AdSync prend 25 % de commission, et te reverse 100 % de cette commission. C'est notre manière de récompenser les ambassadeurs qui amènent des utilisateurs qui restent.",
+      "Le 1er contrat est offert à ton filleul (créateur ou marque) : AdSync prend 0 % pour qu'il teste la plateforme sans risque. Sur son 2ème contrat, AdSync prend 25 % de commission, et te reverse 25 % de cette commission. C'est notre manière de récompenser les ambassadeurs qui amènent des utilisateurs qui restent.",
   },
   {
     question: 'Combien je peux gagner concrètement ?',
     answer:
-      "Exemple : un filleul signe un 2ème contrat de 100 €. Le créateur reçoit 75 €, AdSync reçoit 25 €, et tu reçois 25 % de cette commission, soit 25 € (ou 6,25 € si la commission AdSync est de 6,25 € selon le montant). Aucun plafond : 10 filleuls actifs = 10 commissions, 100 filleuls = 100 commissions.",
+      "Exemple : un filleul signe un 2ème contrat de 100 €. Le créateur reçoit 75 €, AdSync reçoit 25 €, et tu reçois 25 % de cette commission, soit 6,25 € si la commission AdSync est de 6,25 € selon le montant). Aucun plafond : 10 filleuls actifs = 10 commissions, 100 filleuls = 100 commissions.",
   },
   {
     question: 'Pourquoi la date limite du 21 juin 2026 ?',
