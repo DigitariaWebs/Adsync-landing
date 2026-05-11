@@ -6,6 +6,7 @@ type NavItem = {
   href: string;
   label: string;
   id: string;
+  external?: boolean;
 };
 
 const navItems: NavItem[] = [
@@ -17,6 +18,7 @@ const navItems: NavItem[] = [
   { href: '#inscription', label: "L'inscription", id: 'inscription' },
   { href: '#vision', label: 'La Vision', id: 'vision' },
   { href: '#faq', label: 'Vos questions', id: 'faq' },
+  { href: '/station-f', label: 'Station F', id: 'station-f', external: true },
 ];
 
 export default function Navbar() {
@@ -33,6 +35,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const sections = navItems
+      .filter(item => !item.external)
       .map(item => document.getElementById(item.id))
       .filter((section): section is HTMLElement => section instanceof HTMLElement);
 
@@ -100,12 +103,13 @@ export default function Navbar() {
         aria-label="Navigation principale"
       >
         {navItems.map(item => {
-          const isActive = activeSection === item.id;
+          const isActive = !item.external && activeSection === item.id;
+          const baseClass = item.external ? 'nav-link nav-link-stationf' : 'nav-link';
           return (
             <a
               key={item.id}
               href={item.href}
-              className={isActive ? 'nav-link nav-link-active' : 'nav-link'}
+              className={isActive ? `${baseClass} nav-link-active` : baseClass}
               aria-current={isActive ? 'page' : undefined}
               onClick={() => setMenuOpen(false)}
             >

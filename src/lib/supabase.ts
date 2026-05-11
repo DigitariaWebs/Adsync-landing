@@ -29,6 +29,7 @@ export type WaitlistEntry = {
   country: string | null;
   audience_size: string | null;
   phone: string | null;
+  referral_code: string | null;
 };
 
 export type WaitlistInsert = {
@@ -40,6 +41,7 @@ export type WaitlistInsert = {
   country?: string | null;
   audience_size?: string | null;
   phone?: string | null;
+  referral_code?: string | null;
 };
 
 export type MessageStatus = 'new' | 'read' | 'replied';

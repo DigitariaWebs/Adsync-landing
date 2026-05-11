@@ -70,12 +70,12 @@ export default function PartnerDashboard({ session, onSignOut }: Props) {
 
   const stats = useMemo(() => {
     const total = referrals.length;
-    const withContract = referrals.filter(r => r.status === 'first_contract' || r.status === 'second_contract').length;
-    const paid = referrals.filter(r => r.status === 'second_contract').length;
+    const active = referrals.filter(r => r.status !== 'pending').length;
+    const paid = referrals.filter(r => r.status === 'first_contract' || r.status === 'second_contract').length;
     const commission = referrals
-      .filter(r => r.status === 'second_contract')
+      .filter(r => r.status === 'first_contract' || r.status === 'second_contract')
       .reduce((sum, r) => sum + (Number(r.commission_amount) || 0), 0);
-    return { total, withContract, paid, commission };
+    return { total, active, paid, commission };
   }, [referrals]);
 
   const shareUrl = partner ? `${window.location.origin}/?ref=${partner.referral_code}` : '';
@@ -139,11 +139,11 @@ export default function PartnerDashboard({ session, onSignOut }: Props) {
                 <strong>{stats.total}</strong>
               </div>
               <div className="partners-stat-card">
-                <span>Avec un contrat signé</span>
-                <strong>{stats.withContract}</strong>
+                <span>Filleuls actifs</span>
+                <strong>{stats.active}</strong>
               </div>
               <div className="partners-stat-card">
-                <span>2èmes contrats payés</span>
+                <span>1ers contrats payés</span>
                 <strong>{stats.paid}</strong>
               </div>
               <div className="partners-stat-card partners-stat-card-amount">
@@ -223,8 +223,8 @@ function StatusBadge({ status }: { status: Referral['status'] }) {
   const map: Record<Referral['status'], { label: string; className: string }> = {
     pending: { label: 'Inscrit', className: 'partners-badge partners-badge-pending' },
     active: { label: 'Actif', className: 'partners-badge partners-badge-active' },
-    first_contract: { label: '1er contrat', className: 'partners-badge partners-badge-first' },
-    second_contract: { label: '2ème contrat ✓', className: 'partners-badge partners-badge-paid' },
+    first_contract: { label: '1er contrat ✓', className: 'partners-badge partners-badge-paid' },
+    second_contract: { label: '1er contrat ✓', className: 'partners-badge partners-badge-paid' },
   };
   const item = map[status];
   return <span className={item.className}>{item.label}</span>;

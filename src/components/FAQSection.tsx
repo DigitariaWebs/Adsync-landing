@@ -34,6 +34,14 @@ const faqs: FaqItem[] = [
     answer:
       "Oui. Le budget de la marque est bloqué via Stripe Connect avant le lancement. Le créateur est payé uniquement après diffusion vérifiée. En cas de non-respect des performances (PrecisionPay), le surplus est automatiquement remboursé.",
   },
+  {
+    question: "Je n’ai pas 2000 followers, est-ce que je peux quand même m'inscrire ?",
+    answer: "Oui. AdSync valorise l’audience engagée plus que la taille brute. Beaucoup de marques préfèrent 2 000 vrais fans à 200 000 followers fantômes. Tu seras matché avec les marques qui cherchent ton type d’audience."
+  },
+  {
+    question: "Comment je dois faire pour m'inscrire ?",
+    answer:"Choisis ton rôle (Créateur ou Marque), remplis le formulaire intelligent (~60 secondes), et tu reçois ton accès le jour J. Aucune carte bancaire requise pour réserver ta place.",
+  }
   
 ];
 

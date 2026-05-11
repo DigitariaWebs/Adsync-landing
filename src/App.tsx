@@ -18,6 +18,7 @@ import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import AdminPage from './admin/AdminPage';
 import PartnersPage from './partners/PartnersPage';
+import StationFPage from './stationf/StationFPage';
 
 export default function App() {
   useEffect(() => {
@@ -33,6 +34,9 @@ export default function App() {
   }
   if (typeof window !== 'undefined' && window.location.pathname.startsWith('/partenaires')) {
     return <PartnersPage />;
+  }
+  if (typeof window !== 'undefined' && window.location.pathname.startsWith('/station-f')) {
+    return <StationFPage />;
   }
 
   return (

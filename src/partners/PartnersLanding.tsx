@@ -52,12 +52,12 @@ const detailSteps = [
   },
   {
     n: '04',
-    title: 'Son 1er contrat est offert',
-    text: 'AdSync ne prend aucune commission sur le premier contrat de tes filleuls (offre de lancement).',
+    title: 'Ton filleul signe son premier contrat',
+    text: "Quand un filleul signe sa première campagne sur AdSync, ta commission se déclenche automatiquement.",
   },
   {
     n: '05',
-    title: 'Tu touches 25 % sur son 2ème contrat',
+    title: 'Tu touches 25 % sur son 1er contrat',
     text: 'Une seule fois par filleul, versés automatiquement via Stripe, PayPal ou Mobile Money. AdSync te cède sa propre commission.',
   },
 ];
@@ -169,7 +169,7 @@ export default function PartnersLanding({ onLoginClick }: { onLoginClick: () => 
           </h1>
           <p className="partners-hero-lead">
             Reçois ton code parrain en 60 secondes. Chaque filleul inscrit via ton lien avant le
-            21 juin 2026 te rapporte 25 % de la commission AdSync sur son deuxième contrat, une
+            21 juin 2026 te rapporte 25 % de la commission AdSync sur son premier contrat, une
             seule fois, versés via Stripe, PayPal ou Mobile Money. AdSync renonce à sa part : elle
             te revient intégralement.
           </p>
@@ -180,7 +180,7 @@ export default function PartnersLanding({ onLoginClick }: { onLoginClick: () => 
           <div className="partners-hero-stats">
             <div className="partners-stat">
               <strong>25 %</strong>
-              <span>De la commission AdSync, à toi · 2ème contrat du filleul</span>
+              <span>De la commission AdSync, à toi · 1er contrat du filleul</span>
             </div>
             <div className="partners-stat">
               <strong>Illimité</strong>
@@ -312,12 +312,12 @@ export default function PartnersLanding({ onLoginClick }: { onLoginClick: () => 
         <section className="partners-example">
           <header>
             <h2>Exemple chiffré</h2>
-            <p>Ton filleul signe son 2ème contrat à 100 € sur AdSync :</p>
+            <p>Ton filleul signe son 1er contrat à 100 € sur AdSync :</p>
           </header>
           <ul className="partners-example-list">
             <li>→ Le filleul reçoit <strong>75 €</strong> (sa part créateur de 75 %)</li>
             <li>→ La commission AdSync est de <strong>25 €</strong></li>
-            <li>→ Tu reçois 25 % de cette commission, soit <strong>6,25 €</strong> — à la place d&apos;AdSync</li>
+            <li>→ Tu reçois 25 % de cette commission, soit <strong>6,25 €</strong>, à la place d&apos;AdSync</li>
           </ul>
 
           <div className="partners-projection-grid">
@@ -329,7 +329,7 @@ export default function PartnersLanding({ onLoginClick }: { onLoginClick: () => 
             ))}
           </div>
           <p className="partners-example-fineprint">
-            * Estimation basée sur un 2ème contrat moyen de 100 € par filleul. Rémunération
+            * Estimation basée sur un 1er contrat moyen de 100 € par filleul. Rémunération
             versée une seule fois par filleul.
           </p>
 
@@ -339,15 +339,15 @@ export default function PartnersLanding({ onLoginClick }: { onLoginClick: () => 
               <p>
                 Seules les personnes inscrites via ton lien et avant le 21 juin 2026 sont
                 comptabilisées comme tes filleuls. Après cette date, le programme de
-                pré-lancement se ferme — mais tes filleuls déjà inscrits restent rattachés à toi
-                à vie pour leur 2ème contrat.
+                pré-lancement se ferme. Tes filleuls déjà inscrits restent rattachés à toi
+                pour leur 1er contrat.
               </p>
             </div>
             <div className="partners-rule">
               <span className="partners-rule-tag">💸 Une seule fois par filleul</span>
               <p>
-                Tu touches 25 % uniquement sur le 2ème contrat de chaque filleul. Les contrats
-                suivants ne génèrent plus de commission partenaire — mais tu peux parrainer un
+                Tu touches 25 % uniquement sur le 1er contrat de chaque filleul. Les contrats
+                suivants ne génèrent plus de commission partenaire, mais tu peux parrainer un
                 nombre illimité de personnes.
               </p>
             </div>

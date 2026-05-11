@@ -11,6 +11,8 @@ type AdminView = 'waitlist' | 'messages' | 'team' | 'audit';
 
 type RoleFilter = 'all' | WaitlistRole;
 
+type ReferralFilter = 'all' | 'with' | 'without';
+
 type ParsedPlatform = { name: string; handle: string; audience: string };
 
 function parsePlatformEntries(raw: string | null | undefined): ParsedPlatform[] {
@@ -70,7 +72,7 @@ Merci de faire partie de la première vague. On a hâte de te voir sur la platef
 — L'équipe AdSync.io`;
 
 function downloadXlsx(rows: WaitlistEntry[]) {
-  const header = ['created_at', 'role', 'name', 'email', 'platform', 'category', 'country', 'audience_size', 'phone'];
+  const header = ['created_at', 'role', 'name', 'email', 'platform', 'category', 'country', 'audience_size', 'phone', 'referral_code'];
   const data = rows.map(r => {
     const obj: Record<string, unknown> = {};
     const src = r as unknown as Record<string, unknown>;
@@ -105,6 +107,7 @@ export default function AdminDashboard({ adminEmail, permissions, onSignOut }: P
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState<string>('');
   const [roleFilter, setRoleFilter] = useState<RoleFilter>('all');
+  const [referralFilter, setReferralFilter] = useState<ReferralFilter>('all');
   const [search, setSearch] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
   const [pwdOpen, setPwdOpen] = useState(false);
@@ -176,15 +179,18 @@ export default function AdminDashboard({ adminEmail, permissions, onSignOut }: P
     return entries.filter(e => {
       if (roleFilter !== 'all' && e.role !== roleFilter) return false;
       if (categoryFilter !== 'all' && e.category !== categoryFilter) return false;
+      if (referralFilter === 'with' && !e.referral_code) return false;
+      if (referralFilter === 'without' && e.referral_code) return false;
       if (!q) return true;
       return (
         e.name.toLowerCase().includes(q) ||
         e.email.toLowerCase().includes(q) ||
         (e.platform ?? '').toLowerCase().includes(q) ||
-        (e.category ?? '').toLowerCase().includes(q)
+        (e.category ?? '').toLowerCase().includes(q) ||
+        (e.referral_code ?? '').toLowerCase().includes(q)
       );
     });
-  }, [entries, roleFilter, categoryFilter, search]);
+  }, [entries, roleFilter, categoryFilter, referralFilter, search]);
 
   const stats = useMemo(() => {
     const now = Date.now();
@@ -193,14 +199,16 @@ export default function AdminDashboard({ adminEmail, permissions, onSignOut }: P
     let marques = 0;
     let last24h = 0;
     let last7d = 0;
+    let withReferral = 0;
     for (const e of entries) {
       if (e.role === 'createur') createurs++;
       else if (e.role === 'marque') marques++;
       const ts = new Date(e.created_at).getTime();
       if (now - ts < dayMs) last24h++;
       if (now - ts < 7 * dayMs) last7d++;
+      if (e.referral_code) withReferral++;
     }
-    return { total: entries.length, createurs, marques, last24h, last7d };
+    return { total: entries.length, createurs, marques, last24h, last7d, withReferral };
   }, [entries]);
 
   const titleFor = (v: AdminView) => {
@@ -364,6 +372,8 @@ export default function AdminDashboard({ adminEmail, permissions, onSignOut }: P
           setRoleFilter={setRoleFilter}
           categoryFilter={categoryFilter}
           setCategoryFilter={setCategoryFilter}
+          referralFilter={referralFilter}
+          setReferralFilter={setReferralFilter}
           search={search}
           setSearch={setSearch}
           categories={categories}
@@ -384,10 +394,12 @@ type WaitlistViewProps = {
   setRoleFilter: (r: RoleFilter) => void;
   categoryFilter: string;
   setCategoryFilter: (c: string) => void;
+  referralFilter: ReferralFilter;
+  setReferralFilter: (r: ReferralFilter) => void;
   search: string;
   setSearch: (s: string) => void;
   categories: string[];
-  stats: { total: number; createurs: number; marques: number; last24h: number; last7d: number };
+  stats: { total: number; createurs: number; marques: number; last24h: number; last7d: number; withReferral: number };
   filtered: WaitlistEntry[];
   canExport: boolean;
 };
@@ -400,6 +412,8 @@ function WaitlistView({
   setRoleFilter,
   categoryFilter,
   setCategoryFilter,
+  referralFilter,
+  setReferralFilter,
   search,
   setSearch,
   categories,
@@ -473,6 +487,10 @@ function WaitlistView({
           <span className="admin-kpi-label">7 derniers jours</span>
           <strong>{stats.last7d}</strong>
         </article>
+        <article className="admin-kpi">
+          <span className="admin-kpi-label">Via code partenaire</span>
+          <strong>{stats.withReferral}</strong>
+        </article>
       </section>
 
       <section className="admin-toolbar">
@@ -504,10 +522,21 @@ function WaitlistView({
             ))}
           </select>
 
+          <select
+            className="admin-select"
+            value={referralFilter}
+            onChange={e => setReferralFilter(e.target.value as ReferralFilter)}
+            aria-label="Filtrer par code partenaire"
+          >
+            <option value="all">Tous (parrainage)</option>
+            <option value="with">Avec code partenaire</option>
+            <option value="without">Sans code partenaire</option>
+          </select>
+
           <input
             type="search"
             className="admin-search"
-            placeholder="Rechercher nom, email, plateforme..."
+            placeholder="Rechercher nom, email, plateforme, code..."
             value={search}
             onChange={e => setSearch(e.target.value)}
           />
@@ -623,6 +652,7 @@ function WaitlistView({
                 <th>Catégorie / Secteur</th>
                 <th>Audience / Budget</th>
                 <th>Pays / Objectif</th>
+                <th>Code parrain</th>
               </tr>
             </thead>
             <tbody>
@@ -677,6 +707,13 @@ function WaitlistView({
                     )}
                   </td>
                   <td>{entry.country ?? '—'}</td>
+                  <td className="admin-cell-referral">
+                    {entry.referral_code ? (
+                      <span className="admin-referral-pill">{entry.referral_code}</span>
+                    ) : (
+                      <span className="admin-pill-empty">—</span>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>

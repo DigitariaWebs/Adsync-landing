@@ -104,7 +104,7 @@ const partnerCards = [
   },
   {
     number: '05',
-    title: '25 % à vie',
+    title: '25 % au premier contrat',
     description: 'Quand chacun signe son premier contrat, je reçois 25 % de la commission AdSync via Stripe, PayPal ou Mobile Money.',
     image: stripeImage,
   },
@@ -137,9 +137,9 @@ const titles: Record<CardType, { eyebrow: string; heading: ReactNode; subline: s
     eyebrow: 'Programme Partenaires',
     heading: (
       <>
-        Gagne 25 % à vie sur
+        Gagne 25 % sur
         <br />
-        <em>chaque contrat de tes filleuls.</em>
+        <em>le premier contrat de tes filleuls.</em>
       </>
     ),
     subline: 'selon ton profil.',

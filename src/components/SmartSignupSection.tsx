@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import BrandedText from './BrandedText';
 
@@ -185,6 +185,19 @@ export default function SmartSignupSection() {
   const [countryOther, setCountryOther] = useState<string>('');
   const [budgetChoice, setBudgetChoice] = useState<string>('');
   const [budgetOther, setBudgetOther] = useState<string>('');
+  const [referralCode, setReferralCode] = useState<string>('');
+  const [referralLocked, setReferralLocked] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const fromUrl = new URLSearchParams(window.location.search).get('ref') ?? '';
+    const fromStorage = window.localStorage.getItem('adsync_ref') ?? '';
+    const code = (fromUrl || fromStorage).trim();
+    if (code) {
+      setReferralCode(code.toUpperCase());
+      setReferralLocked(!!fromUrl);
+    }
+  }, []);
 
   const togglePlatform = (p: string) => {
     setCreatorHandles(prev => {
@@ -277,6 +290,26 @@ export default function SmartSignupSection() {
       return;
     }
 
+    const cleanedRef = referralCode.trim().toUpperCase();
+    let resolvedRefCode: string | null = null;
+    let resolvedPartnerId: string | null = null;
+
+    if (cleanedRef) {
+      const { data: partnerRow } = await supabase
+        .from('partners')
+        .select('id, referral_code')
+        .eq('referral_code', cleanedRef)
+        .maybeSingle();
+      if (partnerRow) {
+        resolvedRefCode = partnerRow.referral_code;
+        resolvedPartnerId = partnerRow.id;
+      } else {
+        setStatus('error');
+        setErrorMsg("Code partenaire inconnu. Vérifie l'orthographe ou laisse le champ vide.");
+        return;
+      }
+    }
+
     const { error } = await supabase.from('waitlist').insert({
       role,
       name,
@@ -285,6 +318,7 @@ export default function SmartSignupSection() {
       category,
       country,
       audience_size: audienceSize,
+      referral_code: resolvedRefCode,
     });
 
     if (error) {
@@ -297,29 +331,18 @@ export default function SmartSignupSection() {
       return;
     }
 
-    try {
-      const refCode =
-        new URLSearchParams(window.location.search).get('ref') ||
-        window.localStorage.getItem('adsync_ref') ||
-        '';
-      if (refCode) {
-        const { data: partnerRow } = await supabase
-          .from('partners')
-          .select('id, referral_code')
-          .eq('referral_code', refCode.toUpperCase())
-          .maybeSingle();
-        if (partnerRow) {
-          await supabase.from('referrals').insert({
-            partner_id: partnerRow.id,
-            referral_code: partnerRow.referral_code,
-            email,
-            name,
-            role,
-          });
-        }
+    if (resolvedPartnerId && resolvedRefCode) {
+      try {
+        await supabase.from('referrals').insert({
+          partner_id: resolvedPartnerId,
+          referral_code: resolvedRefCode,
+          email,
+          name,
+          role,
+        });
+      } catch {
+        // ne bloque pas l'inscription si l'insert dans referrals échoue
       }
-    } catch {
-      // ne bloque pas l'inscription si la résolution du parrain échoue
     }
 
     setStatus('success');
@@ -327,6 +350,9 @@ export default function SmartSignupSection() {
     setCreatorHandles({});
     setCountryChoice('');
     setCountryOther('');
+    if (!referralLocked) {
+      setReferralCode('');
+    }
   };
 
   const submitting = status === 'submitting';
@@ -527,6 +553,26 @@ export default function SmartSignupSection() {
                 </label>
               </div>
             )}
+
+            <div className="smart-signup-referral">
+              <label className="smart-field smart-field-full">
+                <span>
+                  Code partenaire (optionnel)
+                  {referralLocked && (
+                    <small className="smart-signup-referral-locked"> · pré-rempli via ton lien</small>
+                  )}
+                </span>
+                <input
+                  type="text"
+                  name="referral_code"
+                  value={referralCode}
+                  onChange={e => setReferralCode(e.target.value.toUpperCase())}
+                  placeholder="Ex : AS-PRENOM1234"
+                  autoComplete="off"
+                  spellCheck={false}
+                />
+              </label>
+            </div>
 
             <div className="smart-signup-note">
               <BrandedText
