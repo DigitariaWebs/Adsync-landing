@@ -6626,6 +6626,54 @@ img {
   transition: border-color 200ms ease;
 }
 
+.admin-referral-toggles {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 6px;
+  border-radius: 10px;
+  background: rgba(78, 55, 135, 0.06);
+  border: 1px solid rgba(78, 55, 135, 0.1);
+}
+
+.admin-referral-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  color: rgba(61, 43, 107, 0.85);
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+
+.admin-referral-toggle input {
+  accent-color: var(--primary-700);
+  cursor: pointer;
+}
+
+.admin-referral-toggle:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.admin-cell-check {
+  width: 36px;
+  text-align: center;
+}
+
+.admin-cell-check input {
+  accent-color: var(--primary-700);
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+
+.admin-table tbody tr.is-selected {
+  background: rgba(78, 55, 135, 0.06);
+}
+
 .admin-search {
   min-width: 240px;
 }

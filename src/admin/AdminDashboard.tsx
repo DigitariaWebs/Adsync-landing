@@ -11,8 +11,6 @@ type AdminView = 'waitlist' | 'messages' | 'team' | 'audit';
 
 type RoleFilter = 'all' | WaitlistRole;
 
-type ReferralFilter = 'all' | 'with' | 'without';
-
 type ParsedPlatform = { name: string; handle: string; audience: string };
 
 function parsePlatformEntries(raw: string | null | undefined): ParsedPlatform[] {
@@ -107,7 +105,8 @@ export default function AdminDashboard({ adminEmail, permissions, onSignOut }: P
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState<string>('');
   const [roleFilter, setRoleFilter] = useState<RoleFilter>('all');
-  const [referralFilter, setReferralFilter] = useState<ReferralFilter>('all');
+  const [referralWith, setReferralWith] = useState(true);
+  const [referralWithout, setReferralWithout] = useState(true);
   const [search, setSearch] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
   const [pwdOpen, setPwdOpen] = useState(false);
@@ -179,8 +178,9 @@ export default function AdminDashboard({ adminEmail, permissions, onSignOut }: P
     return entries.filter(e => {
       if (roleFilter !== 'all' && e.role !== roleFilter) return false;
       if (categoryFilter !== 'all' && e.category !== categoryFilter) return false;
-      if (referralFilter === 'with' && !e.referral_code) return false;
-      if (referralFilter === 'without' && e.referral_code) return false;
+      const hasReferral = !!e.referral_code;
+      if (hasReferral && !referralWith) return false;
+      if (!hasReferral && !referralWithout) return false;
       if (!q) return true;
       return (
         e.name.toLowerCase().includes(q) ||
@@ -190,7 +190,7 @@ export default function AdminDashboard({ adminEmail, permissions, onSignOut }: P
         (e.referral_code ?? '').toLowerCase().includes(q)
       );
     });
-  }, [entries, roleFilter, categoryFilter, referralFilter, search]);
+  }, [entries, roleFilter, categoryFilter, referralWith, referralWithout, search]);
 
   const stats = useMemo(() => {
     const now = Date.now();
@@ -372,8 +372,10 @@ export default function AdminDashboard({ adminEmail, permissions, onSignOut }: P
           setRoleFilter={setRoleFilter}
           categoryFilter={categoryFilter}
           setCategoryFilter={setCategoryFilter}
-          referralFilter={referralFilter}
-          setReferralFilter={setReferralFilter}
+          referralWith={referralWith}
+          setReferralWith={setReferralWith}
+          referralWithout={referralWithout}
+          setReferralWithout={setReferralWithout}
           search={search}
           setSearch={setSearch}
           categories={categories}
@@ -394,8 +396,10 @@ type WaitlistViewProps = {
   setRoleFilter: (r: RoleFilter) => void;
   categoryFilter: string;
   setCategoryFilter: (c: string) => void;
-  referralFilter: ReferralFilter;
-  setReferralFilter: (r: ReferralFilter) => void;
+  referralWith: boolean;
+  setReferralWith: (v: boolean) => void;
+  referralWithout: boolean;
+  setReferralWithout: (v: boolean) => void;
   search: string;
   setSearch: (s: string) => void;
   categories: string[];
@@ -412,8 +416,10 @@ function WaitlistView({
   setRoleFilter,
   categoryFilter,
   setCategoryFilter,
-  referralFilter,
-  setReferralFilter,
+  referralWith,
+  setReferralWith,
+  referralWithout,
+  setReferralWithout,
   search,
   setSearch,
   categories,
@@ -425,17 +431,48 @@ function WaitlistView({
   const [broadcastSubject, setBroadcastSubject] = useState(DEFAULT_BROADCAST_SUBJECT);
   const [broadcastBody, setBroadcastBody] = useState(DEFAULT_BROADCAST_BODY);
   const [broadcastFeedback, setBroadcastFeedback] = useState<string>('');
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+
+  const filteredIds = useMemo(() => filtered.map(e => e.id), [filtered]);
+  const allFilteredSelected =
+    filtered.length > 0 && filtered.every(e => selectedIds.has(e.id));
+  const someFilteredSelected =
+    !allFilteredSelected && filtered.some(e => selectedIds.has(e.id));
+
+  const toggleRow = (id: string) => {
+    setSelectedIds(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  const toggleAllFiltered = () => {
+    setSelectedIds(prev => {
+      const next = new Set(prev);
+      if (allFilteredSelected) {
+        for (const id of filteredIds) next.delete(id);
+      } else {
+        for (const id of filteredIds) next.add(id);
+      }
+      return next;
+    });
+  };
+
+  const clearSelection = () => setSelectedIds(new Set());
 
   const broadcastEmails = useMemo(
     () =>
       Array.from(
         new Set(
-          filtered
+          entries
+            .filter(e => selectedIds.has(e.id))
             .map(e => e.email?.trim().toLowerCase())
             .filter((e): e is string => !!e),
         ),
       ),
-    [filtered],
+    [entries, selectedIds],
   );
 
   const openInGmailBroadcast = () => {
@@ -522,16 +559,24 @@ function WaitlistView({
             ))}
           </select>
 
-          <select
-            className="admin-select"
-            value={referralFilter}
-            onChange={e => setReferralFilter(e.target.value as ReferralFilter)}
-            aria-label="Filtrer par code partenaire"
-          >
-            <option value="all">Tous (parrainage)</option>
-            <option value="with">Avec code partenaire</option>
-            <option value="without">Sans code partenaire</option>
-          </select>
+          <div className="admin-referral-toggles" role="group" aria-label="Filtrer par code partenaire">
+            <label className="admin-referral-toggle">
+              <input
+                type="checkbox"
+                checked={referralWith}
+                onChange={e => setReferralWith(e.target.checked)}
+              />
+              <span>Avec parrainage</span>
+            </label>
+            <label className="admin-referral-toggle">
+              <input
+                type="checkbox"
+                checked={referralWithout}
+                onChange={e => setReferralWithout(e.target.checked)}
+              />
+              <span>Sans parrainage</span>
+            </label>
+          </div>
 
           <input
             type="search"
@@ -553,8 +598,17 @@ function WaitlistView({
               }}
               disabled={broadcastEmails.length === 0}
             >
-              Envoyer un email à tous ({broadcastEmails.length})
+              Envoyer un email aux sélectionnés ({broadcastEmails.length})
             </button>
+            {selectedIds.size > 0 && (
+              <button
+                type="button"
+                className="admin-export admin-export-secondary"
+                onClick={clearSelection}
+              >
+                Désélectionner
+              </button>
+            )}
             <button
               type="button"
               className="admin-export"
@@ -571,7 +625,7 @@ function WaitlistView({
         <div className="admin-modal-backdrop" onClick={() => setBroadcastOpen(false)}>
           <div className="admin-modal admin-modal-broadcast" onClick={e => e.stopPropagation()}>
             <header className="admin-modal-head">
-              <h3>Email à tous les inscrits ({broadcastEmails.length})</h3>
+              <h3>Email aux inscrits sélectionnés ({broadcastEmails.length})</h3>
               <button
                 type="button"
                 className="admin-modal-close"
@@ -601,9 +655,9 @@ function WaitlistView({
                 />
               </label>
               <p className="admin-broadcast-hint">
-                Les destinataires sont placés en <strong>BCC</strong> (cachés entre eux). Filtre la
-                liste avant d'ouvrir cette fenêtre pour cibler un sous-groupe (créateurs uniquement,
-                catégorie spécifique, etc.).
+                Les destinataires sont placés en <strong>BCC</strong> (cachés entre eux). Coche
+                uniquement les inscrits à qui tu veux envoyer ce message — utilise les filtres puis
+                « Tout cocher » pour cibler un sous-groupe rapidement.
               </p>
               {broadcastFeedback && (
                 <p className="admin-broadcast-feedback">{broadcastFeedback}</p>
@@ -644,6 +698,17 @@ function WaitlistView({
           <table className="admin-table">
             <thead>
               <tr>
+                <th className="admin-cell-check">
+                  <input
+                    type="checkbox"
+                    aria-label="Tout cocher / décocher"
+                    checked={allFilteredSelected}
+                    ref={el => {
+                      if (el) el.indeterminate = someFilteredSelected;
+                    }}
+                    onChange={toggleAllFiltered}
+                  />
+                </th>
                 <th>Date</th>
                 <th>Rôle</th>
                 <th>Nom</th>
@@ -657,7 +722,15 @@ function WaitlistView({
             </thead>
             <tbody>
               {filtered.map(entry => (
-                <tr key={entry.id}>
+                <tr key={entry.id} className={selectedIds.has(entry.id) ? 'is-selected' : ''}>
+                  <td className="admin-cell-check">
+                    <input
+                      type="checkbox"
+                      aria-label={`Sélectionner ${entry.name}`}
+                      checked={selectedIds.has(entry.id)}
+                      onChange={() => toggleRow(entry.id)}
+                    />
+                  </td>
                   <td className="admin-cell-date">{formatDate(entry.created_at)}</td>
                   <td>
                     <span className={`admin-role admin-role-${entry.role}`}>
