@@ -317,7 +317,7 @@ export default function PartnersLanding({ onLoginClick }: { onLoginClick: () => 
           <ul className="partners-example-list">
             <li>→ Le filleul reçoit <strong>75 €</strong> (sa part créateur de 75 %)</li>
             <li>→ La commission AdSync est de <strong>25 €</strong></li>
-            <li>→ Tu reçois 25 % de cette commission soit <strong>6,25 €</strong>, avec AdSync</li>
+            <li>→ Tu reçois 25 % de cette commission soit <strong>6,25 €</strong> avec AdSync</li>
           </ul>
 
           <div className="partners-projection-grid">
