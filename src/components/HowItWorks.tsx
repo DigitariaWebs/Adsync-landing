@@ -98,8 +98,8 @@ const partnerCards = [
   },
   {
     number: '04',
-    title: 'Accès prioritaire',
-    description: 'Le 21 juin, les personnes inscrites via mon code accèdent en priorité à la plateforme.',
+    title: '1er contrat offert',
+    description: "Le 21 juin 2026, mes filleuls accèdent à la plateforme. AdSync ne prend aucune commission sur leur 1er contrat (offre de lancement).",
     image: dashboardImage,
   },
   {
