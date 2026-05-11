@@ -226,10 +226,12 @@ export default function SmartSignupSection() {
     const formData = new FormData(event.currentTarget);
     const name = String(formData.get('name') ?? '').trim();
     const email = String(formData.get('email') ?? '').trim().toLowerCase();
+    const city = String(formData.get('city') ?? '').trim() || null;
 
     let platform: string | null = null;
     let category: string | null = null;
     let country: string | null = null;
+    let objective: string | null = null;
     let audienceSize: string | null = null;
 
     if (role === 'createur') {
@@ -281,7 +283,18 @@ export default function SmartSignupSection() {
       } else {
         audienceSize = budgetChoice || null;
       }
-      country = String(formData.get('objective') ?? '').trim() || null;
+      if (countryChoice === 'Autre') {
+        const custom = countryOther.trim();
+        if (!custom) {
+          setStatus('error');
+          setErrorMsg('Précise ton pays.');
+          return;
+        }
+        country = `Autre — ${custom}`;
+      } else {
+        country = countryChoice || null;
+      }
+      objective = String(formData.get('objective') ?? '').trim() || null;
     }
 
     if (!name || !email) {
@@ -317,6 +330,8 @@ export default function SmartSignupSection() {
       platform,
       category,
       country,
+      city,
+      objective,
       audience_size: audienceSize,
       referral_code: resolvedRefCode,
     });
@@ -494,6 +509,10 @@ export default function SmartSignupSection() {
                     />
                   )}
                 </label>
+                <label className="smart-field">
+                  <span>Ville <small className="smart-field-optional">(optionnel)</small></span>
+                  <input type="text" name="city" placeholder="Ex : Abidjan" />
+                </label>
               </div>
             ) : (
               <div className="smart-signup-grid">
@@ -508,6 +527,34 @@ export default function SmartSignupSection() {
                 <label className="smart-field smart-field-full">
                   <span>Site web de la marque <small className="smart-field-optional">(optionnel)</small></span>
                   <input type="url" name="website" placeholder="https://marque.com" />
+                </label>
+                <label className="smart-field">
+                  <span>Pays</span>
+                  <select
+                    name="country"
+                    value={countryChoice}
+                    onChange={e => setCountryChoice(e.target.value)}
+                  >
+                    <option value="" disabled>Sélectionne ton pays</option>
+                    {COUNTRIES.map(c => (
+                      <option key={c} value={c}>{c}</option>
+                    ))}
+                  </select>
+                  {countryChoice === 'Autre' && (
+                    <input
+                      type="text"
+                      className="smart-country-other"
+                      value={countryOther}
+                      onChange={e => setCountryOther(e.target.value)}
+                      placeholder="Précise ton pays (ex : Suriname)"
+                      aria-label="Pays personnalisé"
+                      style={{ marginTop: 8 }}
+                    />
+                  )}
+                </label>
+                <label className="smart-field">
+                  <span>Ville <small className="smart-field-optional">(optionnel)</small></span>
+                  <input type="text" name="city" placeholder="Ex : Dakar" />
                 </label>
                 <label className="smart-field">
                   <span>Secteur d&apos;activité</span>

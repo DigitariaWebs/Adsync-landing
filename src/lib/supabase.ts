@@ -27,6 +27,8 @@ export type WaitlistEntry = {
   platform: string | null;
   category: string | null;
   country: string | null;
+  city: string | null;
+  objective: string | null;
   audience_size: string | null;
   phone: string | null;
   referral_code: string | null;
@@ -39,6 +41,8 @@ export type WaitlistInsert = {
   platform?: string | null;
   category?: string | null;
   country?: string | null;
+  city?: string | null;
+  objective?: string | null;
   audience_size?: string | null;
   phone?: string | null;
   referral_code?: string | null;

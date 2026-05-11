@@ -6674,6 +6674,12 @@ img {
   background: rgba(78, 55, 135, 0.06);
 }
 
+.admin-cell-city {
+  margin-top: 2px;
+  font-size: 0.78rem;
+  color: rgba(61, 43, 107, 0.6);
+}
+
 .admin-search {
   min-width: 240px;
 }

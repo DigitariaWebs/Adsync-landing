@@ -70,7 +70,7 @@ Merci de faire partie de la première vague. On a hâte de te voir sur la platef
 — L'équipe AdSync.io`;
 
 function downloadXlsx(rows: WaitlistEntry[]) {
-  const header = ['created_at', 'role', 'name', 'email', 'platform', 'category', 'country', 'audience_size', 'phone', 'referral_code'];
+  const header = ['created_at', 'role', 'name', 'email', 'platform', 'category', 'country', 'city', 'objective', 'audience_size', 'phone', 'referral_code'];
   const data = rows.map(r => {
     const obj: Record<string, unknown> = {};
     const src = r as unknown as Record<string, unknown>;
@@ -716,7 +716,8 @@ function WaitlistView({
                 <th>Plateforme / Site</th>
                 <th>Catégorie / Secteur</th>
                 <th>Audience / Budget</th>
-                <th>Pays / Objectif</th>
+                <th>Pays / Ville</th>
+                <th>Objectif</th>
                 <th>Code parrain</th>
               </tr>
             </thead>
@@ -779,7 +780,11 @@ function WaitlistView({
                       entry.audience_size ?? '—'
                     )}
                   </td>
-                  <td>{entry.country ?? '—'}</td>
+                  <td>
+                    <div>{entry.country ?? '—'}</div>
+                    {entry.city && <div className="admin-cell-city">{entry.city}</div>}
+                  </td>
+                  <td>{entry.role === 'marque' ? (entry.objective ?? '—') : '—'}</td>
                   <td className="admin-cell-referral">
                     {entry.referral_code ? (
                       <span className="admin-referral-pill">{entry.referral_code}</span>
