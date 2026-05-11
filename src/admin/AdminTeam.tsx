@@ -98,16 +98,37 @@ export default function AdminTeam({ adminEmail }: { adminEmail: string }) {
       invited_by: adminEmail,
     });
 
-    setInviteSubmitting(false);
-
     if (error) {
+      setInviteSubmitting(false);
       setErrorMsg(error.message);
       return;
     }
 
-    setInviteSuccess(
-      `Invitation préparée pour ${email}. Demande-lui d'aller sur /admin et de cliquer « Créer un compte » avec cet email exact. Ses permissions seront appliquées automatiquement à l'inscription.`,
+    const { data: emailData, error: emailError } = await supabase.functions.invoke(
+      'send-invite-email',
+      {
+        body: {
+          email,
+          invitedBy: adminEmail,
+          permissions: invitePerms,
+        },
+      },
     );
+
+    setInviteSubmitting(false);
+
+    if (emailError || (emailData as { error?: string } | null)?.error) {
+      const detail =
+        (emailData as { error?: string } | null)?.error ?? emailError?.message ?? 'inconnu';
+      setInviteSuccess(
+        `Invitation enregistrée pour ${email}, mais l'email n'a pas pu être envoyé (${detail}). Envoie-lui le lien manuellement vers /admin.`,
+      );
+    } else {
+      setInviteSuccess(
+        `Invitation envoyée à ${email}. Elle recevra un email avec un lien pour créer son compte. Ses permissions seront appliquées automatiquement à l'inscription.`,
+      );
+    }
+
     setInviteEmail('');
     setInvitePerms({ ...EMPTY_PERMS });
     void logAction('team.invite_created', 'invite', email, invitePerms);
