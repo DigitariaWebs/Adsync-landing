@@ -506,7 +506,7 @@ export default function SmartSignupSection() {
                   <input type="email" name="email" required placeholder="contact@marque.com" />
                 </label>
                 <label className="smart-field smart-field-full">
-                  <span>Site web de la marque</span>
+                  <span>Site web de la marque <small className="smart-field-optional">(optionnel)</small></span>
                   <input type="url" name="website" placeholder="https://marque.com" />
                 </label>
                 <label className="smart-field">

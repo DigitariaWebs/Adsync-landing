@@ -2468,6 +2468,15 @@
   letter-spacing: 0.06em;
 }
 
+.smart-field-optional {
+  margin-left: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #7a6e93;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
 /* ============================================================
    ADMIN — Code partenaire colonne
    ============================================================ */

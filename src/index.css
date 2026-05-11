@@ -6663,7 +6663,9 @@ img {
   background: #ffffff;
   border: 1px solid rgba(78, 55, 135, 0.1);
   box-shadow: 0 4px 14px rgba(31, 12, 53, 0.05);
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 .admin-empty {
@@ -6675,6 +6677,7 @@ img {
 
 .admin-table {
   width: 100%;
+  min-width: 1280px;
   border-collapse: collapse;
   font-size: 0.88rem;
 }
