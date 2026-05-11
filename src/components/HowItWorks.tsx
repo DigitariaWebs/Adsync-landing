@@ -104,8 +104,8 @@ const partnerCards = [
   },
   {
     number: '05',
-    title: '25 % au premier contrat',
-    description: 'Quand chacun signe son premier contrat, je reçois 25 % de la commission AdSync via Stripe, PayPal ou Mobile Money.',
+    title: '25 % sur le 2ème contrat',
+    description: 'Dès que mon filleul signe son 2ème contrat, je reçois 25 % de la commission AdSync — une seule fois, versés via Stripe, PayPal ou Mobile Money.',
     image: stripeImage,
   },
 ];
@@ -139,7 +139,7 @@ const titles: Record<CardType, { eyebrow: string; heading: ReactNode; subline: s
       <>
         Gagne 25 % sur
         <br />
-        <em>le premier contrat de tes filleuls.</em>
+        <em>le 2ème contrat de tes filleuls.</em>
       </>
     ),
     subline: 'selon ton profil.',

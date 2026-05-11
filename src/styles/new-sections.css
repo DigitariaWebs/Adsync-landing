@@ -2498,3 +2498,105 @@
   border: 1px solid rgba(78, 55, 135, 0.25);
 }
 
+/* ============================================================
+   PARTNERS — FAQ
+   ============================================================ */
+
+.partners-faq {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 36px;
+  align-items: start;
+}
+
+.partners-faq-head h2 {
+  margin: 10px 0 12px;
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  line-height: 1.1;
+  color: #1b1233;
+}
+
+.partners-faq-head h2 em {
+  font-style: italic;
+  background: linear-gradient(135deg, #4e3787 0%, #7a67de 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.partners-faq-head p {
+  margin: 0;
+  color: #5f518d;
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.partners-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.partners-faq-item {
+  background: #fff;
+  border: 1px solid rgba(78, 55, 135, 0.1);
+  border-radius: 16px;
+  padding: 18px 20px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.partners-faq-item:hover {
+  border-color: rgba(78, 55, 135, 0.25);
+  box-shadow: 0 14px 36px -24px rgba(25, 10, 45, 0.35);
+}
+
+.partners-faq-item.is-open {
+  border-color: rgba(122, 103, 222, 0.5);
+  box-shadow: 0 22px 54px -28px rgba(78, 55, 135, 0.45);
+}
+
+.partners-faq-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.partners-faq-row h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1b1233;
+  line-height: 1.4;
+}
+
+.partners-faq-plus {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4e3787 0%, #7a67de 100%);
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.partners-faq-item p {
+  margin: 12px 0 0;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #4f4470;
+}
+
+@media (max-width: 900px) {
+  .partners-faq {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+}
+
