@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import BrandedText from './BrandedText';
 
@@ -187,6 +187,13 @@ export default function SmartSignupSection() {
   const [budgetOther, setBudgetOther] = useState<string>('');
   const [referralCode, setReferralCode] = useState<string>('');
   const [referralLocked, setReferralLocked] = useState<boolean>(false);
+  const successRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (status === 'success' && successRef.current) {
+      successRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [status]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -639,9 +646,27 @@ export default function SmartSignupSection() {
             </div>
 
             {status === 'success' && (
-              <p className="smart-signup-feedback">
-                Inscription confirmée. On te recontacte avant le lancement du 21 juin 2026.
-              </p>
+              <div className="smart-signup-success" role="status" aria-live="polite" ref={successRef}>
+                <div className="smart-signup-success-icon" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="11" fill="#16a34a" />
+                    <path
+                      d="M7 12.5l3.2 3.2L17 9"
+                      stroke="#ffffff"
+                      strokeWidth="2.4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+                <div className="smart-signup-success-body">
+                  <strong>Inscription confirmée 🎉</strong>
+                  <p>
+                    Ton inscription à la liste d&apos;attente a bien été enregistrée. On te
+                    recontacte par email avant le lancement du <strong>21 juin 2026</strong>.
+                  </p>
+                </div>
+              </div>
             )}
             {status === 'error' && (
               <p className="smart-signup-feedback smart-signup-feedback-error">{errorMsg}</p>

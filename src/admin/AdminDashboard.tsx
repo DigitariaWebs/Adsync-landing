@@ -5,9 +5,10 @@ import { BrandBadge } from '../components/BrandedText';
 import AdminMessages from './AdminMessages';
 import AdminTeam from './AdminTeam';
 import AdminAudit from './AdminAudit';
+import AdminPartners from './AdminPartners';
 import { logAction } from './audit';
 
-type AdminView = 'waitlist' | 'messages' | 'team' | 'audit';
+type AdminView = 'waitlist' | 'partners' | 'messages' | 'team' | 'audit';
 
 type RoleFilter = 'all' | WaitlistRole;
 
@@ -213,6 +214,7 @@ export default function AdminDashboard({ adminEmail, permissions, onSignOut }: P
 
   const titleFor = (v: AdminView) => {
     if (v === 'waitlist') return 'Liste d’attente';
+    if (v === 'partners') return 'Partenaires';
     if (v === 'messages') return 'Messages reçus';
     if (v === 'team') return 'Équipe';
     return 'Activité';
@@ -318,6 +320,17 @@ export default function AdminDashboard({ adminEmail, permissions, onSignOut }: P
             Inscriptions
           </button>
         )}
+        {permissions.canViewWaitlist && (
+          <button
+            type="button"
+            role="tab"
+            aria-selected={view === 'partners'}
+            className={`admin-tab ${view === 'partners' ? 'is-active' : ''}`}
+            onClick={() => setView('partners')}
+          >
+            Partenaires
+          </button>
+        )}
         {permissions.canViewMessages && (
           <button
             type="button"
@@ -352,6 +365,8 @@ export default function AdminDashboard({ adminEmail, permissions, onSignOut }: P
           </>
         )}
       </nav>
+
+      {view === 'partners' && permissions.canViewWaitlist && <AdminPartners />}
 
       {view === 'messages' && permissions.canViewMessages && (
         <AdminMessages canReply={permissions.canReplyMessages} />
