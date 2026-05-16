@@ -6756,6 +6756,27 @@ img {
   color: #14532d;
 }
 
+.admin-row-delete {
+  background: none;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: rgba(220, 38, 38, 0.7);
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.admin-row-delete:hover:not(:disabled) {
+  background: rgba(220, 38, 38, 0.1);
+  color: #b91c1c;
+}
+
+.admin-row-delete:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .admin-search {
   min-width: 240px;
 }

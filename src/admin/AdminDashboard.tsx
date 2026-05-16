@@ -397,6 +397,22 @@ export default function AdminDashboard({ adminEmail, permissions, onSignOut }: P
           stats={stats}
           filtered={filtered}
           canExport={permissions.canEditWaitlist}
+          onDelete={async entry => {
+            const confirmed = window.confirm(
+              `Supprimer définitivement l'inscription de ${entry.name} (${entry.email}) ?\n\nCette action est irréversible.`,
+            );
+            if (!confirmed) return;
+            const { error } = await supabase.from('waitlist').delete().eq('id', entry.id);
+            if (error) {
+              setErrorMsg(error.message);
+              return;
+            }
+            setEntries(prev => prev.filter(e => e.id !== entry.id));
+            void logAction('waitlist.delete', 'waitlist', entry.id, {
+              email: entry.email,
+              role: entry.role,
+            });
+          }}
         />
       )}
     </div>
@@ -421,6 +437,7 @@ type WaitlistViewProps = {
   stats: { total: number; createurs: number; marques: number; last24h: number; last7d: number; withReferral: number };
   filtered: WaitlistEntry[];
   canExport: boolean;
+  onDelete: (entry: WaitlistEntry) => Promise<void>;
 };
 
 function WaitlistView({
@@ -441,7 +458,9 @@ function WaitlistView({
   stats,
   filtered,
   canExport,
+  onDelete,
 }: WaitlistViewProps) {
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const [broadcastOpen, setBroadcastOpen] = useState(false);
   const [broadcastSubject, setBroadcastSubject] = useState(DEFAULT_BROADCAST_SUBJECT);
   const [broadcastBody, setBroadcastBody] = useState(DEFAULT_BROADCAST_BODY);
@@ -734,6 +753,7 @@ function WaitlistView({
                 <th>Pays / Ville</th>
                 <th>Objectif</th>
                 <th>Code parrain</th>
+                {canExport && <th></th>}
               </tr>
             </thead>
             <tbody>
@@ -807,6 +827,24 @@ function WaitlistView({
                       <span className="admin-pill-empty">—</span>
                     )}
                   </td>
+                  {canExport && (
+                    <td>
+                      <button
+                        type="button"
+                        className="admin-row-delete"
+                        onClick={async () => {
+                          setDeletingId(entry.id);
+                          await onDelete(entry);
+                          setDeletingId(null);
+                        }}
+                        disabled={deletingId === entry.id}
+                        aria-label={`Supprimer ${entry.name}`}
+                        title="Supprimer cette inscription"
+                      >
+                        {deletingId === entry.id ? '...' : '🗑'}
+                      </button>
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>

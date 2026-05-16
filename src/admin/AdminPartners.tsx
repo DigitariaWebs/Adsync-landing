@@ -65,6 +65,32 @@ export default function AdminPartners() {
   const [referrals, setReferrals] = useState<Referral[]>([]);
   const [referralsLoading, setReferralsLoading] = useState(false);
 
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  const deletePartner = async (p: PartnerRow) => {
+    const confirmed = window.confirm(
+      `Supprimer définitivement le partenaire ${p.first_name} ${p.last_name} (${p.email}) ?\n\n` +
+        `Ses ${p.total_referrals} filleul(s) liés seront aussi supprimés. Le compte de connexion (auth) n'est pas supprimé — il restera, mais sans accès partenaire.\n\n` +
+        `Cette action est irréversible.`,
+    );
+    if (!confirmed) return;
+
+    setDeletingId(p.id);
+    const { error } = await supabase.from('partners').delete().eq('id', p.id);
+    setDeletingId(null);
+
+    if (error) {
+      setErrorMsg(error.message);
+      return;
+    }
+
+    setPartners(prev => prev.filter(x => x.id !== p.id));
+    void logAction('partners.delete', 'partner', p.id, {
+      email: p.email,
+      referral_code: p.referral_code,
+    });
+  };
+
   const openReferrals = async (p: PartnerRow) => {
     setSelectedPartner(p);
     setReferrals([]);
@@ -249,6 +275,7 @@ export default function AdminPartners() {
                 <th>Filleuls</th>
                 <th>Sous contrat</th>
                 <th>Commission</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -293,6 +320,18 @@ export default function AdminPartners() {
                   </td>
                   <td>{p.referrals_with_contract}</td>
                   <td>{p.total_commission.toFixed(2)} €</td>
+                  <td>
+                    <button
+                      type="button"
+                      className="admin-row-delete"
+                      onClick={() => deletePartner(p)}
+                      disabled={deletingId === p.id}
+                      aria-label={`Supprimer ${p.first_name} ${p.last_name}`}
+                      title="Supprimer ce partenaire"
+                    >
+                      {deletingId === p.id ? '...' : '🗑'}
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
